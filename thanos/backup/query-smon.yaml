@@ -1,0 +1,30 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  annotations:
+    meta.helm.sh/release-name: thanos
+    meta.helm.sh/release-namespace: thanos
+  generation: 1
+  labels:
+    app: thanos
+    app.kubernetes.io/component: query
+    app.kubernetes.io/instance: thanos
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: thanos
+    app.kubernetes.io/version: 0.35.1
+    appGroup: lma
+    helm.sh/chart: thanos-15.7.9
+  name: thanos-query
+  namespace: thanos
+spec:
+  endpoints:
+  - port: http
+  namespaceSelector:
+    matchNames:
+    - thanos
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: query
+      app.kubernetes.io/instance: thanos
+      app.kubernetes.io/name: thanos
+      prometheus-operator/monitor: "true"

@@ -1,0 +1,407 @@
+{
+  "request": {
+    "url": "api/ds/query?ds_type=elasticsearch&requestId=explore_7HE",
+    "method": "POST",
+    "data": {
+      "queries": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "e63722b8-7785-4756-bd64-9c10bedf04a9"
+          },
+          "query": "",
+          "alias": "",
+          "metrics": [
+            {
+              "id": "1",
+              "type": "logs",
+              "settings": {
+                "limit": "5"
+              }
+            }
+          ],
+          "bucketAggs": [],
+          "timeField": "@timestamp",
+          "datasourceId": 2,
+          "intervalMs": 30000,
+          "maxDataPoints": 1904
+        }
+      ],
+      "from": "1719990070377",
+      "to": "1719993670377"
+    },
+    "hideFromInspector": false
+  },
+  "response": {
+    "results": {
+      "A": {
+        "status": 200,
+        "frames": [
+          {
+            "schema": {
+              "refId": "A",
+              "meta": {
+                "typeVersion": [
+                  0,
+                  0
+                ],
+                "custom": {
+                  "limit": 5,
+                  "searchWords": []
+                },
+                "preferredVisualisationType": "logs"
+              },
+              "fields": [
+                {
+                  "name": "@timestamp",
+                  "type": "time",
+                  "typeInfo": {
+                    "frame": "time.Time",
+                    "nullable": true
+                  },
+                  "config": {
+                    "filterable": true
+                  }
+                },
+                {
+                  "name": "message",
+                  "type": "string",
+                  "typeInfo": {
+                    "frame": "string",
+                    "nullable": true
+                  },
+                  "config": {
+                    "filterable": true
+                  }
+                },
+                {
+                  "name": "@version",
+                  "type": "string",
+                  "typeInfo": {
+                    "frame": "string",
+                    "nullable": true
+                  },
+                  "config": {
+                    "filterable": true
+                  }
+                },
+                {
+                  "name": "NHcluster",
+                  "type": "string",
+                  "typeInfo": {
+                    "frame": "string",
+                    "nullable": true
+                  },
+                  "config": {
+                    "filterable": true
+                  }
+                },
+                {
+                  "name": "_id",
+                  "type": "string",
+                  "typeInfo": {
+                    "frame": "string",
+                    "nullable": true
+                  },
+                  "config": {
+                    "filterable": true
+                  }
+                },
+                {
+                  "name": "_index",
+                  "type": "string",
+                  "typeInfo": {
+                    "frame": "string",
+                    "nullable": true
+                  },
+                  "config": {
+                    "filterable": true
+                  }
+                },
+                {
+                  "name": "_source",
+                  "type": "string",
+                  "typeInfo": {
+                    "frame": "string",
+                    "nullable": true
+                  },
+                  "config": {
+                    "filterable": true
+                  }
+                },
+                {
+                  "name": "_type",
+                  "type": "other",
+                  "typeInfo": {
+                    "frame": "json.RawMessage",
+                    "nullable": true
+                  },
+                  "config": {
+                    "filterable": true
+                  }
+                },
+                {
+                  "name": "container",
+                  "type": "string",
+                  "typeInfo": {
+                    "frame": "string",
+                    "nullable": true
+                  },
+                  "config": {
+                    "filterable": true
+                  }
+                },
+                {
+                  "name": "cpu_usage",
+                  "type": "number",
+                  "typeInfo": {
+                    "frame": "float64",
+                    "nullable": true
+                  },
+                  "config": {
+                    "filterable": true
+                  }
+                },
+                {
+                  "name": "highlight",
+                  "type": "other",
+                  "typeInfo": {
+                    "frame": "json.RawMessage",
+                    "nullable": true
+                  },
+                  "config": {
+                    "filterable": true
+                  }
+                },
+                {
+                  "name": "id",
+                  "type": "string",
+                  "typeInfo": {
+                    "frame": "string",
+                    "nullable": true
+                  },
+                  "config": {
+                    "filterable": true
+                  }
+                },
+                {
+                  "name": "metric",
+                  "type": "string",
+                  "typeInfo": {
+                    "frame": "string",
+                    "nullable": true
+                  },
+                  "config": {
+                    "filterable": true
+                  }
+                },
+                {
+                  "name": "namespace",
+                  "type": "string",
+                  "typeInfo": {
+                    "frame": "string",
+                    "nullable": true
+                  },
+                  "config": {
+                    "filterable": true
+                  }
+                },
+                {
+                  "name": "nhalert",
+                  "type": "string",
+                  "typeInfo": {
+                    "frame": "string",
+                    "nullable": true
+                  },
+                  "config": {
+                    "filterable": true
+                  }
+                },
+                {
+                  "name": "pod",
+                  "type": "string",
+                  "typeInfo": {
+                    "frame": "string",
+                    "nullable": true
+                  },
+                  "config": {
+                    "filterable": true
+                  }
+                },
+                {
+                  "name": "sort",
+                  "type": "other",
+                  "typeInfo": {
+                    "frame": "json.RawMessage",
+                    "nullable": true
+                  },
+                  "config": {
+                    "filterable": true
+                  }
+                },
+                {
+                  "name": "status",
+                  "type": "string",
+                  "typeInfo": {
+                    "frame": "string",
+                    "nullable": true
+                  },
+                  "config": {
+                    "filterable": true
+                  }
+                }
+              ]
+            },
+            "data": {
+              "values": [
+                [
+                  1719993649155,
+                  1719993649155,
+                  1719993649155,
+                  1719993649155,
+                  1719993649155
+                ],
+                [
+                  "2024-07-03T08:00:49.155710868Z, Info, Cluster: clusterA, Namespace: harbor, Pod: harbor-trivy-0, Container: trivy, CPUUsage: 0%",
+                  "2024-07-03T08:00:49.155710868Z, Info, Cluster: clusterA, Namespace: example2, Pod: memory-load-example-55d64c4d58-69hx9, Container: stress, CPUUsage: 0%",
+                  "2024-07-03T08:00:49.155710868Z, Info, Cluster: clusterA, Namespace: example, Pod: memory-load-example-55d64c4d58-27bph, Container: stress, CPUUsage: 0%",
+                  "2024-07-03T08:00:49.155710868Z, Info, Cluster: clusterA, Namespace: thanos, Pod: thanos-storegateway-1, Container: storegateway, CPUUsage: 0%",
+                  "2024-07-03T08:00:49.155710868Z, Info, Cluster: clusterA, Namespace: thanos, Pod: thanos-storegateway-0, Container: storegateway, CPUUsage: 0%"
+                ],
+                [
+                  "1",
+                  "1",
+                  "1",
+                  "1",
+                  "1"
+                ],
+                [
+                  "clusterA",
+                  "clusterA",
+                  "clusterA",
+                  "clusterA",
+                  "clusterA"
+                ],
+                [
+                  "PWWcd5AB6m_0uy7nSDy4",
+                  "PGWcd5AB6m_0uy7nSDy4",
+                  "O2Wcd5AB6m_0uy7nSDy4",
+                  "OmWcd5AB6m_0uy7nSDy4",
+                  "OWWcd5AB6m_0uy7nSDy4"
+                ],
+                [
+                  "k8s-app3-metric-2024.07.03",
+                  "k8s-app3-metric-2024.07.03",
+                  "k8s-app3-metric-2024.07.03",
+                  "k8s-app3-metric-2024.07.03",
+                  "k8s-app3-metric-2024.07.03"
+                ],
+                [
+                  "{\"@timestamp\":\"2024-07-03T08:00:49.155710868Z\",\"@version\":\"1\",\"NHcluster\":\"clusterA\",\"container\":\"trivy\",\"cpu_usage\":0,\"message\":\"2024-07-03T08:00:49.155710868Z, Info, Cluster: clusterA, Namespace: harbor, Pod: harbor-trivy-0, Container: trivy, CPUUsage: 0%\",\"metric\":\"nh_pod_cpu_usage:rate5m\",\"namespace\":\"harbor\",\"nhalert\":\"Info\",\"pod\":\"harbor-trivy-0\",\"status\":\"success\"}",
+                  "{\"@timestamp\":\"2024-07-03T08:00:49.155710868Z\",\"@version\":\"1\",\"NHcluster\":\"clusterA\",\"container\":\"stress\",\"cpu_usage\":0,\"message\":\"2024-07-03T08:00:49.155710868Z, Info, Cluster: clusterA, Namespace: example2, Pod: memory-load-example-55d64c4d58-69hx9, Container: stress, CPUUsage: 0%\",\"metric\":\"nh_pod_cpu_usage:rate5m\",\"namespace\":\"example2\",\"nhalert\":\"Info\",\"pod\":\"memory-load-example-55d64c4d58-69hx9\",\"status\":\"success\"}",
+                  "{\"@timestamp\":\"2024-07-03T08:00:49.155710868Z\",\"@version\":\"1\",\"NHcluster\":\"clusterA\",\"container\":\"stress\",\"cpu_usage\":0,\"message\":\"2024-07-03T08:00:49.155710868Z, Info, Cluster: clusterA, Namespace: example, Pod: memory-load-example-55d64c4d58-27bph, Container: stress, CPUUsage: 0%\",\"metric\":\"nh_pod_cpu_usage:rate5m\",\"namespace\":\"example\",\"nhalert\":\"Info\",\"pod\":\"memory-load-example-55d64c4d58-27bph\",\"status\":\"success\"}",
+                  "{\"@timestamp\":\"2024-07-03T08:00:49.155710868Z\",\"@version\":\"1\",\"NHcluster\":\"clusterA\",\"container\":\"storegateway\",\"cpu_usage\":0,\"message\":\"2024-07-03T08:00:49.155710868Z, Info, Cluster: clusterA, Namespace: thanos, Pod: thanos-storegateway-1, Container: storegateway, CPUUsage: 0%\",\"metric\":\"nh_pod_cpu_usage:rate5m\",\"namespace\":\"thanos\",\"nhalert\":\"Info\",\"pod\":\"thanos-storegateway-1\",\"status\":\"success\"}",
+                  "{\"@timestamp\":\"2024-07-03T08:00:49.155710868Z\",\"@version\":\"1\",\"NHcluster\":\"clusterA\",\"container\":\"storegateway\",\"cpu_usage\":0,\"message\":\"2024-07-03T08:00:49.155710868Z, Info, Cluster: clusterA, Namespace: thanos, Pod: thanos-storegateway-0, Container: storegateway, CPUUsage: 0%\",\"metric\":\"nh_pod_cpu_usage:rate5m\",\"namespace\":\"thanos\",\"nhalert\":\"Info\",\"pod\":\"thanos-storegateway-0\",\"status\":\"success\"}"
+                ],
+                [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null
+                ],
+                [
+                  "trivy",
+                  "stress",
+                  "stress",
+                  "storegateway",
+                  "storegateway"
+                ],
+                [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null
+                ],
+                [
+                  "k8s-app3-metric-2024.07.03#PWWcd5AB6m_0uy7nSDy4",
+                  "k8s-app3-metric-2024.07.03#PGWcd5AB6m_0uy7nSDy4",
+                  "k8s-app3-metric-2024.07.03#O2Wcd5AB6m_0uy7nSDy4",
+                  "k8s-app3-metric-2024.07.03#OmWcd5AB6m_0uy7nSDy4",
+                  "k8s-app3-metric-2024.07.03#OWWcd5AB6m_0uy7nSDy4"
+                ],
+                [
+                  "nh_pod_cpu_usage:rate5m",
+                  "nh_pod_cpu_usage:rate5m",
+                  "nh_pod_cpu_usage:rate5m",
+                  "nh_pod_cpu_usage:rate5m",
+                  "nh_pod_cpu_usage:rate5m"
+                ],
+                [
+                  "harbor",
+                  "example2",
+                  "example",
+                  "thanos",
+                  "thanos"
+                ],
+                [
+                  "Info",
+                  "Info",
+                  "Info",
+                  "Info",
+                  "Info"
+                ],
+                [
+                  "harbor-trivy-0",
+                  "memory-load-example-55d64c4d58-69hx9",
+                  "memory-load-example-55d64c4d58-27bph",
+                  "thanos-storegateway-1",
+                  "thanos-storegateway-0"
+                ],
+                [
+                  [
+                    1719993649155,
+                    7864
+                  ],
+                  [
+                    1719993649155,
+                    7863
+                  ],
+                  [
+                    1719993649155,
+                    7862
+                  ],
+                  [
+                    1719993649155,
+                    7861
+                  ],
+                  [
+                    1719993649155,
+                    7860
+                  ]
+                ],
+                [
+                  "success",
+                  "success",
+                  "success",
+                  "success",
+                  "success"
+                ]
+              ]
+            }
+          }
+        ],
+        "refId": "A"
+      }
+    }
+  }
+}

@@ -1,0 +1,363 @@
+[
+  {
+    "schema": {
+      "refId": "A",
+      "meta": {
+        "typeVersion": [
+          0,
+          0
+        ],
+        "custom": {
+          "limit": 5,
+          "searchWords": []
+        },
+        "preferredVisualisationType": "logs"
+      },
+      "fields": [
+        {
+          "name": "@timestamp",
+          "type": "time",
+          "typeInfo": {
+            "frame": "time.Time",
+            "nullable": true
+          },
+          "config": {
+            "filterable": true
+          }
+        },
+        {
+          "name": "message",
+          "type": "string",
+          "typeInfo": {
+            "frame": "string",
+            "nullable": true
+          },
+          "config": {
+            "filterable": true
+          }
+        },
+        {
+          "name": "@version",
+          "type": "string",
+          "typeInfo": {
+            "frame": "string",
+            "nullable": true
+          },
+          "config": {
+            "filterable": true
+          }
+        },
+        {
+          "name": "NHcluster",
+          "type": "string",
+          "typeInfo": {
+            "frame": "string",
+            "nullable": true
+          },
+          "config": {
+            "filterable": true
+          }
+        },
+        {
+          "name": "_id",
+          "type": "string",
+          "typeInfo": {
+            "frame": "string",
+            "nullable": true
+          },
+          "config": {
+            "filterable": true
+          }
+        },
+        {
+          "name": "_index",
+          "type": "string",
+          "typeInfo": {
+            "frame": "string",
+            "nullable": true
+          },
+          "config": {
+            "filterable": true
+          }
+        },
+        {
+          "name": "_source",
+          "type": "string",
+          "typeInfo": {
+            "frame": "string",
+            "nullable": true
+          },
+          "config": {
+            "filterable": true
+          }
+        },
+        {
+          "name": "_type",
+          "type": "other",
+          "typeInfo": {
+            "frame": "json.RawMessage",
+            "nullable": true
+          },
+          "config": {
+            "filterable": true
+          }
+        },
+        {
+          "name": "container",
+          "type": "string",
+          "typeInfo": {
+            "frame": "string",
+            "nullable": true
+          },
+          "config": {
+            "filterable": true
+          }
+        },
+        {
+          "name": "cpu_usage",
+          "type": "number",
+          "typeInfo": {
+            "frame": "float64",
+            "nullable": true
+          },
+          "config": {
+            "filterable": true
+          }
+        },
+        {
+          "name": "highlight",
+          "type": "other",
+          "typeInfo": {
+            "frame": "json.RawMessage",
+            "nullable": true
+          },
+          "config": {
+            "filterable": true
+          }
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "typeInfo": {
+            "frame": "string",
+            "nullable": true
+          },
+          "config": {
+            "filterable": true
+          }
+        },
+        {
+          "name": "metric",
+          "type": "string",
+          "typeInfo": {
+            "frame": "string",
+            "nullable": true
+          },
+          "config": {
+            "filterable": true
+          }
+        },
+        {
+          "name": "namespace",
+          "type": "string",
+          "typeInfo": {
+            "frame": "string",
+            "nullable": true
+          },
+          "config": {
+            "filterable": true
+          }
+        },
+        {
+          "name": "nhalert",
+          "type": "string",
+          "typeInfo": {
+            "frame": "string",
+            "nullable": true
+          },
+          "config": {
+            "filterable": true
+          }
+        },
+        {
+          "name": "pod",
+          "type": "string",
+          "typeInfo": {
+            "frame": "string",
+            "nullable": true
+          },
+          "config": {
+            "filterable": true
+          }
+        },
+        {
+          "name": "sort",
+          "type": "other",
+          "typeInfo": {
+            "frame": "json.RawMessage",
+            "nullable": true
+          },
+          "config": {
+            "filterable": true
+          }
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "typeInfo": {
+            "frame": "string",
+            "nullable": true
+          },
+          "config": {
+            "filterable": true
+          }
+        }
+      ]
+    },
+    "data": {
+      "values": [
+        [
+          1719993348761,
+          1719993348761,
+          1719993348761,
+          1719993348761,
+          1719993348761
+        ],
+        [
+          "2024-07-03T07:55:48.761717361Z, Info, Cluster: clusterA, Namespace: harbor, Pod: harbor-trivy-0, Container: trivy, CPUUsage: 0%",
+          "2024-07-03T07:55:48.761717361Z, Info, Cluster: clusterA, Namespace: example2, Pod: memory-load-example-55d64c4d58-69hx9, Container: stress, CPUUsage: 0%",
+          "2024-07-03T07:55:48.761717361Z, Info, Cluster: clusterA, Namespace: example, Pod: memory-load-example-55d64c4d58-27bph, Container: stress, CPUUsage: 0%",
+          "2024-07-03T07:55:48.761717361Z, Info, Cluster: clusterA, Namespace: thanos, Pod: thanos-storegateway-1, Container: storegateway, CPUUsage: 0%",
+          "2024-07-03T07:55:48.761717361Z, Info, Cluster: clusterA, Namespace: thanos, Pod: thanos-storegateway-0, Container: storegateway, CPUUsage: 0%"
+        ],
+        [
+          "1",
+          "1",
+          "1",
+          "1",
+          "1"
+        ],
+        [
+          "clusterA",
+          "clusterA",
+          "clusterA",
+          "clusterA",
+          "clusterA"
+        ],
+        [
+          "cWWXd5AB6m_0uy7nszom",
+          "cGWXd5AB6m_0uy7nszom",
+          "b2WXd5AB6m_0uy7nszom",
+          "bmWXd5AB6m_0uy7nszom",
+          "bWWXd5AB6m_0uy7nszom"
+        ],
+        [
+          "k8s-app3-metric-2024.07.03",
+          "k8s-app3-metric-2024.07.03",
+          "k8s-app3-metric-2024.07.03",
+          "k8s-app3-metric-2024.07.03",
+          "k8s-app3-metric-2024.07.03"
+        ],
+        [
+          "{\"@timestamp\":\"2024-07-03T07:55:48.761717361Z\",\"@version\":\"1\",\"NHcluster\":\"clusterA\",\"container\":\"trivy\",\"cpu_usage\":0,\"message\":\"2024-07-03T07:55:48.761717361Z, Info, Cluster: clusterA, Namespace: harbor, Pod: harbor-trivy-0, Container: trivy, CPUUsage: 0%\",\"metric\":\"nh_pod_cpu_usage:rate5m\",\"namespace\":\"harbor\",\"nhalert\":\"Info\",\"pod\":\"harbor-trivy-0\",\"status\":\"success\"}",
+          "{\"@timestamp\":\"2024-07-03T07:55:48.761717361Z\",\"@version\":\"1\",\"NHcluster\":\"clusterA\",\"container\":\"stress\",\"cpu_usage\":0,\"message\":\"2024-07-03T07:55:48.761717361Z, Info, Cluster: clusterA, Namespace: example2, Pod: memory-load-example-55d64c4d58-69hx9, Container: stress, CPUUsage: 0%\",\"metric\":\"nh_pod_cpu_usage:rate5m\",\"namespace\":\"example2\",\"nhalert\":\"Info\",\"pod\":\"memory-load-example-55d64c4d58-69hx9\",\"status\":\"success\"}",
+          "{\"@timestamp\":\"2024-07-03T07:55:48.761717361Z\",\"@version\":\"1\",\"NHcluster\":\"clusterA\",\"container\":\"stress\",\"cpu_usage\":0,\"message\":\"2024-07-03T07:55:48.761717361Z, Info, Cluster: clusterA, Namespace: example, Pod: memory-load-example-55d64c4d58-27bph, Container: stress, CPUUsage: 0%\",\"metric\":\"nh_pod_cpu_usage:rate5m\",\"namespace\":\"example\",\"nhalert\":\"Info\",\"pod\":\"memory-load-example-55d64c4d58-27bph\",\"status\":\"success\"}",
+          "{\"@timestamp\":\"2024-07-03T07:55:48.761717361Z\",\"@version\":\"1\",\"NHcluster\":\"clusterA\",\"container\":\"storegateway\",\"cpu_usage\":0,\"message\":\"2024-07-03T07:55:48.761717361Z, Info, Cluster: clusterA, Namespace: thanos, Pod: thanos-storegateway-1, Container: storegateway, CPUUsage: 0%\",\"metric\":\"nh_pod_cpu_usage:rate5m\",\"namespace\":\"thanos\",\"nhalert\":\"Info\",\"pod\":\"thanos-storegateway-1\",\"status\":\"success\"}",
+          "{\"@timestamp\":\"2024-07-03T07:55:48.761717361Z\",\"@version\":\"1\",\"NHcluster\":\"clusterA\",\"container\":\"storegateway\",\"cpu_usage\":0,\"message\":\"2024-07-03T07:55:48.761717361Z, Info, Cluster: clusterA, Namespace: thanos, Pod: thanos-storegateway-0, Container: storegateway, CPUUsage: 0%\",\"metric\":\"nh_pod_cpu_usage:rate5m\",\"namespace\":\"thanos\",\"nhalert\":\"Info\",\"pod\":\"thanos-storegateway-0\",\"status\":\"success\"}"
+        ],
+        [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          "trivy",
+          "stress",
+          "stress",
+          "storegateway",
+          "storegateway"
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          "k8s-app3-metric-2024.07.03#cWWXd5AB6m_0uy7nszom",
+          "k8s-app3-metric-2024.07.03#cGWXd5AB6m_0uy7nszom",
+          "k8s-app3-metric-2024.07.03#b2WXd5AB6m_0uy7nszom",
+          "k8s-app3-metric-2024.07.03#bmWXd5AB6m_0uy7nszom",
+          "k8s-app3-metric-2024.07.03#bWWXd5AB6m_0uy7nszom"
+        ],
+        [
+          "nh_pod_cpu_usage:rate5m",
+          "nh_pod_cpu_usage:rate5m",
+          "nh_pod_cpu_usage:rate5m",
+          "nh_pod_cpu_usage:rate5m",
+          "nh_pod_cpu_usage:rate5m"
+        ],
+        [
+          "harbor",
+          "example2",
+          "example",
+          "thanos",
+          "thanos"
+        ],
+        [
+          "Info",
+          "Info",
+          "Info",
+          "Info",
+          "Info"
+        ],
+        [
+          "harbor-trivy-0",
+          "memory-load-example-55d64c4d58-69hx9",
+          "memory-load-example-55d64c4d58-27bph",
+          "thanos-storegateway-1",
+          "thanos-storegateway-0"
+        ],
+        [
+          [
+            1719993348761,
+            51
+          ],
+          [
+            1719993348761,
+            50
+          ],
+          [
+            1719993348761,
+            49
+          ],
+          [
+            1719993348761,
+            48
+          ],
+          [
+            1719993348761,
+            47
+          ]
+        ],
+        [
+          "success",
+          "success",
+          "success",
+          "success",
+          "success"
+        ]
+      ]
+    }
+  }
+]

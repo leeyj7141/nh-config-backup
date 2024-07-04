@@ -1,0 +1,29 @@
+USER-SUPPLIED VALUES:
+global:
+  cattle:
+    clusterId: c-m-x7zqt7k8
+    clusterName: cluster-test2
+    rkePathPrefix: ""
+    rkeWindowsPathPrefix: ""
+    systemDefaultRegistry: ""
+    systemProjectId: p-n44gg
+    url: https://13.124.13.148
+  systemDefaultRegistry: ""
+prometheus:
+  prometheusSpec:
+    evaluationInterval: 1m
+    resources:
+      requests:
+        cpu: 250m
+    retentionSize: 50GiB
+    scrapeInterval: 1m
+rke2ControllerManager:
+  enabled: true
+rke2Etcd:
+  enabled: true
+rke2IngressNginx:
+  enabled: true
+rke2Proxy:
+  enabled: true
+rke2Scheduler:
+  enabled: true

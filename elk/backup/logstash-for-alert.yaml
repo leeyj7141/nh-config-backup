@@ -1,0 +1,83 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: logstash-config-for-sms-agent
+  namespace: logging
+data:
+  logstash.conf: |
+    input {
+      http_poller {
+        urls => {
+          prometheus_metrics => {
+            method => get
+            url => "http://thanos-query.thanos.svc.cluster.local.:9090/api/v1/query?query=nh_pod_cpu_usage:rate3m"
+            headers => {
+              Accept => "application/json"
+            }
+          }
+        }
+        request_timeout => 60
+        schedule => { every => "1m" }
+        codec => "json"
+        metadata_target => "http_poller_metadata"
+      }
+    }
+
+    filter {
+      split {
+        field => "[data][result]"
+      }
+
+      mutate {
+        add_field => {
+          "metric" => "%{[data][result][metric]}"
+          "value" => "%{[data][result][value][1]}"
+          "timestamp" => "%{[data][result][value][0]}"
+        }
+        remove_field => ["data", "http_poller_metadata"]
+      }
+
+      date {
+        match => ["timestamp", "UNIX"]
+      }
+    }
+
+    output {
+      file {
+        path => "/var/log/prometheus_metrics.log"
+        codec => line { format => "timestamp: %{timestamp}, metric: %{metric}, value: %{value}" }
+      }
+    }
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logstash
+  namespace: logging
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logstash
+  template:
+    metadata:
+      labels:
+        app: logstash
+    spec:
+      containers:
+      - name: logstash
+        image: docker.elastic.co/logstash/logstash:7.10.0
+        volumeMounts:
+        - name: logstash-config
+          mountPath: /usr/share/logstash/pipeline/logstash.conf
+          subPath: logstash.conf
+        - name: logstash-logs
+          mountPath: /var/log
+      volumes:
+      - name: logstash-config
+        configMap:
+          name: logstash-config-for-sms-agent
+      - name: logstash-logs
+        emptyDir: {}

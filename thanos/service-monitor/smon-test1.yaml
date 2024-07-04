@@ -1,0 +1,20 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: thanos-service-monitor
+  namespace: thanos
+  labels:
+    release: prometheus
+spec:
+  namespaceSelector:
+    matchNames:
+    - thanos
+  selector:
+    matchLabels:
+      app: thanos
+      app.kubernetes.io/component: query
+      app.kubernetes.io/name: thanos
+  endpoints:
+  - port: http
+    interval: 30s
+

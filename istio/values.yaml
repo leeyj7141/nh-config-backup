@@ -1,0 +1,13 @@
+USER-SUPPLIED VALUES:
+global:
+  cattle:
+    clusterId: c-m-x7zqt7k8
+    clusterName: cluster-test2
+    rkePathPrefix: ""
+    rkeWindowsPathPrefix: ""
+    systemDefaultRegistry: ""
+    systemProjectId: p-n44gg
+    url: https://13.124.13.148
+  systemDefaultRegistry: ""
+tracing: 
+  enabled: true

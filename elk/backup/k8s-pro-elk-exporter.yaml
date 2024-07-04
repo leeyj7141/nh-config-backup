@@ -1,0 +1,45 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-elasticsearch-exporter-config
+  namespace: logging
+data:
+  es-exporter-config.yml: |
+    es:
+      host: "http://172.31.18.85:9200"
+    prometheus:
+      url: "http://cattle-monitoring-system.rancher-monitoring-prometheus.svc.cluster.local:9090"
+    index: "prometheus-metrics"
+    type: "metric"
+    interval: "1m"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-elasticsearch-exporter
+  namespace: logging
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus-elasticsearch-exporter
+  template:
+    metadata:
+      labels:
+        app: prometheus-elasticsearch-exporter
+    spec:
+      containers:
+      - name: prometheus-elasticsearch-exporter
+        image: justwatch/elasticsearch_exporter:1.1.0
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/es-exporter/
+        env:
+        - name: CONFIG
+          value: /etc/es-exporter/es-exporter-config.yml
+      volumes:
+      - name: config-volume
+        configMap:
+          name: prometheus-elasticsearch-exporter-config

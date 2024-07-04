@@ -1,0 +1,89 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: example-alertcfg
+  namespace: cattle-monitoring-system
+  labels:
+    alertconfig: example
+spec:
+  receivers:
+  - name: default-receiver
+#    emailConfigs:
+#    - to: 'leeyj7141@naver.com'
+#      sendResolved: true
+#      smarthost: 'smtp.gmail.com:587'
+#      from: 'leeyj7141@gmail.com'
+#      authUsername: 'leeyj7141@gmail.com'
+#      authPassword:
+#        name: alertmanager-email-secret
+#        key: smtp-password
+#      requireTLS: true
+
+  - name: email-notifications-server1
+    emailConfigs:
+    - to: 'leeyj7141@naver.com'
+      sendResolved: true
+      smarthost: 'smtp.gmail.com:587'
+      from: 'leeyj7141@gmail.com'
+      authUsername: 'leeyj7141@gmail.com'
+      authPassword:
+        name: alertmanager-email-secret
+        key: smtp-password
+      requireTLS: true
+
+  - name: email-notifications-server2
+    emailConfigs:
+    - to: 'gptforkernel@gmail.com'
+      sendResolved: true
+      smarthost: 'smtp.gmail.com:587'
+      from: 'leeyj7141@gmail.com'
+      authUsername: 'leeyj7141@gmail.com'
+      authPassword:
+        name: alertmanager-email-secret
+        key: smtp-password
+      requireTLS: true
+
+  - name: email-notifications-multiple
+    emailConfigs:
+    - to: 'leeyj7141@naver.com,gptforkernel@gmail.com,leeyj7141@daum.net'
+      from: 'leeyj7141@gmail.com'
+      smarthost: 'smtp.gmail.com:587'
+      authUsername: 'smtp-user'
+      authPassword:
+        name: alertmanager-email-secret
+        key: smtp-password
+      requireTLS: true
+
+  route:
+    groupBy: 
+      - NHcluster
+      - alertname
+    groupWait: 30s
+    groupInterval: 5m
+    repeatInterval: 4h
+    receiver: default-receiver
+    routes:
+    - matchers:
+      - name: severity
+        value: warning
+        operator: '='
+      - name: namespace
+        value: example
+        operator: '='
+      receiver: email-notifications-server1
+    - matchers:
+      - name: severity
+        value: warning
+        operator: '='
+      - name: namespace
+        value: cattle-monitoring-system
+        operator: '='
+      receiver: email-notifications-server2
+    - matchers:
+      - name: severity
+        value: critical
+        operator: '='
+      - name: namespace
+        value: example
+        operator: '='
+      receiver: email-notifications-multiple

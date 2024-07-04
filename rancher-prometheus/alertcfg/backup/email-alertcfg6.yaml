@@ -1,0 +1,23 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: example-alertcfg6
+  namespace: example
+  labels:
+    alertconfig: example
+spec:
+  route:
+    groupBy: ['officeC']
+    groupWait: 30s
+    groupInterval: 5m
+    repeatInterval: 12h
+    receiver: 'webhook3'
+    matchers:
+      - name: app
+        value: exampleAppC
+        matchType: '='
+    continue: false
+  receivers:
+  - name: 'webhook3'
+    webhookConfigs:
+    - url: 'http://example.com/'

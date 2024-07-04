@@ -1,0 +1,145 @@
+# thanos.vo.simple.yaml
+global:
+  storageClass: nfs
+clusterDomain: cluster.local
+commonLabels: 
+  appGroup: lma
+  app: thanos
+existingObjstoreSecret: thanos-objstore-secret
+#query:
+#  enabled: true
+#  stores: 
+#  - rancher-monitoring-thanos-discovery.cattle-monitoring-system.svc.cluster.local:10901
+query:
+  enabled: true
+  replicaCount: 2
+  stores:
+    - rancher-monitoring-thanos-discovery.cattle-monitoring-system.svc.cluster.local:10901 
+  resources:
+    requests:
+      cpu: 200m 
+      memory: 200Mi
+    limits:
+      cpu: 500m 
+      memory: 2Gi
+  service:
+    type: NodePort # 또는 NodePort, ClusterIP 등 원하는 서비스 타입 선택
+    ports:
+      http: 9090
+    #loadBalancerIP:  # 만약 특정 IP를 사용하고 싶다면 설정
+    nodePorts:
+      http: 30008  # 원하는 NodePort 번호 설정
+  replicaLabel: 
+    - prometheus_replica
+#  args:
+#    -  --query.partial-response 
+#  extraArgs:
+#    - --query.replica-label=cluster
+#    - --query.auto-downsampling
+#    - --query.partial-response
+
+queryFrontend:
+  enabled: true
+  replicaCount: 2
+  config: |-
+    type: IN-MEMORY
+    config:
+      max_size: 512MB
+      max_size_items: 100
+      validity: 100s
+  extraFlags:
+    - --query-range.split-interval=24h
+    - --query-range.max-retries-per-request=3
+    - --query-frontend.log-queries-longer-than=60s
+  service:
+    type: NodePort # 또는 NodePort, ClusterIP 등 원하는 서비스 타입 선택
+    ports:
+      http: 9090
+    #loadBalancerIP:  # 만약 특정 IP를 사용하고 싶다면 설정
+    nodePorts:
+      http: 30007  # 원하는 NodePort 번호 설정
+
+bucketweb:
+  enabled: false
+compactor:
+  enabled: true
+  retentionResolutionRaw: 30d
+  retentionResolution5m: 30d
+  retentionResolution1h: 10y
+  # Compaction 실행주기 설정 
+  consistencyDelay: 30m
+storegateway:
+#  logLevel: debug
+  useEndpointGroup: true
+  replicaCount: 2
+  enabled: true
+  config: |-
+    type: IN-MEMORY
+    config:
+      max_size: 250MB
+      max_item_size: 125MB
+ruler:
+  enabled: false
+  replicaCount: 2
+  alertmanagers:
+    - http://rancher-monitoring-alertmanager.cattle-monitoring-system.svc.cluster.local:9093
+  clusterName: thanos
+  #replicaLabel: cluster
+  #config: |-
+  #  groups:
+  #    - name: "metamonitoring"
+  #      rules:
+  #        - : "PrometheusDown"
+  #          expr: absent(up{prometheus="monitoring/prometheus-operator"})
+#  config: |-
+#    groups:
+#      - name: example
+#        rules:
+#          - alert: ExampleAlert
+#            expr: up == 0
+#            for: 5m
+#            labels:
+#              severity: page
+#            annotations:
+#              summary: "Instance {{`{{`}} $labels.instance {{`}}`}} down"
+#              description: "{{`{{`}} $labels.instance {{`}}`}} of job {{`{{`}} $labels.job {{`}}`}} has been down for more than 5 minutes."
+  existingConfigmap: "nginx-cpu-alerts3"
+  externalLabels:
+    ruler_replica: $(POD_NAME)
+#  extraVolumes:
+#    - name: nginx-cpu-alerts1
+#      configMap:
+#        name: nginx-cpu-alerts1
+#    - name: nginx-cpu-alerts2
+#      configMap:
+#        name: nginx-cpu-alerts2
+#  extraVolumeMounts:
+#    - name: nginx-cpu-alerts1
+#      mountPath: /conf/rules/nginx-cpu1.yml
+#      subPath: nginx-cpu1.yml
+#    - name: nginx-cpu-alerts2
+#      mountPath: /conf/rules/nginx-cpu2.yml
+#      subPath: nginx-cpu2.yml
+
+#queryFrontend:
+#  managers: 
+#  - 
+#  evalInterval: 1m
+#  clusterName: thanos
+#  config: |-
+#    groups:
+#      - name: "metamonitoring"
+#        rules:
+#          - : "PrometheusDown"
+#            expr: absent(up{prometheus="monitoring/prometheus-operator"})
+
+receive:
+  enabled: false
+  #replicaLabel: cluster
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+    namespace: "cattle-monitoring-system"
+volumePermissions:
+  enabled: false

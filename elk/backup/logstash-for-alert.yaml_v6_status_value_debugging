@@ -1,0 +1,336 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: logstash-config-for-sms-agent
+  namespace: logging
+data:
+  logstash-cpu.conf: |
+    input {
+      http_poller {
+        urls => {
+          prometheus_metrics => {
+            method => get
+            url => "http://thanos-query.thanos.svc.cluster.local.:9090/api/v1/query?query=nh_pod_cpu_usage:rate5m"
+            headers => {
+              Accept => "application/json"
+            }
+          }
+        }
+        request_timeout => 60
+        schedule => { every => "1m" }
+        codec => "json"
+        metadata_target => "http_poller_metadata"
+      }
+    }
+    
+    filter {
+      split {
+        field => "[data][result]"
+      }
+    
+      mutate {
+        add_field => {
+          "metric" => "%{[data][result][metric][__name__]}"
+          "pod" => "%{[data][result][metric][pod]}"
+          "container" => "%{[data][result][metric][container]}"
+          "namespace" => "%{[data][result][metric][namespace]}"
+          "cpu_usage" => "%{[data][result][value][1]}"
+          "timestamp" => "%{[data][result][value][0]}"
+        }
+        remove_field => ["data", "http_poller_metadata"]
+      }
+    
+      if [cpu_usage] {
+        mutate {
+          convert => { "cpu_usage" => "float" }
+        }
+    
+        if [cpu_usage] and [cpu_usage] > 10 {
+          ruby {
+            code => 'event.set("cpu_usage", event.get("cpu_usage").to_i)'
+          }
+    
+          date {
+            match => ["timestamp", "UNIX"]
+            target => "timestamp"
+            timezone => "UTC"
+          }
+    
+          mutate {
+            add_field => { "timestamp_readable" => "%{@timestamp}" }
+          }
+        } else {
+          drop { }
+        }
+      } else {
+        drop { }
+      }
+    }
+    
+    output {
+      file {
+        path => "/var/log/prometheus_metrics_to_sms_agent.log"
+        codec => line { format => "Timestamp: %{timestamp_readable}, Namespace: %{namespace}, Pod: %{pod}, Container: %{container}, Namespace: %{namespace}, CPUUsage: %{cpu_usage}%" }
+      }
+    }
+
+  logstash-memory.conf: |
+    input {
+      http_poller {
+        urls => {
+          prometheus_metrics => {
+            method => get
+            url => "http://thanos-query.thanos.svc.cluster.local.:9090/api/v1/query?query=nh_pod_memory_usage:ratio"
+            headers => {
+              Accept => "application/json"
+            }
+          }
+        }
+        request_timeout => 60
+        schedule => { every => "1m" }
+        codec => "json"
+        metadata_target => "http_poller_metadata"
+      }
+    }
+    
+    filter {
+      split {
+        field => "[data][result]"
+      }
+    
+      mutate {
+        add_field => {
+          "metric" => "%{[data][result][metric][__name__]}"
+          "container" => "%{[data][result][metric][container]}"
+          "pod" => "%{[data][result][metric][pod]}"
+          "namespace" => "%{[data][result][metric][namespace]}"
+          "memory_usage" => "%{[data][result][value][1]}"
+          "timestamp" => "%{[data][result][value][0]}"
+        }
+        remove_field => ["data", "http_poller_metadata"]
+      }
+    
+      if [memory_usage] {
+        mutate {
+          convert => { "memory_usage" => "float" }
+        }
+    
+        if [memory_usage] and [memory_usage] > 2 {
+          ruby {
+            code => 'event.set("memory_usage", event.get("memory_usage").to_i)'
+          }
+    
+          date {
+            match => ["timestamp", "UNIX"]
+            target => "timestamp"
+            timezone => "UTC"
+          }
+    
+          mutate {
+            add_field => { "timestamp_readable" => "%{@timestamp}" }
+          }
+        } else {
+          drop { }
+        }
+      } else {
+        drop { }
+      }
+    }
+    
+    output {
+      file {
+        path => "/var/log/prometheus_metrics_to_sms_agent.log"
+        codec => line { format => "Timestamp: %{timestamp_readable}, Namespace: %{namespace}, Pod: %{pod}, Container: %{container}, MemoryUsage: %{memory_usage}%" }
+      }
+    }
+
+  logstash-pvc.conf: |
+    input {
+      http_poller {
+        urls => {
+          prometheus_metrics => {
+            method => get
+            url => "http://thanos-query.thanos.svc.cluster.local.:9090/api/v1/query?query=pvc_usage:ratio"
+            headers => {
+              Accept => "application/json"
+            }
+          }
+        }
+        request_timeout => 60
+        schedule => { every => "1m" }
+        codec => "json"
+        metadata_target => "http_poller_metadata"
+      }
+    }
+    
+    filter {
+      split {
+        field => "[data][result]"
+      }
+    
+      mutate {
+        add_field => {
+          "persistentvolumeclaim" => "%{[data][result][metric][persistentvolumeclaim]}"
+          "namespace" => "%{[data][result][metric][namespace]}"
+          "usage_ratio" => "%{[data][result][value][1]}"
+          "timestamp" => "%{[data][result][value][0]}"
+        }
+        remove_field => ["data", "http_poller_metadata"]
+      }
+    
+      if [usage_ratio] {
+        mutate {
+          convert => { "usage_ratio" => "float" }
+        }
+    
+        if [usage_ratio] and [usage_ratio] > 40 {
+          ruby {
+            code => 'event.set("usage_ratio", event.get("usage_ratio").to_i)'
+          }
+    
+          date {
+            match => ["timestamp", "UNIX"]
+            target => "timestamp"
+            timezone => "UTC"
+          }
+    
+          mutate {
+            add_field => { "timestamp_readable" => "%{@timestamp}" }
+          }
+        } else {
+          drop { }
+        }
+      } else {
+        drop { }
+      }
+    }
+    
+    output {
+      file {
+        path => "/var/log/prometheus_metrics_to_sms_agent.log"
+        codec => line { format => "Timestamp: %{timestamp_readable}, Namespace: %{namespace}, PVC: %{persistentvolumeclaim}, PVCUsage: %{usage_ratio}%" }
+      }
+    }
+
+
+  logstash-pod-status.conf: |
+    input {
+      http_poller {
+        urls => {
+          prometheus_failed_pods => {
+            method => get
+            url => 'http://thanos-query.thanos.svc.cluster.local:9090/api/v1/query?query=kube_pod_status_phase%7Bphase%3D%22Failed%22%7D'
+            headers => {
+              Accept => "application/json"
+            }
+          }
+        }
+        request_timeout => 60
+        schedule => { every => "1m" }
+        codec => "json"
+        metadata_target => "http_poller_metadata"
+      }
+    }
+    
+    filter {
+      split {
+        field => "[data][result]"
+      }
+    
+      mutate {
+        add_field => {
+          "namespace" => "%{[data][result][metric][namespace]}"
+          "pod" => "%{[data][result][metric][pod]}"
+          "status_raw" => "%{[data][result][value][1]}"
+          "status_value" => "%{[data][result][value][1]}"
+          "timestamp" => "%{[data][result][value][0]}"
+        }
+        remove_field => ["data", "http_poller_metadata"]
+      }
+    
+      ruby {
+        code => '
+          status_raw = event.get("status_raw")
+          if status_raw.is_a?(Array)
+            event.set("status", status_raw[1].strip)
+          else
+            event.set("status", status_raw)
+          end
+        '
+      }
+    
+      if [status_value] == "1" {
+        date {
+          match => ["timestamp", "UNIX"]
+          target => "timestamp"
+          timezone => "UTC"
+        }
+    
+        mutate {
+          add_field => { "timestamp_readable" => "%{@timestamp}" }
+        }
+      } else {
+        drop { }
+      }
+    }
+    
+    output {
+      file {
+        path => "/var/log/prometheus_metrics_to_sms_agent.log"
+        codec => line { format => "Timestamp: %{timestamp_readable}, Namespace: %{namespace}, Pod: %{pod}, Status: Failed, debugging: %{status_value}"}
+      }
+    }
+
+  pipelines.yml: |
+    - pipeline.id: cpu-metrics
+      path.config: "/usr/share/logstash/pipeline/logstash-cpu.conf"
+    - pipeline.id: memory-metrics
+      path.config: "/usr/share/logstash/pipeline/logstash-memory.conf"
+    - pipeline.id: pvc-metrics
+      path.config: "/usr/share/logstash/pipeline/logstash-pvc.conf"
+    - pipeline.id: pod-status-metrics
+      path.config: "/usr/share/logstash/pipeline/logstash-pod-status.conf"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logstash
+  namespace: logging
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logstash
+  template:
+    metadata:
+      labels:
+        app: logstash
+    spec:
+      containers:
+      - name: logstash
+        image: docker.elastic.co/logstash/logstash:7.10.0
+        securityContext:
+          runAsUser: 0
+          privileged: true
+        volumeMounts:
+        - name: logstash-config
+          mountPath: /usr/share/logstash/pipeline/
+        - name: logstash-pipelines
+          mountPath: /usr/share/logstash/config/pipelines.yml
+          subPath: pipelines.yml
+        - name: logstash-logs
+          mountPath: /var/log
+      volumes:
+      - name: logstash-config
+        configMap:
+          name: logstash-config-for-sms-agent
+      - name: logstash-pipelines
+        configMap:
+          name: logstash-config-for-sms-agent
+      - name: logstash-logs
+        hostPath:
+          path: /var/log
+          type: Directory
+

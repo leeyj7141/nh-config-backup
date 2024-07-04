@@ -1,0 +1,11 @@
+groups:
+- name: nginx-cpu-alerts1
+  rules:
+  - alert: NginxHighCPUUsage
+    expr: sum(rate(container_cpu_usage_seconds_total{pod=~"nginx-example.*"}[5m])) by (pod) / sum(kube_pod_container_resource_requests_cpu_cores{pod=~"nginx-.*"}) by (pod) > 0.6
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "High CPU usage detected on Nginx Pod ({{ $labels.pod }})"
+      description: "CPU usage on Nginx pod {{ $labels.pod }} has exceeded 60% for more than 5 minutes."

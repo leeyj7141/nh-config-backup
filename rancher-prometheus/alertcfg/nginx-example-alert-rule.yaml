@@ -1,0 +1,33 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    NHapp: exampleapp
+  name: nginx-alert-example
+  namespace: cattle-monitoring-system
+  #namespace: example
+spec:
+    groups:
+    - name: nginx-alert-example
+      rules:
+      - alert: ExampleAlertNginxHighCPUUsageRULE2
+        expr: |- 
+          sum(rate(container_cpu_usage_seconds_total{namespace=~".*example.*"}[5m])) by (NHcluster, pod, namespace) / sum(kube_pod_container_resource_requests{namespace=~".*example.*", resource="cpu"}) by (NHcluster, pod, namespace) > 0.6
+        for: 15s
+        labels:
+          severity: warning
+          team: teamA
+        annotations:
+          summary: "High CPU usage detected on Nginx Pod ({{ $labels.pod }})"
+          description: "CPU usage on Nginx pod {{$labels.namespace}}/{{ $labels.pod }} has exceeded 60% for more than 5 minutes."
+      - alert: ExampleAlertNginxHighMemoryUsageRULE2
+        expr: |-
+          sum(container_memory_usage_bytes{namespace=~".*example.*"}) by (NHcluster, pod, namespace) / sum(kube_pod_container_resource_requests{namespace=~".*example.*" ,resource="memory"}) by (NHcluster, pod, namespace) > 0.2
+        for: 15s
+        labels:
+          severity: critical
+          team: teamB
+        annotations:
+          summary: "High Memory usage detected on Nginx Pod ({{ $labels.pod }})"
+          description: "Memory usage on Nginx pod {{$labels.namespace}}/{{ $labels.pod }} has exceeded 50% for more than 5 minutes."
+

@@ -1,0 +1,45 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  annotations:
+    meta.helm.sh/release-name: rancher-monitoring
+    meta.helm.sh/release-namespace: cattle-monitoring-system
+  creationTimestamp: "2024-06-10T05:46:45Z"
+  generation: 1
+  labels:
+    app: rancher-monitoring-alertmanager
+    app.kubernetes.io/instance: rancher-monitoring
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: rancher-monitoring
+    app.kubernetes.io/version: 103.1.1_up45.31.1
+    chart: rancher-monitoring-103.1.1_up45.31.1
+    heritage: Helm
+    release: rancher-monitoring
+  name: rancher-monitoring-alertmanager
+  namespace: cattle-monitoring-system
+  resourceVersion: "11656"
+  uid: 390d9f85-0292-4920-a5e3-9f48d7ac8b75
+spec:
+  endpoints:
+  - enableHttp2: true
+    metricRelabelings:
+    - action: replace
+      replacement: c-m-x7zqt7k8
+      sourceLabels:
+      - __address__
+      targetLabel: cluster_id
+    - action: replace
+      replacement: cluster-test2
+      sourceLabels:
+      - __address__
+      targetLabel: cluster_name
+    path: /metrics
+    port: http-web
+  namespaceSelector:
+    matchNames:
+    - cattle-monitoring-system
+  selector:
+    matchLabels:
+      app: rancher-monitoring-alertmanager
+      release: rancher-monitoring
+      self-monitor: "true"

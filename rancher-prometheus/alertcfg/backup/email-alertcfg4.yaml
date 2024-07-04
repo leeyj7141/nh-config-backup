@@ -1,0 +1,23 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: example-alertcfg4
+  namespace: example
+  labels:
+    alertconfig: example
+spec:
+  route:
+    groupBy: ['officeA']
+    groupWait: 30s
+    groupInterval: 5m
+    repeatInterval: 12h
+    receiver: 'webhook2'
+    #matchers:
+    #  - name: namespace
+    #    value: example
+    #    matchType: '='
+    continue: false
+  receivers:
+  - name: 'webhook2'
+    webhookConfigs:
+    - url: 'http://example.com/'

@@ -1,0 +1,12 @@
+groups:
+- name: nginx-memory-alerts
+  rules:
+  - alert: NginxHighMemoryUsage
+    expr: sum(container_memory_usage_bytes{namespace="example", pod=~"nginx-example.*"}) by (pod) / sum(kube_pod_container_resource_requests{namespace="example", pod=~"nginx-example.*", resource="memory"}) by (pod) > 0.5
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "High Memory usage detected on Nginx Pod ({{ $labels.pod }})"
+      description: "Memory usage on Nginx pod {{ $labels.pod }} has exceeded 50% for more than 5 minutes."
+

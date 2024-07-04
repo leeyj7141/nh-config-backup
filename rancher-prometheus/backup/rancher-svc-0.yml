@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    field.cattle.io/publicEndpoints: "null"
+  labels:
+    app: rancher-monitoring-prometheus
+  name: rancher-monitoring-prometheus-for-thanos-0
+  namespace: cattle-monitoring-system
+spec:
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: http-web
+    port: 9090
+    protocol: TCP
+    targetPort: 8081
+  selector:
+    app.kubernetes.io/name: prometheus
+    prometheus: rancher-monitoring-prometheus
+    statefulset.kubernetes.io/pod-name: prometheus-rancher-monitoring-prometheus-0
+  sessionAffinity: None
+  type: ClusterIP

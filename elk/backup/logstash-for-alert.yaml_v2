@@ -1,0 +1,141 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: logstash-config-for-sms-agent
+  namespace: logging
+data:
+  logstash.conf: |
+#    input {
+#      http_poller {
+#        urls => {
+#          nh_pod_cpu_usage => {
+#            method => get
+#            url => "http://thanos-query.thanos.svc.cluster.local.:9090/api/v1/query?query=nh_pod_cpu_usage:rate3m"
+#            headers => {
+#              Accept => "application/json"
+#            }
+#          }
+#        }
+#        request_timeout => 60
+#        schedule => { every => "1m" }
+#        codec => "json"
+#        metadata_target => "http_poller_metadata"
+#      }
+#    }
+#    
+#    filter {
+#      if [data][result][0][value][1] > 10 {
+#        mutate {
+#          add_field => {
+#            "pod" => "%{[data][result][0][metric][pod]}"
+#            "namespace" => "%{[data][result][0][metric][namespace]}"
+#            "cpu_usage" => "%{[data][result][0][value][1]}"
+#            "timestamp" => "%{[data][result][0][value][0]}"
+#          }
+#        }
+#    
+#        date {
+#          match => ["timestamp", "UNIX"]
+#        }
+#      } else {
+#        drop { }
+#      }
+#    }
+#    
+#    output {
+#      file {
+#        path => "/var/log/high_cpu_usage.log"
+#        codec => line { format => "Pod: %{pod}, Namespace: %{namespace}, CPUUsage: %{cpu_usage}, Timestamp: %{+YYYY-MM-dd HH:mm:ss}" }
+#      }
+#    }
+
+    input {
+      http_poller {
+        urls => {
+          nh_pod_cpu_usage => {
+            method => get
+            url => "http://3.38.76.78:30008/api/v1/query?query=nh_pod_cpu_usage:rate3m{pod=\"jenkins-0\"}"
+            headers => {
+              Accept => "application/json"
+            }
+          }
+        }
+        request_timeout => 60
+        schedule => { every => "1m" }
+        codec => "json"
+        metadata_target => "http_poller_metadata"
+      }
+    }
+    
+    filter {
+      if [data][result] {
+        if [data][result][0] {
+          if [data][result][0][value] and [data][result][0][value][1] {
+            if [data][result][0][value][1] > 10 {
+              mutate {
+                add_field => {
+                  "pod" => "%{[data][result][0][metric][pod]}"
+                  "namespace" => "%{[data][result][0][metric][namespace]}"
+                  "cpu_usage" => "%{[data][result][0][value][1]}"
+                  "timestamp" => "%{[data][result][0][value][0]}"
+                }
+              }
+    
+              date {
+                match => ["timestamp", "UNIX"]
+              }
+            } else {
+              drop { }
+            }
+          } else {
+            drop { }
+          }
+        } else {
+          drop { }
+        }
+      } else {
+        drop { }
+      }
+    }
+    
+    output {
+      file {
+        path => "/var/log/high_cpu_usage.log"
+        codec => line { format => "Pod: %{pod}, Namespace: %{namespace}, CPU Usage: %{cpu_usage}, Timestamp: %{+YYYY-MM-dd HH:mm:ss}" }
+      }
+    }
+
+
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logstash
+  namespace: logging
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logstash
+  template:
+    metadata:
+      labels:
+        app: logstash
+    spec:
+      containers:
+      - name: logstash
+        image: docker.elastic.co/logstash/logstash:7.10.0
+        volumeMounts:
+        - name: logstash-config
+          mountPath: /usr/share/logstash/pipeline/logstash.conf
+          subPath: logstash.conf
+        - name: logstash-logs
+          mountPath: /var/log
+      volumes:
+      - name: logstash-config
+        configMap:
+          name: logstash-config-for-sms-agent
+      - name: logstash-logs
+        emptyDir: {}

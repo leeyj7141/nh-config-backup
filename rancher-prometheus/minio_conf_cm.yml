@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: thanos-objstore-config
+  namespace: cattle-monitoring-system 
+data:
+  thanos.yaml: |
+    type: s3
+    config:
+      bucket: thanos
+      endpoint: 172.31.39.208:30927
+      access_key: minio
+      access_key: minio123
+      insecure: true

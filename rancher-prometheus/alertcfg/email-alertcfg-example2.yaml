@@ -1,0 +1,58 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: example-alertcfg-nginx
+  namespace: example2
+  labels:
+    alertconfig: example
+spec:
+  receivers:
+  - name: blackhole
+  - name: email-notification-multiple
+    emailConfigs:
+    - to: 'leeyj7141@naver.com,gptforkernel@gmail.com,leeyj7141@daum.net'
+      from: 'leeyj7141@gmail.com'
+      smarthost: 'smtp.gmail.com:587'
+      authUsername: 'leeyj7141@gmail.com'
+      authPassword:
+        name: alertmanager-email-secret
+        key: smtp-password
+      requireTLS: true
+  - name: email-notification
+    emailConfigs:
+    - to: 'leeyj7141@naver.com'
+      sendResolved: true
+      smarthost: 'smtp.gmail.com:587'
+      from: 'leeyj7141@gmail.com'
+      authUsername: 'leeyj7141@gmail.com'
+      authPassword:
+        name: alertmanager-email-secret
+        key: smtp-password
+      requireTLS: true
+
+  route:
+    groupBy: 
+      - NHcluster
+      - alertname
+      - namespace
+    groupWait: 30s
+    groupInterval: 5m
+    repeatInterval: 4h
+    receiver: blackhole
+    routes:
+    - matchers:
+      - name: team
+        value: teamA
+        matchType: '='
+      - name: severity
+        value: warning
+        matchType: '='
+      receiver: email-notification
+    - matchers:
+      - name: team
+        value: teamB
+        matchType: '='
+      - name: severity
+        value: critical
+        matchType: '='
+      receiver: email-notification-multiple

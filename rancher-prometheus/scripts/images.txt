@@ -1,0 +1,36 @@
+    Image:         docker.io/rancher/mirrored-prometheus-operator-prometheus-config-reloader:v0.65.1
+    Image:         docker.io/rancher/mirrored-prometheus-alertmanager:v0.26.0
+    Image:         docker.io/rancher/mirrored-prometheus-operator-prometheus-config-reloader:v0.65.1
+--- alertmanager-rancher-monitoring-alertmanager-0 done ---
+    Image:         docker.io/rancher/mirrored-prometheus-operator-prometheus-config-reloader:v0.65.1
+    Image:         docker.io/rancher/mirrored-prometheus-prometheus:v2.45.0
+    Image:         docker.io/rancher/mirrored-prometheus-operator-prometheus-config-reloader:v0.65.1
+    Image:         docker.io/rancher/mirrored-thanos-thanos:v0.30.2
+    Image:         rancher/mirrored-library-nginx:1.24.0-alpine
+--- prometheus-rancher-monitoring-prometheus-0 done ---
+    Image:         docker.io/rancher/mirrored-prometheus-operator-prometheus-config-reloader:v0.65.1
+    Image:         docker.io/rancher/mirrored-prometheus-prometheus:v2.45.0
+    Image:         docker.io/rancher/mirrored-prometheus-operator-prometheus-config-reloader:v0.65.1
+    Image:         docker.io/rancher/mirrored-thanos-thanos:v0.30.2
+    Image:         rancher/mirrored-library-nginx:1.24.0-alpine
+--- prometheus-rancher-monitoring-prometheus-1 done ---
+    Image:           rancher/mirrored-kiwigrid-k8s-sidecar:1.24.6
+    Image:           rancher/mirrored-kiwigrid-k8s-sidecar:1.24.6
+    Image:           rancher/mirrored-kiwigrid-k8s-sidecar:1.24.6
+    Image:           rancher/mirrored-grafana-grafana:9.1.5
+    Image:         rancher/mirrored-library-nginx:1.24.0-alpine
+--- rancher-monitoring-grafana-577cb9ffd4-ph76w done ---
+    Image:         docker.io/rancher/mirrored-kube-state-metrics-kube-state-metrics:v2.10.1
+--- rancher-monitoring-kube-state-metrics-74655c88c4-xwmk2 done ---
+    Image:         docker.io/rancher/mirrored-prometheus-operator-prometheus-operator:v0.65.1
+--- rancher-monitoring-operator-9b85587d8-59tjs done ---
+    Image:           rancher/mirrored-prometheus-adapter-prometheus-adapter:v0.10.0
+--- rancher-monitoring-prometheus-adapter-79ff56f44-xglf5 done ---
+    Image:         docker.io/rancher/mirrored-prometheus-node-exporter:v1.3.1
+--- rancher-monitoring-prometheus-node-exporter-nf7x5 done ---
+    Image:         docker.io/rancher/mirrored-prometheus-node-exporter:v1.3.1
+--- rancher-monitoring-prometheus-node-exporter-s2v4h done ---
+    Image:         docker.io/rancher/mirrored-prometheus-node-exporter:v1.3.1
+--- rancher-monitoring-prometheus-node-exporter-tw2cc done ---
+    Image:         docker.io/rancher/mirrored-prometheus-node-exporter:v1.3.1
+--- rancher-monitoring-prometheus-node-exporter-xvjfx done ---

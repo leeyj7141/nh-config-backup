@@ -1,0 +1,44 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  annotations:
+    meta.helm.sh/release-name: rancher-monitoring
+    meta.helm.sh/release-namespace: cattle-monitoring-system
+  creationTimestamp: "2024-06-10T05:46:45Z"
+  generation: 1
+  labels:
+    app.kubernetes.io/instance: rancher-monitoring
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: grafana
+    app.kubernetes.io/version: 9.1.5
+    helm.sh/chart: grafana-6.59.0
+  name: rancher-monitoring-grafana
+  namespace: cattle-monitoring-system
+  resourceVersion: "11657"
+  uid: 4831a20b-1d85-4d76-9ce7-672cf0083d4c
+spec:
+  endpoints:
+  - honorLabels: true
+    metricRelabelings:
+    - action: replace
+      replacement: c-m-x7zqt7k8
+      sourceLabels:
+      - __address__
+      targetLabel: cluster_id
+    - action: replace
+      replacement: cluster-test2
+      sourceLabels:
+      - __address__
+      targetLabel: cluster_name
+    path: /metrics
+    port: nginx-http
+    scheme: http
+    scrapeTimeout: 30s
+  jobLabel: rancher-monitoring
+  namespaceSelector:
+    matchNames:
+    - cattle-monitoring-system
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: rancher-monitoring
+      app.kubernetes.io/name: grafana

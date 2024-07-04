@@ -1,0 +1,418 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: logstash-config-for-sms-agent
+  namespace: logging
+data:
+  logstash-cpu.conf: |
+    input {
+      http_poller {
+        urls => {
+          prometheus_metrics => {
+            method => get
+            url => "http://thanos-query.thanos.svc.cluster.local.:9090/api/v1/query?query=nh_pod_cpu_usage:rate5m"
+            headers => {
+              Accept => "application/json"
+            }
+          }
+        }
+        request_timeout => 60
+        schedule => { every => "1m" }
+        codec => "json"
+        metadata_target => "http_poller_metadata"
+      }
+    }
+    
+    filter {
+      split {
+        field => "[data][result]"
+      }
+    
+      mutate {
+        add_field => {
+          "NHcluster" => "%{[data][result][metric][NHcluster]}"
+          "metric" => "%{[data][result][metric][__name__]}"
+          "pod" => "%{[data][result][metric][pod]}"
+          "container" => "%{[data][result][metric][container]}"
+          "namespace" => "%{[data][result][metric][namespace]}"
+          "cpu_usage" => "%{[data][result][value][1]}"
+          "timestamp" => "%{[data][result][value][0]}"
+        }
+        remove_field => ["data", "http_poller_metadata"]
+      }
+    
+      if [cpu_usage] {
+        mutate {
+          convert => { "cpu_usage" => "float" }
+          add_field => { "timestamp_readable" => "%{@timestamp}" }
+        }
+        ruby {
+          code => 'event.set("cpu_usage", event.get("cpu_usage").to_i)'
+        }
+        date {
+          match => ["timestamp", "UNIX"]
+          target => "timestamp"
+          timezone => "UTC"
+        }
+
+        if [cpu_usage] >= 90 {
+          mutate {
+            add_field => {
+              "alert" => "Critical"
+            }
+          }
+        } else if [cpu_usage] >= 80 {
+          mutate {
+            add_field => {
+              "alert" => "Warning"
+            }
+          }
+        } else if [cpu_usage] < 80 {
+          mutate {
+            add_field => {
+              "alert" => "Info"
+            }
+          }
+        }
+      if [cpu_usage] {
+        mutate {
+          add_field => {
+            "message" => "%{timestamp_readable}, %{alert}, Cluster: %{NHcluster}, Namespace: %{namespace}, Pod: %{pod}, Container: %{container}, CPUUsage: %{cpu_usage}%"
+          }
+        }
+      }
+    }
+   
+    output {
+      if [alert] in ["Critical", "Warning"] {
+        elasticsearch {
+          hosts => ["http://172.31.18.85:9200"]
+          index => "k8s-platform_health-%{+YYYY.MM.dd}"
+        }
+      } else {
+        elasticsearch {
+          hosts => ["http://172.31.18.85:9200"]
+          index => "k8s-app-metric-%{+YYYY.MM.dd}"
+        }
+      }
+      file {
+        path => "/var/log/prometheus_metrics_to_sms_agent.log"
+        codec => line { format => "%{message}"}
+      }
+    }
+
+  logstash-memory.conf: |
+    input {
+      http_poller {
+        urls => {
+          prometheus_metrics => {
+            method => get
+            url => "http://thanos-query.thanos.svc.cluster.local.:9090/api/v1/query?query=nh_pod_memory_usage:ratio"
+            headers => {
+              Accept => "application/json"
+            }
+          }
+        }
+        request_timeout => 60
+        schedule => { every => "1m" }
+        codec => "json"
+        metadata_target => "http_poller_metadata"
+      }
+    }
+    
+    filter {
+      split {
+        field => "[data][result]"
+      }
+    
+      mutate {
+        add_field => {
+          "NHcluster" => "%{[data][result][metric][NHcluster]}"
+          "metric" => "%{[data][result][metric][__name__]}"
+          "container" => "%{[data][result][metric][container]}"
+          "pod" => "%{[data][result][metric][pod]}"
+          "namespace" => "%{[data][result][metric][namespace]}"
+          "memory_usage" => "%{[data][result][value][1]}"
+          "timestamp" => "%{[data][result][value][0]}"
+        }
+        remove_field => ["data", "http_poller_metadata"]
+      }
+    
+      if [memory_usage] {
+        mutate {
+          convert => { "memory_usage" => "float" }
+        }
+        ruby {
+          code => 'event.set("memory_usage", event.get("memory_usage").to_i)'
+        }
+        date {
+          match => ["timestamp", "UNIX"]
+          target => "timestamp"
+          timezone => "UTC"
+        }
+        if [memory_usage] >= 95 {
+          mutate {
+            add_field => { 
+              "alert" => "Critical"
+            }
+          }
+        } else if [memory_usage] >= 90 {
+          mutate {
+            add_field => { 
+              "alert" => "Warning"
+            }
+          }
+        } else if [memory_usage] < 90 {
+          mutate {
+            add_field => { 
+              "alert" => "Info"
+            }
+          }
+        }
+      }
+
+      if [memory_usage] {
+        mutate {
+          add_field => {
+            "message" => "%{timestamp_readable}, %{alert}, Cluster: %{NHcluster}, Namespace: %{namespace}, Pod: %{pod}, Container: %{container}, MemoryUsage: %{memory_usage}%"
+          }
+        }
+      }
+    } 
+    
+    output {
+      if [alert] in ["Critical", "Warning"] {
+        elasticsearch {
+          hosts => ["http://172.31.18.85:9200"]
+          index => "k8s-platform_health-%{+YYYY.MM.dd}"
+        }
+        file {
+          path => "/var/log/prometheus_metrics_to_sms_agent.log"
+          codec => line { format => "%{message}"}
+        }
+      } else {
+        elasticsearch {
+          hosts => ["http://172.31.18.85:9200"]
+          index => "k8s-app-metric-%{+YYYY.MM.dd}"
+        }
+      }
+    }
+
+  logstash-pvc.conf: |
+    input {
+      http_poller {
+        urls => {
+          prometheus_metrics => {
+            method => get
+            url => "http://thanos-query.thanos.svc.cluster.local.:9090/api/v1/query?query=nh_pvc_usage:ratio"
+            headers => {
+              Accept => "application/json"
+            }
+          }
+        }
+        request_timeout => 60
+        schedule => { every => "1m" }
+        codec => "json"
+        metadata_target => "http_poller_metadata"
+      }
+    }
+    
+    filter {
+      split {
+        field => "[data][result]"
+      }
+    
+      mutate {
+        add_field => {
+          "metric" => "%{[data][result][metric][__name__]}"
+          "NHcluster" => "%{[data][result][metric][NHcluster]}"
+          "persistentvolumeclaim" => "%{[data][result][metric][persistentvolumeclaim]}"
+          "namespace" => "%{[data][result][metric][namespace]}"
+          "pvc_usage" => "%{[data][result][value][1]}"
+          "timestamp" => "%{[data][result][value][0]}"
+        }
+        remove_field => ["data", "http_poller_metadata"]
+      }
+    
+      if [pvc_usage] {
+        mutate {
+          convert => { "pvc_usage" => "float" }
+          add_field => { 
+            "timestamp_readable" => "%{@timestamp}" 
+          }
+        }
+        ruby {
+          code => 'event.set("pvc_usage", event.get("pvc_usage").to_i)' 
+        }
+        date {
+          match => ["timestamp", "UNIX"]
+          target => "timestamp"
+          timezone => "UTC"
+        }
+
+        if [pvc_usage] > 90 {
+          mutate {
+            add_field => { 
+              "alert" => "Critical" 
+            }
+          }
+        } else if [pvc_usage] > 80 {
+          mutate {
+            add_field => { 
+              "alert" => "Warning" 
+            }
+          }
+        } else if [pvc_usage] <= 80 {
+          mutate {
+            add_field => { 
+              "alert" => "Info" 
+            }
+          }
+        }
+      } 
+      if [pvc_usage] {
+        mutate {
+          add_field => { 
+            "message" => "%{timestamp_readable}, %{alert}, Cluster: %{NHcluster}, Namespace: %{namespace}, PVC: %{persistentvolumeclaim}, PVCUsage: %{pvc_usage}%" 
+          }
+        }
+      }
+    }
+
+    output {
+      if [alert] in ["Critical", "Warning"] {
+        elasticsearch {
+          hosts => ["http://172.31.18.85:9200"]
+          index => "k8s-platform_health-%{+YYYY.MM.dd}"
+        }
+        file {
+          path => "/var/log/prometheus_metrics_to_sms_agent.log"
+          codec => line { format => "%{message}"}
+        }
+      } else {
+        elasticsearch {
+          hosts => ["http://172.31.18.85:9200"]
+          index => "k8s-app-metric-%{+YYYY.MM.dd}"
+        }
+      }
+    }
+
+  logstash-pod-status.conf: |
+    input {
+      http_poller {
+        urls => {
+          prometheus_failed_pods => {
+            method => get
+            url => 'http://thanos-query.thanos.svc.cluster.local:9090/api/v1/query?query=kube_pod_status_phase%7Bphase%3D%22Failed%22%7D'
+            headers => {
+              Accept => "application/json"
+            }
+          }
+        }
+        request_timeout => 60
+        schedule => { every => "1m" }
+        codec => "json"
+        metadata_target => "http_poller_metadata"
+      }
+    }
+    
+    filter {
+      split {
+        field => "[data][result]"
+      }
+    
+      mutate {
+        add_field => {
+          "metric" => "%{[data][result][metric][__name__]}"
+          "NHcluster" => "%{[data][result][metric][NHcluster]}"
+          "namespace" => "%{[data][result][metric][namespace]}"
+          "pod" => "%{[data][result][metric][pod]}"
+          "pod_fail_status" => "%{[data][result][value][1]}"
+          "timestamp" => "%{[data][result][value][0]}"
+        }
+        remove_field => ["data", "http_poller_metadata"]
+      }
+    
+      if [pod_fail_status] == "1" {
+        date {
+          match => ["timestamp", "UNIX"]
+          target => "timestamp"
+          timezone => "UTC"
+        }
+   
+        mutate {
+          add_field => {
+            "alert" => "Warning" 
+            "timestamp_readable" => "%{@timestamp}" 
+            "message" => "%{timestamp_readable}, %{alert}, Cluster: %{NHcluster}, Namespace: %{namespace}, Pod: %{pod}, Status: Failed" 
+          }
+        }
+      } else {
+        drop { }
+      }
+    }
+    
+    output {
+      elasticsearch {
+        hosts => ["http://172.31.18.85:9200"]
+        index => "k8s-platform_health-%{+YYYY.MM.dd}"
+      }
+      file {
+        path => "/var/log/prometheus_metrics_to_sms_agent.log"
+        codec => line { format => "%{message}" }
+      }
+    }
+
+  pipelines.yml: |
+    - pipeline.id: cpu-metrics
+      path.config: "/usr/share/logstash/pipeline/logstash-cpu.conf"
+    - pipeline.id: memory-metrics
+      path.config: "/usr/share/logstash/pipeline/logstash-memory.conf"
+    - pipeline.id: pvc-metrics
+      path.config: "/usr/share/logstash/pipeline/logstash-pvc.conf"
+    - pipeline.id: pod-status-metrics
+      path.config: "/usr/share/logstash/pipeline/logstash-pod-status.conf"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logstash
+  namespace: logging
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logstash
+  template:
+    metadata:
+      labels:
+        app: logstash
+    spec:
+      containers:
+      - name: logstash
+        image: docker.elastic.co/logstash/logstash:7.10.0
+        securityContext:
+          runAsUser: 0
+          privileged: true
+        volumeMounts:
+        - name: logstash-config
+          mountPath: /usr/share/logstash/pipeline/
+        - name: logstash-pipelines
+          mountPath: /usr/share/logstash/config/pipelines.yml
+          subPath: pipelines.yml
+        - name: logstash-logs
+          mountPath: /var/log
+      volumes:
+      - name: logstash-config
+        configMap:
+          name: logstash-config-for-sms-agent
+      - name: logstash-pipelines
+        configMap:
+          name: logstash-config-for-sms-agent
+      - name: logstash-logs
+        hostPath:
+          path: /var/log
+          type: Directory
+

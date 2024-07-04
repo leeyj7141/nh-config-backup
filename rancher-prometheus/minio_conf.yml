@@ -1,0 +1,7 @@
+type: s3
+config:
+  bucket: thanos
+  endpoint: 172.31.39.208:30927
+  access_key: minio
+  secret_key: minio123
+  insecure: true

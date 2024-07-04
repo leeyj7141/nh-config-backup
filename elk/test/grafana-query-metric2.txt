@@ -1,0 +1,360 @@
+{
+  "request": {
+    "url": "api/ds/query?ds_type=elasticsearch&requestId=explore_rTw",
+    "method": "POST",
+    "data": {
+      "queries": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "e63722b8-7785-4756-bd64-9c10bedf04a9"
+          },
+          "query": "",
+          "alias": "",
+          "metrics": [
+            {
+              "id": "1",
+              "type": "raw_data",
+              "settings": {
+                "size": "5"
+              }
+            }
+          ],
+          "bucketAggs": [],
+          "timeField": "@timestamp",
+          "datasourceId": 2,
+          "intervalMs": 30000,
+          "maxDataPoints": 1904
+        }
+      ],
+      "from": "1719990501511",
+      "to": "1719994101512"
+    },
+    "hideFromInspector": false
+  },
+  "response": {
+    "results": {
+      "A": {
+        "status": 200,
+        "frames": [
+          {
+            "schema": {
+              "refId": "A",
+              "fields": [
+                {
+                  "name": "@timestamp",
+                  "type": "time",
+                  "typeInfo": {
+                    "frame": "time.Time",
+                    "nullable": true
+                  },
+                  "config": {
+                    "filterable": true
+                  }
+                },
+                {
+                  "name": "@version",
+                  "type": "string",
+                  "typeInfo": {
+                    "frame": "string",
+                    "nullable": true
+                  },
+                  "config": {
+                    "filterable": true
+                  }
+                },
+                {
+                  "name": "NHcluster",
+                  "type": "string",
+                  "typeInfo": {
+                    "frame": "string",
+                    "nullable": true
+                  },
+                  "config": {
+                    "filterable": true
+                  }
+                },
+                {
+                  "name": "_id",
+                  "type": "string",
+                  "typeInfo": {
+                    "frame": "string",
+                    "nullable": true
+                  },
+                  "config": {
+                    "filterable": true
+                  }
+                },
+                {
+                  "name": "_index",
+                  "type": "string",
+                  "typeInfo": {
+                    "frame": "string",
+                    "nullable": true
+                  },
+                  "config": {
+                    "filterable": true
+                  }
+                },
+                {
+                  "name": "_type",
+                  "type": "other",
+                  "typeInfo": {
+                    "frame": "json.RawMessage",
+                    "nullable": true
+                  },
+                  "config": {
+                    "filterable": true
+                  }
+                },
+                {
+                  "name": "container",
+                  "type": "string",
+                  "typeInfo": {
+                    "frame": "string",
+                    "nullable": true
+                  },
+                  "config": {
+                    "filterable": true
+                  }
+                },
+                {
+                  "name": "cpu_usage",
+                  "type": "number",
+                  "typeInfo": {
+                    "frame": "float64",
+                    "nullable": true
+                  },
+                  "config": {
+                    "filterable": true
+                  }
+                },
+                {
+                  "name": "highlight",
+                  "type": "other",
+                  "typeInfo": {
+                    "frame": "json.RawMessage",
+                    "nullable": true
+                  },
+                  "config": {
+                    "filterable": true
+                  }
+                },
+                {
+                  "name": "message",
+                  "type": "string",
+                  "typeInfo": {
+                    "frame": "string",
+                    "nullable": true
+                  },
+                  "config": {
+                    "filterable": true
+                  }
+                },
+                {
+                  "name": "metric",
+                  "type": "string",
+                  "typeInfo": {
+                    "frame": "string",
+                    "nullable": true
+                  },
+                  "config": {
+                    "filterable": true
+                  }
+                },
+                {
+                  "name": "namespace",
+                  "type": "string",
+                  "typeInfo": {
+                    "frame": "string",
+                    "nullable": true
+                  },
+                  "config": {
+                    "filterable": true
+                  }
+                },
+                {
+                  "name": "nhalert",
+                  "type": "string",
+                  "typeInfo": {
+                    "frame": "string",
+                    "nullable": true
+                  },
+                  "config": {
+                    "filterable": true
+                  }
+                },
+                {
+                  "name": "pod",
+                  "type": "string",
+                  "typeInfo": {
+                    "frame": "string",
+                    "nullable": true
+                  },
+                  "config": {
+                    "filterable": true
+                  }
+                },
+                {
+                  "name": "sort",
+                  "type": "other",
+                  "typeInfo": {
+                    "frame": "json.RawMessage",
+                    "nullable": true
+                  },
+                  "config": {
+                    "filterable": true
+                  }
+                },
+                {
+                  "name": "status",
+                  "type": "string",
+                  "typeInfo": {
+                    "frame": "string",
+                    "nullable": true
+                  },
+                  "config": {
+                    "filterable": true
+                  }
+                }
+              ]
+            },
+            "data": {
+              "values": [
+                [
+                  1719994068734,
+                  1719994068734,
+                  1719994068734,
+                  1719994068734,
+                  1719994068734
+                ],
+                [
+                  "1",
+                  "1",
+                  "1",
+                  "1",
+                  "1"
+                ],
+                [
+                  "clusterA",
+                  "clusterA",
+                  "clusterA",
+                  "clusterA",
+                  "clusterA"
+                ],
+                [
+                  "wWWid5AB6m_0uy7nrz6m",
+                  "wGWid5AB6m_0uy7nrz6m",
+                  "v2Wid5AB6m_0uy7nrz6m",
+                  "vmWid5AB6m_0uy7nrz6m",
+                  "vWWid5AB6m_0uy7nrz6m"
+                ],
+                [
+                  "k8s-app3-metric-2024.07.03",
+                  "k8s-app3-metric-2024.07.03",
+                  "k8s-app3-metric-2024.07.03",
+                  "k8s-app3-metric-2024.07.03",
+                  "k8s-app3-metric-2024.07.03"
+                ],
+                [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null
+                ],
+                [
+                  "trivy",
+                  "stress",
+                  "stress",
+                  "storegateway",
+                  "storegateway"
+                ],
+                [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null
+                ],
+                [
+                  "2024-07-03T08:07:48.734477373Z, Info, Cluster: clusterA, Namespace: harbor, Pod: harbor-trivy-0, Container: trivy, CPUUsage: 0%",
+                  "2024-07-03T08:07:48.734477373Z, Info, Cluster: clusterA, Namespace: example2, Pod: memory-load-example-55d64c4d58-69hx9, Container: stress, CPUUsage: 0%",
+                  "2024-07-03T08:07:48.734477373Z, Info, Cluster: clusterA, Namespace: example, Pod: memory-load-example-55d64c4d58-27bph, Container: stress, CPUUsage: 0%",
+                  "2024-07-03T08:07:48.734477373Z, Info, Cluster: clusterA, Namespace: thanos, Pod: thanos-storegateway-1, Container: storegateway, CPUUsage: 0%",
+                  "2024-07-03T08:07:48.734477373Z, Info, Cluster: clusterA, Namespace: thanos, Pod: thanos-storegateway-0, Container: storegateway, CPUUsage: 0%"
+                ],
+                [
+                  "nh_pod_cpu_usage:rate5m",
+                  "nh_pod_cpu_usage:rate5m",
+                  "nh_pod_cpu_usage:rate5m",
+                  "nh_pod_cpu_usage:rate5m",
+                  "nh_pod_cpu_usage:rate5m"
+                ],
+                [
+                  "harbor",
+                  "example2",
+                  "example",
+                  "thanos",
+                  "thanos"
+                ],
+                [
+                  "Info",
+                  "Info",
+                  "Info",
+                  "Info",
+                  "Info"
+                ],
+                [
+                  "harbor-trivy-0",
+                  "memory-load-example-55d64c4d58-69hx9",
+                  "memory-load-example-55d64c4d58-27bph",
+                  "thanos-storegateway-1",
+                  "thanos-storegateway-0"
+                ],
+                [
+                  [
+                    1719994068734,
+                    8224
+                  ],
+                  [
+                    1719994068734,
+                    8223
+                  ],
+                  [
+                    1719994068734,
+                    8222
+                  ],
+                  [
+                    1719994068734,
+                    8221
+                  ],
+                  [
+                    1719994068734,
+                    8220
+                  ]
+                ],
+                [
+                  "success",
+                  "success",
+                  "success",
+                  "success",
+                  "success"
+                ]
+              ]
+            }
+          }
+        ],
+        "refId": "A"
+      }
+    }
+  }
+}

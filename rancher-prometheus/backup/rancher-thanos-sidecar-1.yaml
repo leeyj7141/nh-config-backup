@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+#  annotations:
+#    meta.helm.sh/release-name: rancher-monitoring
+#    meta.helm.sh/release-namespace: cattle-monitoring-system
+#  creationTimestamp: "2024-06-23T04:44:10Z"
+  labels:
+    app: rancher-monitoring-thanos-discovery
+#    app.kubernetes.io/instance: rancher-monitoring
+#    app.kubernetes.io/managed-by: Helm
+#    app.kubernetes.io/part-of: rancher-monitoring
+#    app.kubernetes.io/version: 103.1.1_up45.31.1
+#    chart: rancher-monitoring-103.1.1_up45.31.1
+#    heritage: Helm
+#    release: rancher-monitoring
+  name: rancher-monitoring-thanos-discovery-1
+  namespace: cattle-monitoring-system
+spec:
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: grpc
+    port: 10901
+    protocol: TCP
+    targetPort: grpc
+  - name: http
+    port: 10902
+    protocol: TCP
+    targetPort: http
+  selector:
+    app.kubernetes.io/name: prometheus
+    prometheus: rancher-monitoring-prometheus
+    statefulset.kubernetes.io/pod-name: prometheus-rancher-monitoring-prometheus-1
+  sessionAffinity: None
+  type: NodePort
