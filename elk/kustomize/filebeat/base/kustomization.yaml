@@ -1,0 +1,6 @@
+resources:
+ - filebeat-clusterrolebinding.yaml
+ - filebeat-clusterrole.yaml
+ - filebeat-configmap.yaml
+ - filebeat-daemonset.yaml
+ - filebeat-serviceaccount.yaml

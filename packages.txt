@@ -6,7 +6,6 @@ thanos:
 
 rancher-monitoring-system:
  - rancher/mirrored-kube-state-metrics-kube-state-metrics:v2.10.1
- - rancher-prometheus-operator:
  - rancher/mirrored-prometheus-operator-prometheus-operator:v0.65.1
  - rancher/shell:v0.1.25
  - rancher/mirrored-prometheus-adapter-prometheus-adapter:v0.10.0

@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: filebeat
+  labels:
+    k8s-app: filebeat
+spec:
+  selector:
+    matchLabels:
+      k8s-app: filebeat
+  template:
+    metadata:
+      labels:
+        k8s-app: filebeat
+    spec:
+      serviceAccountName: filebeat
+      containers:
+      - name: filebeat
+        image: docker.elastic.co/beats/filebeat:8.9.0
+        env:
+        - name: ELASTICSEARCH_HOST
+          value: "172.31.18.85"
+        - name: ELASTICSEARCH_PORT
+          value: "9200"
+        resources:
+          limits:
+            memory: 1Gi
+            cpu: 500m
+          requests:
+            memory: 100Mi
+            cpu: 100m
+        securityContext:
+          runAsUser: 1000  
+        volumeMounts:
+        - name: config
+          mountPath: /usr/share/filebeat/filebeat.yml
+          subPath: filebeat.yml
+        - name: data
+          mountPath: /usr/share/filebeat/data
+        - name: varlog
+          mountPath: /var/log
+          readOnly: true
+      volumes:
+      - name: config
+        configMap:
+          defaultMode: 0644
+          name: filebeat-config
+      - name: data
+        emptyDir: {}
+      - name: varlog
+        hostPath:
+          path: /var/log
+

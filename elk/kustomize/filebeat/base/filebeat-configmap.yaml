@@ -1,0 +1,45 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: filebeat-config
+  labels:
+    k8s-app: filebeat
+data:
+  filebeat.yml: |-
+    filebeat.inputs:
+    - type: log
+      paths:
+        - /var/log/*.log
+      json.keys_under_root: true
+      json.add_error_key: true
+      fields_under_root: true
+      fields:
+        log_type: node
+
+    - type: log
+      paths:
+        - /var/log/containers/*.log
+      exclude_files: 
+        - '.*filebeat.*'
+      json.keys_under_root: true
+      json.add_error_key: true
+      fields_under_root: true
+      fields:
+        log_type: pod
+
+    processors:
+    - add_cloud_metadata: {}
+    - add_docker_metadata: {}
+    - add_kubernetes_metadata: {}
+
+    output.elasticsearch:
+      hosts: ['${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}']
+      indices:
+        - index: "k8s-node-log-%{+yyyy.MM.dd}"
+          when.equals:
+            fields.log_type: "node"
+        - index: "k8s-pod-log-%{+yyyy.MM.dd}"
+          when.equals:
+            fields.log_type: "pod"
+
