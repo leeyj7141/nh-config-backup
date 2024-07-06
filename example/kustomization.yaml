@@ -1,0 +1,16 @@
+#namespace: example2
+namespace: example
+
+resources:
+# load test
+# - memory-test-deploy2.yml
+# - memory-test-deploy.yml
+# - nginx-deploy2.yml
+# - nginx-deploy.yml
+# - nginx-svc2.yml
+# - nginx-svc.yml
+
+# ingress test 
+ - nginx-ingress-test-deploy.yaml
+ - nginx-ingress-test-ingress.yaml
+ - nginx-ingress-test-svc.yaml

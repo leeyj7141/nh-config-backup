@@ -1,7 +1,0 @@
-resources:
- - memory-test-deploy2.yml
- - memory-test-deploy.yml
- - nginx-deploy2.yml
- - nginx-deploy.yml
- - nginx-svc2.yml
- - nginx-svc.yml

@@ -1,0 +1,17 @@
+{{- if .Values.configFiles }}
+{{ $files := .Files }}
+{{- range $index, $file := .Values.configFiles }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: test-configmap-{{ $index }}
+  namespace: example
+data:
+{{- $content := $files.Get $file }}
+{{- range $key, $value := fromYaml $content }}
+  {{ $key }}: {{ $value | quote }}
+{{- end }}
+---
+{{- end }}
+{{- end }}
+
