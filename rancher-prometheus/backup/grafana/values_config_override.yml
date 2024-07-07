@@ -1,0 +1,103 @@
+testFramework:
+  enabled: false
+replicas: 1
+image: 
+  repository: rancher/mirrored-grafana-grafana
+  tag: 10.3.3
+service:
+  type: NodePort
+  nodePort: 31111
+  isessionAffinity: ClientIP
+sidecar:
+  datasources:
+    enabled: true
+    isDefaultDatasource: false
+  label: "grafana_dashboard"
+  labelValue: "1"
+  dashboards:
+    enabled: true
+    provider:
+      name: 'sidecarProvider'
+      orgId: 1
+      folder: 'Test-sidecar-folder'
+      type: file
+      disableDelete: false
+      allowUiUpdates: false
+dashboardProviders: 
+  dashboardproviders.yaml:
+    apiVersion: 1
+    providers:
+    - name: 'default'
+      orgId: 1
+      folder: 'Test-dashboard-default'
+      type: file
+      disableDeletion: false
+      editable: true
+      options:
+        path: /var/lib/grafana/dashboards/default
+    - name: 'system'
+      orgId: 1
+      folder: 'Test-dashboard-system'
+      type: file
+      disableDeletion: false
+      editable: true
+      options:
+        path: /var/lib/grafana/dashboards/system
+dashboards:
+  default: 
+    k8s-status-test1:
+      file: dashboards/k8s-status-1.json
+    k8s-status-test2:
+      file: k8s-status-2.json
+    k8s-status-test3:
+      file: /home/rocky/yjlee/apps/rancher-prometheus/grafana/dashboards/k8s-status-3.json
+  system: 
+    kubernetes-cluster:
+      # Ref: https://grafana.com/dashboards/6417 - Kubernetes cluster 
+      gnetId: 6417
+      revision: 1
+      datasource: Thanos
+#dashboardsConfigMaps:
+#  default: "grafana-dashboards-k8s-status"
+#  system: "grafana-dashboards-k8s-status-1"
+additionalDataSources:
+  - name: Thanos
+    type: prometheus
+    access: proxy
+    url: http://thanos-query.thanos.svc.cluster.local.:9090
+    isDefault: true
+    jsonData:
+      cacheLevel: Medium
+      defaultEditor: builder
+      disableRecordingRules: false
+      exemplarTraceIdDestinations: []
+      httpMethod: POST
+      prometheusType: Thanos
+      prometheusVersion: 0.31.1
+      timeInterval: 1m
+  - name: elasticsearch-k8s-log
+    type: elasticsearch
+    access: proxy
+    url: http://172.31.18.85:9200
+    isDefault: false
+    jsonData:
+      includeFrozen: false
+      index: k8s-log*
+      logLevelField: ""
+      logMessageField: message
+      maxConcurrentShardRequests: 5
+      timeField: "@timestamp"
+      timeInterval: 30s
+  - name: elasticsearch-k8s-app
+    type: elasticsearch
+    access: proxy
+    url: http://172.31.18.85:9200
+    isDefault: false
+    jsonData:
+      includeFrozen: false
+      index: k8s-app3-metric*
+      logLevelField: ""
+      logMessageField: message
+      maxConcurrentShardRequests: 5
+      timeField: "@timestamp"
+      timeInterval: 30s

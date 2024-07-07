@@ -1,8 +1,7 @@
 prometheus:
   prometheusSpec:
     externalLabels:
-      cluster: ""
-      NHcluster: "clusterA"
+      NHcenter: "centerA"
     replicas: 2
 #    remoteWrite: 
 #     - url: http://metricbeat.logging.svc.cluster.local.:9201/write
@@ -57,7 +56,8 @@ alertmanager:
     nodePort: 31112
 
 grafana: 
-  replicas: 1
+  enabled: true
+  replicas: 2
   image: 
     repository: rancher/mirrored-grafana-grafana
     tag: 10.3.3
@@ -67,35 +67,52 @@ grafana:
     isessionAffinity: ClientIP
   sidecar:
     datasources:
+      enabled: true
       isDefaultDatasource: false
+    label: "grafana_dashboard"
+    labelValue: "1"
     dashboards:
       enabled: true
-  dashboardProviders: 
-    dashboardproviders.yaml:
-      apiVersion: 1
-      providers:
-      - name: 'default'
+      provider:
+        name: 'sidecarProvider'
         orgId: 1
-        folder: 'Test-dashboard'
+        #folder: 'Test-sidecar-folder'
+        folder: ''
         type: file
-        disableDeletion: false
-        editable: true
-        options:
-          path: /var/lib/grafana/dashboards/default
-  dashboards:
-    default: 
-      k8s-status-test1:
-        file: dashboards/k8s-status-1.json
-      k8s-status-test2:
-        file: k8s-status-2.json
-      k8s-status-test3:
-        file: /home/rocky/yjlee/apps/rancher-prometheus/dashboards/k8s-status-3.json
-      kubernetes-cluster:
-        # Ref: https://grafana.com/dashboards/6417 - Kubernetes cluster 
-        gnetId: 6417
-        revision: 1
-        datasource: Thanos
-
+        disableDelete: false
+        allowUiUpdates: false
+  #dashboardProviders: 
+  #  dashboardproviders.yaml:
+  #    apiVersion: 1
+  #    providers:
+  #    - name: 'default'
+  #      orgId: 1
+  #      folder: 'Test-dashboard-default'
+  #      type: file
+  #      disableDeletion: false
+  #      editable: true
+  #      options:
+  #        path: /var/lib/grafana/dashboards/default
+  #    - name: 'system'
+  #      orgId: 1
+  #      folder: 'Test-dashboard-system'
+  #      type: file
+  #      disableDeletion: false
+  #      editable: true
+  #      options:
+  #        path: /var/lib/grafana/dashboards/system
+  #dashboards:
+  #  default: 
+  #  system: 
+  #    kubernetes-cluster:
+  #      # Ref: https://grafana.com/dashboards/6417 - Kubernetes cluster 
+  #      gnetId: 6417
+  #      revision: 1
+  #      datasource: Thanos
+  dashboardsConfigMaps:
+    k8s-status: "grafana-dashboards-k8s-status"
+    node-status: "grafana-dashboards-node-status"
+    node-exporter-full: "grafana-dashboards-node-exporter-full"
   additionalDataSources:
     - name: Thanos
       type: prometheus
@@ -143,3 +160,14 @@ kube-state-metrics:
 
 prometheus-adapter:
   replicas: 2
+
+prometheus-node-exporter:
+  image:
+    registry: docker.io
+    repository: rancher/mirrored-prometheus-node-exporter
+    # Overrides the image tag whose default is {{ printf "v%s" .Chart.AppVersion }}
+    tag: v1.7.0
+  extraArgs:
+    - --collector.tcpstat
+    - --collector.processes   # resource 사용률 높음. 
+    #- --collector.ipvs

@@ -1,359 +1,9 @@
-upgrade.go:158: [debug] preparing upgrade for rancher-monitoring
-upgrade.go:166: [debug] performing update for rancher-monitoring
-upgrade.go:364: [debug] creating upgraded release for rancher-monitoring
-client.go:486: [debug] Starting delete for "rancher-monitoring-admission" ServiceAccount
-client.go:490: [debug] Ignoring delete failure for "rancher-monitoring-admission" /v1, Kind=ServiceAccount: serviceaccounts "rancher-monitoring-admission" not found
-wait.go:104: [debug] beginning wait for 1 resources to be deleted with timeout of 5m0s
-client.go:142: [debug] creating 1 resource(s)
-client.go:486: [debug] Starting delete for "rancher-monitoring-admission" ClusterRole
-client.go:490: [debug] Ignoring delete failure for "rancher-monitoring-admission" rbac.authorization.k8s.io/v1, Kind=ClusterRole: clusterroles.rbac.authorization.k8s.io "rancher-monitoring-admission" not found
-wait.go:104: [debug] beginning wait for 1 resources to be deleted with timeout of 5m0s
-client.go:142: [debug] creating 1 resource(s)
-client.go:486: [debug] Starting delete for "rancher-monitoring-admission" ClusterRoleBinding
-client.go:490: [debug] Ignoring delete failure for "rancher-monitoring-admission" rbac.authorization.k8s.io/v1, Kind=ClusterRoleBinding: clusterrolebindings.rbac.authorization.k8s.io "rancher-monitoring-admission" not found
-wait.go:104: [debug] beginning wait for 1 resources to be deleted with timeout of 5m0s
-client.go:142: [debug] creating 1 resource(s)
-client.go:486: [debug] Starting delete for "rancher-monitoring-admission" Role
-client.go:490: [debug] Ignoring delete failure for "rancher-monitoring-admission" rbac.authorization.k8s.io/v1, Kind=Role: roles.rbac.authorization.k8s.io "rancher-monitoring-admission" not found
-wait.go:104: [debug] beginning wait for 1 resources to be deleted with timeout of 5m0s
-client.go:142: [debug] creating 1 resource(s)
-client.go:486: [debug] Starting delete for "rancher-monitoring-admission" RoleBinding
-client.go:490: [debug] Ignoring delete failure for "rancher-monitoring-admission" rbac.authorization.k8s.io/v1, Kind=RoleBinding: rolebindings.rbac.authorization.k8s.io "rancher-monitoring-admission" not found
-wait.go:104: [debug] beginning wait for 1 resources to be deleted with timeout of 5m0s
-client.go:142: [debug] creating 1 resource(s)
-client.go:486: [debug] Starting delete for "rancher-monitoring-admission-create" Job
-client.go:490: [debug] Ignoring delete failure for "rancher-monitoring-admission-create" batch/v1, Kind=Job: jobs.batch "rancher-monitoring-admission-create" not found
-wait.go:104: [debug] beginning wait for 1 resources to be deleted with timeout of 5m0s
-client.go:142: [debug] creating 1 resource(s)
-client.go:712: [debug] Watching for changes to Job rancher-monitoring-admission-create with timeout of 5m0s
-client.go:740: [debug] Add/Modify event for rancher-monitoring-admission-create: ADDED
-client.go:779: [debug] rancher-monitoring-admission-create: Jobs active: 0, jobs failed: 0, jobs succeeded: 0
-client.go:740: [debug] Add/Modify event for rancher-monitoring-admission-create: MODIFIED
-client.go:779: [debug] rancher-monitoring-admission-create: Jobs active: 1, jobs failed: 0, jobs succeeded: 0
-client.go:740: [debug] Add/Modify event for rancher-monitoring-admission-create: MODIFIED
-client.go:779: [debug] rancher-monitoring-admission-create: Jobs active: 0, jobs failed: 0, jobs succeeded: 0
-client.go:740: [debug] Add/Modify event for rancher-monitoring-admission-create: MODIFIED
-client.go:486: [debug] Starting delete for "rancher-monitoring-upgrade" ConfigMap
-client.go:490: [debug] Ignoring delete failure for "rancher-monitoring-upgrade" /v1, Kind=ConfigMap: configmaps "rancher-monitoring-upgrade" not found
-wait.go:104: [debug] beginning wait for 1 resources to be deleted with timeout of 5m0s
-client.go:142: [debug] creating 1 resource(s)
-client.go:486: [debug] Starting delete for "rancher-monitoring-upgrade" ServiceAccount
-client.go:490: [debug] Ignoring delete failure for "rancher-monitoring-upgrade" /v1, Kind=ServiceAccount: serviceaccounts "rancher-monitoring-upgrade" not found
-wait.go:104: [debug] beginning wait for 1 resources to be deleted with timeout of 5m0s
-client.go:142: [debug] creating 1 resource(s)
-client.go:486: [debug] Starting delete for "rancher-monitoring-upgrade" ClusterRole
-client.go:490: [debug] Ignoring delete failure for "rancher-monitoring-upgrade" rbac.authorization.k8s.io/v1, Kind=ClusterRole: clusterroles.rbac.authorization.k8s.io "rancher-monitoring-upgrade" not found
-wait.go:104: [debug] beginning wait for 1 resources to be deleted with timeout of 5m0s
-client.go:142: [debug] creating 1 resource(s)
-client.go:486: [debug] Starting delete for "rancher-monitoring-upgrade" ClusterRoleBinding
-client.go:490: [debug] Ignoring delete failure for "rancher-monitoring-upgrade" rbac.authorization.k8s.io/v1, Kind=ClusterRoleBinding: clusterrolebindings.rbac.authorization.k8s.io "rancher-monitoring-upgrade" not found
-wait.go:104: [debug] beginning wait for 1 resources to be deleted with timeout of 5m0s
-client.go:142: [debug] creating 1 resource(s)
-client.go:486: [debug] Starting delete for "rancher-monitoring-upgrade" Role
-client.go:490: [debug] Ignoring delete failure for "rancher-monitoring-upgrade" rbac.authorization.k8s.io/v1, Kind=Role: roles.rbac.authorization.k8s.io "rancher-monitoring-upgrade" not found
-wait.go:104: [debug] beginning wait for 1 resources to be deleted with timeout of 5m0s
-client.go:142: [debug] creating 1 resource(s)
-client.go:486: [debug] Starting delete for "rancher-monitoring-upgrade" RoleBinding
-client.go:490: [debug] Ignoring delete failure for "rancher-monitoring-upgrade" rbac.authorization.k8s.io/v1, Kind=RoleBinding: rolebindings.rbac.authorization.k8s.io "rancher-monitoring-upgrade" not found
-wait.go:104: [debug] beginning wait for 1 resources to be deleted with timeout of 5m0s
-client.go:142: [debug] creating 1 resource(s)
-client.go:486: [debug] Starting delete for "rancher-monitoring-upgrade" Job
-client.go:490: [debug] Ignoring delete failure for "rancher-monitoring-upgrade" batch/v1, Kind=Job: jobs.batch "rancher-monitoring-upgrade" not found
-wait.go:104: [debug] beginning wait for 1 resources to be deleted with timeout of 5m0s
-client.go:142: [debug] creating 1 resource(s)
-client.go:712: [debug] Watching for changes to Job rancher-monitoring-upgrade with timeout of 5m0s
-client.go:740: [debug] Add/Modify event for rancher-monitoring-upgrade: ADDED
-client.go:779: [debug] rancher-monitoring-upgrade: Jobs active: 0, jobs failed: 0, jobs succeeded: 0
-client.go:740: [debug] Add/Modify event for rancher-monitoring-upgrade: MODIFIED
-client.go:779: [debug] rancher-monitoring-upgrade: Jobs active: 1, jobs failed: 0, jobs succeeded: 0
-client.go:740: [debug] Add/Modify event for rancher-monitoring-upgrade: MODIFIED
-client.go:779: [debug] rancher-monitoring-upgrade: Jobs active: 1, jobs failed: 0, jobs succeeded: 0
-client.go:740: [debug] Add/Modify event for rancher-monitoring-upgrade: MODIFIED
-client.go:779: [debug] rancher-monitoring-upgrade: Jobs active: 1, jobs failed: 0, jobs succeeded: 0
-client.go:740: [debug] Add/Modify event for rancher-monitoring-upgrade: MODIFIED
-client.go:779: [debug] rancher-monitoring-upgrade: Jobs active: 0, jobs failed: 0, jobs succeeded: 0
-client.go:740: [debug] Add/Modify event for rancher-monitoring-upgrade: MODIFIED
-client.go:486: [debug] Starting delete for "rancher-monitoring-admission" ServiceAccount
-wait.go:104: [debug] beginning wait for 1 resources to be deleted with timeout of 5m0s
-client.go:486: [debug] Starting delete for "rancher-monitoring-admission" ClusterRole
-wait.go:104: [debug] beginning wait for 1 resources to be deleted with timeout of 5m0s
-client.go:486: [debug] Starting delete for "rancher-monitoring-admission" ClusterRoleBinding
-wait.go:104: [debug] beginning wait for 1 resources to be deleted with timeout of 5m0s
-client.go:486: [debug] Starting delete for "rancher-monitoring-admission" Role
-wait.go:104: [debug] beginning wait for 1 resources to be deleted with timeout of 5m0s
-client.go:486: [debug] Starting delete for "rancher-monitoring-admission" RoleBinding
-wait.go:104: [debug] beginning wait for 1 resources to be deleted with timeout of 5m0s
-client.go:486: [debug] Starting delete for "rancher-monitoring-admission-create" Job
-wait.go:104: [debug] beginning wait for 1 resources to be deleted with timeout of 5m0s
-client.go:486: [debug] Starting delete for "rancher-monitoring-upgrade" ConfigMap
-wait.go:104: [debug] beginning wait for 1 resources to be deleted with timeout of 5m0s
-client.go:486: [debug] Starting delete for "rancher-monitoring-upgrade" ServiceAccount
-wait.go:104: [debug] beginning wait for 1 resources to be deleted with timeout of 5m0s
-client.go:486: [debug] Starting delete for "rancher-monitoring-upgrade" ClusterRole
-wait.go:104: [debug] beginning wait for 1 resources to be deleted with timeout of 5m0s
-client.go:486: [debug] Starting delete for "rancher-monitoring-upgrade" ClusterRoleBinding
-wait.go:104: [debug] beginning wait for 1 resources to be deleted with timeout of 5m0s
-client.go:486: [debug] Starting delete for "rancher-monitoring-upgrade" Role
-wait.go:104: [debug] beginning wait for 1 resources to be deleted with timeout of 5m0s
-client.go:486: [debug] Starting delete for "rancher-monitoring-upgrade" RoleBinding
-wait.go:104: [debug] beginning wait for 1 resources to be deleted with timeout of 5m0s
-client.go:486: [debug] Starting delete for "rancher-monitoring-upgrade" Job
-wait.go:104: [debug] beginning wait for 1 resources to be deleted with timeout of 5m0s
-client.go:393: [debug] checking 181 resources for changes
-client.go:684: [debug] Looks like there are no changes for Namespace "cattle-dashboards"
-client.go:684: [debug] Looks like there are no changes for NetworkPolicy "rancher-monitoring-coredns-allow-all"
-client.go:684: [debug] Looks like there are no changes for ServiceAccount "rancher-monitoring-grafana"
-client.go:693: [debug] Patch ServiceAccount "rancher-monitoring-kube-state-metrics" in namespace cattle-monitoring-system
-client.go:684: [debug] Looks like there are no changes for ServiceAccount "rancher-monitoring-prometheus-adapter"
-client.go:684: [debug] Looks like there are no changes for ServiceAccount "rancher-monitoring-prometheus-node-exporter"
-client.go:684: [debug] Looks like there are no changes for ServiceAccount "pushprox-kube-controller-manager-client"
-client.go:684: [debug] Looks like there are no changes for ServiceAccount "pushprox-kube-controller-manager-proxy"
-client.go:684: [debug] Looks like there are no changes for ServiceAccount "pushprox-kube-etcd-client"
-client.go:684: [debug] Looks like there are no changes for ServiceAccount "pushprox-kube-etcd-proxy"
-client.go:684: [debug] Looks like there are no changes for ServiceAccount "pushprox-kube-proxy-client"
-client.go:684: [debug] Looks like there are no changes for ServiceAccount "pushprox-kube-proxy-proxy"
-client.go:684: [debug] Looks like there are no changes for ServiceAccount "pushprox-kube-scheduler-client"
-client.go:684: [debug] Looks like there are no changes for ServiceAccount "pushprox-kube-scheduler-proxy"
-client.go:684: [debug] Looks like there are no changes for ServiceAccount "rancher-monitoring-alertmanager"
-client.go:684: [debug] Looks like there are no changes for ServiceAccount "rancher-monitoring-operator"
-client.go:684: [debug] Looks like there are no changes for ServiceAccount "rancher-monitoring-prometheus"
-client.go:684: [debug] Looks like there are no changes for ServiceAccount "rancher-monitoring-patch-sa"
-client.go:684: [debug] Looks like there are no changes for Secret "rancher-monitoring-grafana"
-client.go:684: [debug] Looks like there are no changes for Secret "pushprox-kube-controller-manager-client-service-account-token"
-client.go:684: [debug] Looks like there are no changes for Secret "pushprox-kube-scheduler-client-service-account-token"
-client.go:684: [debug] Looks like there are no changes for ConfigMap "rancher-monitoring-grafana-config-dashboards"
-client.go:684: [debug] Looks like there are no changes for ConfigMap "rancher-monitoring-grafana"
-client.go:693: [debug] Patch ConfigMap "rancher-monitoring-grafana-dashboards-system" in namespace cattle-monitoring-system
-client.go:684: [debug] Looks like there are no changes for ConfigMap "grafana-nginx-proxy-config"
-client.go:684: [debug] Looks like there are no changes for ConfigMap "rancher-monitoring-prometheus-adapter"
-client.go:684: [debug] Looks like there are no changes for ConfigMap "rancher-monitoring-grafana-datasource"
-client.go:684: [debug] Looks like there are no changes for ConfigMap "rancher-monitoring-alertmanager-overview"
-client.go:684: [debug] Looks like there are no changes for ConfigMap "rancher-monitoring-apiserver"
-client.go:684: [debug] Looks like there are no changes for ConfigMap "rancher-monitoring-cluster-total"
-client.go:684: [debug] Looks like there are no changes for ConfigMap "rancher-monitoring-controller-manager"
-client.go:684: [debug] Looks like there are no changes for ConfigMap "rancher-monitoring-etcd"
-client.go:684: [debug] Looks like there are no changes for ConfigMap "rancher-monitoring-grafana-overview"
-client.go:684: [debug] Looks like there are no changes for ConfigMap "rancher-monitoring-k8s-coredns"
-client.go:684: [debug] Looks like there are no changes for ConfigMap "rancher-monitoring-k8s-resources-cluster"
-client.go:684: [debug] Looks like there are no changes for ConfigMap "rancher-monitoring-k8s-resources-namespace"
-client.go:684: [debug] Looks like there are no changes for ConfigMap "rancher-monitoring-k8s-resources-node"
-client.go:684: [debug] Looks like there are no changes for ConfigMap "rancher-monitoring-k8s-resources-pod"
-client.go:684: [debug] Looks like there are no changes for ConfigMap "rancher-monitoring-k8s-resources-workload"
-client.go:684: [debug] Looks like there are no changes for ConfigMap "rancher-monitoring-k8s-resources-workloads-namespace"
-client.go:684: [debug] Looks like there are no changes for ConfigMap "rancher-monitoring-kubelet"
-client.go:684: [debug] Looks like there are no changes for ConfigMap "rancher-monitoring-namespace-by-pod"
-client.go:684: [debug] Looks like there are no changes for ConfigMap "rancher-monitoring-namespace-by-workload"
-client.go:684: [debug] Looks like there are no changes for ConfigMap "rancher-monitoring-node-cluster-rsrc-use"
-client.go:684: [debug] Looks like there are no changes for ConfigMap "rancher-monitoring-node-rsrc-use"
-client.go:684: [debug] Looks like there are no changes for ConfigMap "rancher-monitoring-nodes-darwin"
-client.go:684: [debug] Looks like there are no changes for ConfigMap "rancher-monitoring-nodes"
-client.go:684: [debug] Looks like there are no changes for ConfigMap "rancher-monitoring-persistentvolumesusage"
-client.go:684: [debug] Looks like there are no changes for ConfigMap "rancher-monitoring-pod-total"
-client.go:684: [debug] Looks like there are no changes for ConfigMap "rancher-monitoring-prometheus"
-client.go:684: [debug] Looks like there are no changes for ConfigMap "rancher-monitoring-proxy"
-client.go:684: [debug] Looks like there are no changes for ConfigMap "rancher-monitoring-scheduler"
-client.go:684: [debug] Looks like there are no changes for ConfigMap "rancher-monitoring-workload-total"
-client.go:684: [debug] Looks like there are no changes for ConfigMap "prometheus-nginx-proxy-config"
-client.go:684: [debug] Looks like there are no changes for ConfigMap "rancher-default-dashboards-cluster"
-client.go:684: [debug] Looks like there are no changes for ConfigMap "rancher-default-dashboards-home"
-client.go:684: [debug] Looks like there are no changes for ConfigMap "rancher-default-dashboards-k8s"
-client.go:684: [debug] Looks like there are no changes for ConfigMap "rancher-default-dashboards-nodes"
-client.go:684: [debug] Looks like there are no changes for ConfigMap "rancher-default-dashboards-pods"
-client.go:684: [debug] Looks like there are no changes for ConfigMap "rancher-default-dashboards-workloads"
-client.go:684: [debug] Looks like there are no changes for ClusterRole "rancher-monitoring-grafana-clusterrole"
-client.go:684: [debug] Looks like there are no changes for ClusterRole "rancher-monitoring-kube-state-metrics"
-client.go:684: [debug] Looks like there are no changes for ClusterRole "prometheus-adapter-resource-reader"
-client.go:684: [debug] Looks like there are no changes for ClusterRole "prometheus-adapter-server-resources"
-client.go:684: [debug] Looks like there are no changes for ClusterRole "pushprox-kube-controller-manager-client"
-client.go:684: [debug] Looks like there are no changes for ClusterRole "pushprox-kube-controller-manager-proxy"
-client.go:684: [debug] Looks like there are no changes for ClusterRole "pushprox-kube-etcd-client"
-client.go:684: [debug] Looks like there are no changes for ClusterRole "pushprox-kube-etcd-proxy"
-client.go:684: [debug] Looks like there are no changes for ClusterRole "pushprox-kube-proxy-client"
-client.go:684: [debug] Looks like there are no changes for ClusterRole "pushprox-kube-proxy-proxy"
-client.go:684: [debug] Looks like there are no changes for ClusterRole "pushprox-kube-scheduler-client"
-client.go:684: [debug] Looks like there are no changes for ClusterRole "pushprox-kube-scheduler-proxy"
-client.go:684: [debug] Looks like there are no changes for ClusterRole "rancher-monitoring-operator"
-client.go:684: [debug] Looks like there are no changes for ClusterRole "rancher-monitoring-prometheus"
-client.go:684: [debug] Looks like there are no changes for ClusterRole "monitoring-admin"
-client.go:684: [debug] Looks like there are no changes for ClusterRole "monitoring-edit"
-client.go:684: [debug] Looks like there are no changes for ClusterRole "monitoring-view"
-client.go:684: [debug] Looks like there are no changes for ClusterRole "monitoring-ui-view"
-client.go:684: [debug] Looks like there are no changes for ClusterRole "rancher-monitoring-patch-sa"
-client.go:684: [debug] Looks like there are no changes for ClusterRoleBinding "rancher-monitoring-grafana-clusterrolebinding"
-client.go:684: [debug] Looks like there are no changes for ClusterRoleBinding "rancher-monitoring-kube-state-metrics"
-client.go:684: [debug] Looks like there are no changes for ClusterRoleBinding "prometheus-adapter-system-auth-delegator"
-client.go:684: [debug] Looks like there are no changes for ClusterRoleBinding "prometheus-adapter-resource-reader"
-client.go:684: [debug] Looks like there are no changes for ClusterRoleBinding "prometheus-adapter-hpa-controller"
-client.go:684: [debug] Looks like there are no changes for ClusterRoleBinding "pushprox-kube-controller-manager-client"
-client.go:684: [debug] Looks like there are no changes for ClusterRoleBinding "pushprox-kube-controller-manager-proxy"
-client.go:684: [debug] Looks like there are no changes for ClusterRoleBinding "pushprox-kube-etcd-client"
-client.go:684: [debug] Looks like there are no changes for ClusterRoleBinding "pushprox-kube-etcd-proxy"
-client.go:684: [debug] Looks like there are no changes for ClusterRoleBinding "pushprox-kube-proxy-client"
-client.go:684: [debug] Looks like there are no changes for ClusterRoleBinding "pushprox-kube-proxy-proxy"
-client.go:684: [debug] Looks like there are no changes for ClusterRoleBinding "pushprox-kube-scheduler-client"
-client.go:684: [debug] Looks like there are no changes for ClusterRoleBinding "pushprox-kube-scheduler-proxy"
-client.go:684: [debug] Looks like there are no changes for ClusterRoleBinding "rancher-monitoring-operator"
-client.go:684: [debug] Looks like there are no changes for ClusterRoleBinding "rancher-monitoring-prometheus"
-client.go:684: [debug] Looks like there are no changes for ClusterRoleBinding "rancher-monitoring-patch-sa"
-client.go:693: [debug] Patch Role "rancher-monitoring-grafana" in namespace cattle-monitoring-system
-client.go:684: [debug] Looks like there are no changes for Role "monitoring-config-admin"
-client.go:684: [debug] Looks like there are no changes for Role "monitoring-config-edit"
-client.go:684: [debug] Looks like there are no changes for Role "monitoring-config-view"
-client.go:684: [debug] Looks like there are no changes for Role "monitoring-dashboard-admin"
-client.go:684: [debug] Looks like there are no changes for Role "monitoring-dashboard-edit"
-client.go:684: [debug] Looks like there are no changes for Role "monitoring-dashboard-view"
-client.go:684: [debug] Looks like there are no changes for RoleBinding "rancher-monitoring-grafana"
-client.go:684: [debug] Looks like there are no changes for RoleBinding "prometheus-adapter-auth-reader"
-client.go:684: [debug] Looks like there are no changes for Service "rancher-monitoring-grafana"
-client.go:684: [debug] Looks like there are no changes for Service "rancher-monitoring-kube-state-metrics"
-client.go:684: [debug] Looks like there are no changes for Service "rancher-monitoring-prometheus-adapter"
-client.go:684: [debug] Looks like there are no changes for Service "rancher-monitoring-prometheus-node-exporter"
-client.go:684: [debug] Looks like there are no changes for Service "pushprox-kube-controller-manager-proxy"
-client.go:684: [debug] Looks like there are no changes for Service "pushprox-kube-controller-manager-client"
-client.go:684: [debug] Looks like there are no changes for Service "pushprox-kube-etcd-proxy"
-client.go:684: [debug] Looks like there are no changes for Service "pushprox-kube-etcd-client"
-client.go:684: [debug] Looks like there are no changes for Service "pushprox-ingress-nginx-client"
-client.go:684: [debug] Looks like there are no changes for Service "pushprox-kube-proxy-proxy"
-client.go:684: [debug] Looks like there are no changes for Service "pushprox-kube-proxy-client"
-client.go:684: [debug] Looks like there are no changes for Service "pushprox-kube-scheduler-proxy"
-client.go:684: [debug] Looks like there are no changes for Service "pushprox-kube-scheduler-client"
-client.go:684: [debug] Looks like there are no changes for Service "rancher-monitoring-alertmanager"
-client.go:684: [debug] Looks like there are no changes for Service "rancher-monitoring-coredns"
-client.go:684: [debug] Looks like there are no changes for Service "rancher-monitoring-operator"
-client.go:693: [debug] Patch Service "rancher-monitoring-prometheus" in namespace cattle-monitoring-system
-client.go:693: [debug] Patch Service "rancher-monitoring-thanos-discovery" in namespace cattle-monitoring-system
-client.go:693: [debug] Patch DaemonSet "rancher-monitoring-prometheus-node-exporter" in namespace cattle-monitoring-system
-client.go:684: [debug] Looks like there are no changes for DaemonSet "pushprox-kube-controller-manager-client"
-client.go:684: [debug] Looks like there are no changes for DaemonSet "pushprox-kube-etcd-client"
-client.go:684: [debug] Looks like there are no changes for DaemonSet "pushprox-kube-proxy-client"
-client.go:684: [debug] Looks like there are no changes for DaemonSet "pushprox-kube-scheduler-client"
-W0707 03:42:50.950507  142787 warnings.go:70] spec.template.spec.containers[3].ports[0]: duplicate port definition with spec.template.spec.containers[2].ports[0]
-client.go:414: [debug] Created a new Deployment called "rancher-monitoring-grafana" in cattle-monitoring-system
-
-client.go:414: [debug] Created a new Deployment called "rancher-monitoring-kube-state-metrics" in cattle-monitoring-system
-
-client.go:693: [debug] Patch Deployment "rancher-monitoring-prometheus-adapter" in namespace cattle-monitoring-system
-client.go:684: [debug] Looks like there are no changes for Deployment "pushprox-kube-controller-manager-proxy"
-client.go:684: [debug] Looks like there are no changes for Deployment "pushprox-kube-etcd-proxy"
-client.go:684: [debug] Looks like there are no changes for Deployment "pushprox-kube-proxy-proxy"
-client.go:684: [debug] Looks like there are no changes for Deployment "pushprox-kube-scheduler-proxy"
-client.go:684: [debug] Looks like there are no changes for Deployment "rancher-monitoring-operator"
-client.go:693: [debug] Patch APIService "v1beta1.custom.metrics.k8s.io" in namespace 
-client.go:693: [debug] Patch Alertmanager "rancher-monitoring-alertmanager" in namespace cattle-monitoring-system
-client.go:693: [debug] Patch MutatingWebhookConfiguration "rancher-monitoring-admission" in namespace 
-client.go:693: [debug] Patch Prometheus "rancher-monitoring-prometheus" in namespace cattle-monitoring-system
-client.go:693: [debug] Patch PrometheusRule "rancher-monitoring-alertmanager.rules" in namespace cattle-monitoring-system
-client.go:693: [debug] Patch PrometheusRule "rancher-monitoring-config-reloaders" in namespace cattle-monitoring-system
-client.go:693: [debug] Patch PrometheusRule "rancher-monitoring-etcd" in namespace cattle-monitoring-system
-client.go:693: [debug] Patch PrometheusRule "rancher-monitoring-general.rules" in namespace cattle-monitoring-system
-client.go:693: [debug] Patch PrometheusRule "rancher-monitoring-k8s.rules" in namespace cattle-monitoring-system
-client.go:693: [debug] Patch PrometheusRule "rancher-monitoring-kube-apiserver-availability.rules" in namespace cattle-monitoring-system
-client.go:693: [debug] Patch PrometheusRule "rancher-monitoring-kube-apiserver-burnrate.rules" in namespace cattle-monitoring-system
-client.go:693: [debug] Patch PrometheusRule "rancher-monitoring-kube-apiserver-histogram.rules" in namespace cattle-monitoring-system
-client.go:693: [debug] Patch PrometheusRule "rancher-monitoring-kube-apiserver-slos" in namespace cattle-monitoring-system
-client.go:693: [debug] Patch PrometheusRule "rancher-monitoring-kube-prometheus-general.rules" in namespace cattle-monitoring-system
-client.go:693: [debug] Patch PrometheusRule "rancher-monitoring-kube-prometheus-node-recording.rules" in namespace cattle-monitoring-system
-client.go:693: [debug] Patch PrometheusRule "rancher-monitoring-kube-state-metrics" in namespace cattle-monitoring-system
-client.go:693: [debug] Patch PrometheusRule "rancher-monitoring-kubelet.rules" in namespace cattle-monitoring-system
-client.go:693: [debug] Patch PrometheusRule "rancher-monitoring-kubernetes-apps" in namespace cattle-monitoring-system
-client.go:693: [debug] Patch PrometheusRule "rancher-monitoring-kubernetes-resources" in namespace cattle-monitoring-system
-client.go:693: [debug] Patch PrometheusRule "rancher-monitoring-kubernetes-storage" in namespace cattle-monitoring-system
-client.go:693: [debug] Patch PrometheusRule "rancher-monitoring-kubernetes-system-apiserver" in namespace cattle-monitoring-system
-client.go:693: [debug] Patch PrometheusRule "rancher-monitoring-kubernetes-system-controller-manager" in namespace cattle-monitoring-system
-client.go:693: [debug] Patch PrometheusRule "rancher-monitoring-kubernetes-system-kube-proxy" in namespace cattle-monitoring-system
-client.go:693: [debug] Patch PrometheusRule "rancher-monitoring-kubernetes-system-kubelet" in namespace cattle-monitoring-system
-client.go:693: [debug] Patch PrometheusRule "rancher-monitoring-kubernetes-system" in namespace cattle-monitoring-system
-client.go:693: [debug] Patch PrometheusRule "rancher-monitoring-node-exporter.rules" in namespace cattle-monitoring-system
-client.go:693: [debug] Patch PrometheusRule "rancher-monitoring-node-exporter" in namespace cattle-monitoring-system
-client.go:693: [debug] Patch PrometheusRule "rancher-monitoring-node-network" in namespace cattle-monitoring-system
-client.go:693: [debug] Patch PrometheusRule "rancher-monitoring-node.rules" in namespace cattle-monitoring-system
-client.go:693: [debug] Patch PrometheusRule "rancher-monitoring-prometheus-operator" in namespace cattle-monitoring-system
-client.go:693: [debug] Patch PrometheusRule "rancher-monitoring-prometheus" in namespace cattle-monitoring-system
-client.go:414: [debug] Created a new ServiceMonitor called "rancher-monitoring-grafana" in cattle-monitoring-system
-
-client.go:693: [debug] Patch ServiceMonitor "rancher-monitoring-kube-state-metrics" in namespace cattle-monitoring-system
-client.go:693: [debug] Patch ServiceMonitor "rancher-monitoring-prometheus-node-exporter" in namespace cattle-monitoring-system
-client.go:693: [debug] Patch ServiceMonitor "rancher-monitoring-kube-controller-manager" in namespace cattle-monitoring-system
-client.go:693: [debug] Patch ServiceMonitor "rancher-monitoring-kube-etcd" in namespace cattle-monitoring-system
-client.go:693: [debug] Patch ServiceMonitor "rancher-monitoring-ingress-nginx" in namespace kube-system
-client.go:693: [debug] Patch ServiceMonitor "rancher-monitoring-kube-proxy" in namespace cattle-monitoring-system
-client.go:693: [debug] Patch ServiceMonitor "rancher-monitoring-kube-scheduler" in namespace cattle-monitoring-system
-client.go:693: [debug] Patch ServiceMonitor "rancher-monitoring-alertmanager" in namespace cattle-monitoring-system
-client.go:693: [debug] Patch ServiceMonitor "rancher-monitoring-coredns" in namespace kube-system
-client.go:693: [debug] Patch ServiceMonitor "rancher-monitoring-apiserver" in namespace default
-client.go:693: [debug] Patch ServiceMonitor "rancher-monitoring-kubelet" in namespace kube-system
-client.go:693: [debug] Patch ServiceMonitor "rancher-monitoring-operator" in namespace cattle-monitoring-system
-client.go:693: [debug] Patch ServiceMonitor "rancher-monitoring-prometheus" in namespace cattle-monitoring-system
-client.go:693: [debug] Patch ValidatingWebhookConfiguration "rancher-monitoring-admission" in namespace 
-client.go:486: [debug] Starting delete for "rancher-monitoring-admission" ServiceAccount
-client.go:490: [debug] Ignoring delete failure for "rancher-monitoring-admission" /v1, Kind=ServiceAccount: serviceaccounts "rancher-monitoring-admission" not found
-wait.go:104: [debug] beginning wait for 1 resources to be deleted with timeout of 5m0s
-client.go:142: [debug] creating 1 resource(s)
-client.go:486: [debug] Starting delete for "rancher-monitoring-admission" ClusterRole
-client.go:490: [debug] Ignoring delete failure for "rancher-monitoring-admission" rbac.authorization.k8s.io/v1, Kind=ClusterRole: clusterroles.rbac.authorization.k8s.io "rancher-monitoring-admission" not found
-wait.go:104: [debug] beginning wait for 1 resources to be deleted with timeout of 5m0s
-client.go:142: [debug] creating 1 resource(s)
-client.go:486: [debug] Starting delete for "rancher-monitoring-admission" ClusterRoleBinding
-client.go:490: [debug] Ignoring delete failure for "rancher-monitoring-admission" rbac.authorization.k8s.io/v1, Kind=ClusterRoleBinding: clusterrolebindings.rbac.authorization.k8s.io "rancher-monitoring-admission" not found
-wait.go:104: [debug] beginning wait for 1 resources to be deleted with timeout of 5m0s
-client.go:142: [debug] creating 1 resource(s)
-client.go:486: [debug] Starting delete for "rancher-monitoring-admission" Role
-client.go:490: [debug] Ignoring delete failure for "rancher-monitoring-admission" rbac.authorization.k8s.io/v1, Kind=Role: roles.rbac.authorization.k8s.io "rancher-monitoring-admission" not found
-wait.go:104: [debug] beginning wait for 1 resources to be deleted with timeout of 5m0s
-client.go:142: [debug] creating 1 resource(s)
-client.go:486: [debug] Starting delete for "rancher-monitoring-admission" RoleBinding
-client.go:490: [debug] Ignoring delete failure for "rancher-monitoring-admission" rbac.authorization.k8s.io/v1, Kind=RoleBinding: rolebindings.rbac.authorization.k8s.io "rancher-monitoring-admission" not found
-wait.go:104: [debug] beginning wait for 1 resources to be deleted with timeout of 5m0s
-client.go:142: [debug] creating 1 resource(s)
-client.go:486: [debug] Starting delete for "rancher-monitoring-admission-patch" Job
-client.go:490: [debug] Ignoring delete failure for "rancher-monitoring-admission-patch" batch/v1, Kind=Job: jobs.batch "rancher-monitoring-admission-patch" not found
-wait.go:104: [debug] beginning wait for 1 resources to be deleted with timeout of 5m0s
-client.go:142: [debug] creating 1 resource(s)
-client.go:712: [debug] Watching for changes to Job rancher-monitoring-admission-patch with timeout of 5m0s
-client.go:740: [debug] Add/Modify event for rancher-monitoring-admission-patch: ADDED
-client.go:779: [debug] rancher-monitoring-admission-patch: Jobs active: 0, jobs failed: 0, jobs succeeded: 0
-client.go:740: [debug] Add/Modify event for rancher-monitoring-admission-patch: MODIFIED
-client.go:779: [debug] rancher-monitoring-admission-patch: Jobs active: 1, jobs failed: 0, jobs succeeded: 0
-client.go:740: [debug] Add/Modify event for rancher-monitoring-admission-patch: MODIFIED
-client.go:779: [debug] rancher-monitoring-admission-patch: Jobs active: 0, jobs failed: 0, jobs succeeded: 0
-client.go:740: [debug] Add/Modify event for rancher-monitoring-admission-patch: MODIFIED
-client.go:486: [debug] Starting delete for "rancher-monitoring-patch-sa" Job
-client.go:490: [debug] Ignoring delete failure for "rancher-monitoring-patch-sa" batch/v1, Kind=Job: jobs.batch "rancher-monitoring-patch-sa" not found
-wait.go:104: [debug] beginning wait for 1 resources to be deleted with timeout of 5m0s
-client.go:142: [debug] creating 1 resource(s)
-client.go:712: [debug] Watching for changes to Job rancher-monitoring-patch-sa with timeout of 5m0s
-client.go:740: [debug] Add/Modify event for rancher-monitoring-patch-sa: ADDED
-client.go:779: [debug] rancher-monitoring-patch-sa: Jobs active: 0, jobs failed: 0, jobs succeeded: 0
-client.go:740: [debug] Add/Modify event for rancher-monitoring-patch-sa: MODIFIED
-client.go:779: [debug] rancher-monitoring-patch-sa: Jobs active: 1, jobs failed: 0, jobs succeeded: 0
-client.go:740: [debug] Add/Modify event for rancher-monitoring-patch-sa: MODIFIED
-client.go:779: [debug] rancher-monitoring-patch-sa: Jobs active: 1, jobs failed: 0, jobs succeeded: 0
-client.go:740: [debug] Add/Modify event for rancher-monitoring-patch-sa: MODIFIED
-client.go:779: [debug] rancher-monitoring-patch-sa: Jobs active: 1, jobs failed: 0, jobs succeeded: 0
-client.go:740: [debug] Add/Modify event for rancher-monitoring-patch-sa: MODIFIED
-client.go:779: [debug] rancher-monitoring-patch-sa: Jobs active: 0, jobs failed: 0, jobs succeeded: 0
-client.go:740: [debug] Add/Modify event for rancher-monitoring-patch-sa: MODIFIED
-client.go:486: [debug] Starting delete for "rancher-monitoring-admission" ServiceAccount
-wait.go:104: [debug] beginning wait for 1 resources to be deleted with timeout of 5m0s
-client.go:486: [debug] Starting delete for "rancher-monitoring-admission" ClusterRole
-wait.go:104: [debug] beginning wait for 1 resources to be deleted with timeout of 5m0s
-client.go:486: [debug] Starting delete for "rancher-monitoring-admission" ClusterRoleBinding
-wait.go:104: [debug] beginning wait for 1 resources to be deleted with timeout of 5m0s
-client.go:486: [debug] Starting delete for "rancher-monitoring-admission" Role
-wait.go:104: [debug] beginning wait for 1 resources to be deleted with timeout of 5m0s
-client.go:486: [debug] Starting delete for "rancher-monitoring-admission" RoleBinding
-wait.go:104: [debug] beginning wait for 1 resources to be deleted with timeout of 5m0s
-client.go:486: [debug] Starting delete for "rancher-monitoring-admission-patch" Job
-wait.go:104: [debug] beginning wait for 1 resources to be deleted with timeout of 5m0s
-client.go:486: [debug] Starting delete for "rancher-monitoring-patch-sa" Job
-wait.go:104: [debug] beginning wait for 1 resources to be deleted with timeout of 5m0s
-upgrade.go:174: [debug] updating status for upgraded release for rancher-monitoring
 Release "rancher-monitoring" has been upgraded. Happy Helming!
 NAME: rancher-monitoring
-LAST DEPLOYED: Sun Jul  7 03:41:27 2024
+LAST DEPLOYED: Sat Jul  6 18:33:15 2024
 NAMESPACE: cattle-monitoring-system
 STATUS: deployed
-REVISION: 59
+REVISION: 49
 TEST SUITE: None
 USER-SUPPLIED VALUES:
 USER-SUPPLIED VALUES: null
@@ -433,30 +83,24 @@ grafana:
       providers:
       - disableDeletion: false
         editable: true
-        folder: Test-dashboard-default
+        folder: Test-dashboard
         name: default
         options:
           path: /var/lib/grafana/dashboards/default
         orgId: 1
         type: file
-      - disableDeletion: false
-        editable: true
-        folder: Test-dashboard-system
-        name: system
-        options:
-          path: /var/lib/grafana/dashboards/system
-        orgId: 1
-        type: file
   dashboards:
-    system:
+    default:
+      k8s-status-test1:
+        file: dashboards/k8s-status-1.json
+      k8s-status-test2:
+        file: k8s-status-2.json
+      k8s-status-test3:
+        file: /home/rocky/yjlee/apps/rancher-prometheus/dashboards/k8s-status-3.json
       kubernetes-cluster:
         datasource: Thanos
         gnetId: 6417
         revision: 1
-  dashboardsConfigMaps:
-    default1: grafana-dashboards-k8s-status
-    system1: grafana-dashboards-k8s-status-1
-  enabled: true
   image:
     repository: rancher/mirrored-grafana-grafana
     tag: 10.3.3
@@ -468,18 +112,8 @@ grafana:
   sidecar:
     dashboards:
       enabled: true
-      provider:
-        allowUiUpdates: false
-        disableDelete: false
-        folder: Test-sidecar-folder
-        name: sidecarProvider
-        orgId: 1
-        type: file
     datasources:
-      enabled: true
       isDefaultDatasource: false
-    label: grafana_dashboard
-    labelValue: "1"
 kube-state-metrics:
   replicas: 2
 prometheus:
@@ -930,29 +564,25 @@ grafana:
       providers:
       - disableDeletion: false
         editable: true
-        folder: Test-dashboard-default
+        folder: Test-dashboard
         name: default
         options:
           path: /var/lib/grafana/dashboards/default
         orgId: 1
         type: file
-      - disableDeletion: false
-        editable: true
-        folder: Test-dashboard-system
-        name: system
-        options:
-          path: /var/lib/grafana/dashboards/system
-        orgId: 1
-        type: file
   dashboards:
-    system:
+    default:
+      k8s-status-test1:
+        file: dashboards/k8s-status-1.json
+      k8s-status-test2:
+        file: k8s-status-2.json
+      k8s-status-test3:
+        file: /home/rocky/yjlee/apps/rancher-prometheus/dashboards/k8s-status-3.json
       kubernetes-cluster:
         datasource: Thanos
         gnetId: 6417
         revision: 1
-  dashboardsConfigMaps:
-    default1: grafana-dashboards-k8s-status
-    system1: grafana-dashboards-k8s-status-1
+  dashboardsConfigMaps: {}
   datasources: {}
   defaultDashboards:
     cleanupOnUninstall: false
@@ -1301,10 +931,9 @@ grafana:
       provider:
         allowUiUpdates: false
         disableDelete: false
-        folder: Test-sidecar-folder
+        folder: ""
         foldersFromFilesStructure: false
         name: sidecarProvider
-        orgId: 1
         orgid: 1
         type: file
       reloadURL: http://localhost:3000/api/admin/provisioning/dashboards/reload
@@ -1337,8 +966,6 @@ grafana:
       sha: ""
       tag: 1.24.6
     imagePullPolicy: IfNotPresent
-    label: grafana_dashboard
-    labelValue: "1"
     livenessProbe: {}
     notifiers:
       enabled: false
@@ -4328,7 +3955,7 @@ data:
     providers:
       - name: 'sidecarProvider'
         orgId: 1
-        folder: 'Test-sidecar-folder'
+        folder: ''
         type: file
         disableDeletion: false
         allowUiUpdates: false
@@ -4382,25 +4009,16 @@ data:
     providers:
     - disableDeletion: false
       editable: true
-      folder: Test-dashboard-default
+      folder: Test-dashboard
       name: default
       options:
         path: /var/lib/grafana/dashboards/default
-      orgId: 1
-      type: file
-    - disableDeletion: false
-      editable: true
-      folder: Test-dashboard-system
-      name: system
-      options:
-        path: /var/lib/grafana/dashboards/system
       orgId: 1
       type: file
   download_dashboards.sh: |
     #!/usr/bin/env sh
     set -euf
     mkdir -p /var/lib/grafana/dashboards/default
-    mkdir -p /var/lib/grafana/dashboards/system
   
     curl -skf \
     --connect-timeout 60 \
@@ -4409,13 +4027,13 @@ data:
     -H "Content-Type: application/json;charset=UTF-8" \
       "https://grafana.com/api/dashboards/6417/revisions/1/download" \
       | sed '/-- .* --/! s/"datasource":.*,/"datasource": "Thanos",/g' \
-    > "/var/lib/grafana/dashboards/system/kubernetes-cluster.json"
+    > "/var/lib/grafana/dashboards/default/kubernetes-cluster.json"
 ---
 # Source: rancher-monitoring/charts/grafana/templates/dashboards-json-configmap.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: rancher-monitoring-grafana-dashboards-system
+  name: rancher-monitoring-grafana-dashboards-default
   namespace: cattle-monitoring-system
   labels:
     helm.sh/chart: grafana-6.59.0
@@ -4423,9 +4041,14 @@ metadata:
     app.kubernetes.io/instance: rancher-monitoring
     app.kubernetes.io/version: "10.3.3"
     app.kubernetes.io/managed-by: Helm
-    dashboard-provider: system
+    dashboard-provider: default
 data:
-  {}
+  k8s-status-test1.json:
+    ""
+  k8s-status-test2.json:
+    ""
+  k8s-status-test3.json:
+    ""
 ---
 # Source: rancher-monitoring/charts/grafana/templates/nginx-config.yaml
 apiVersion: v1
@@ -55360,9 +54983,9 @@ spec:
         app.kubernetes.io/name: grafana
         app.kubernetes.io/instance: rancher-monitoring
       annotations:
-        checksum/config: 579ed6765cd4a9790570e90d55d6acd43a24e1a39dfe3e098807929074ee92d6
-        checksum/dashboards-json-config: 1c043936c592a16ca89f5a3d4888a5b0ba14a4b4dc9af147018dbef5bf9a788e
-        checksum/sc-dashboard-provider-config: 7c15d476fa3a2ef61cccab189036e3d3d0c2ce4f683b42b43a45cf0db23f6243
+        checksum/config: 9e8579b0c68d61ca6b081d946a5bd64be45023d5f93a378490938287c5a435c0
+        checksum/dashboards-json-config: 06257368649b433b7539ef90961f230b8fd5c324d42594d8e5bc60384f510aab
+        checksum/sc-dashboard-provider-config: a16e94039c03f968f1d981aaae0afa54b781b2357842a6b7b04a61cb17aa9762
         checksum/secret: d97810e08a9b03fe9a29add93722f29287474d4c1cc72f2e19fe1c87f593e829
         kubectl.kubernetes.io/default-container: grafana
     spec:
@@ -55510,10 +55133,15 @@ spec:
               subPath: grafana.ini
             - name: storage
               mountPath: "/var/lib/grafana"
-            - name: dashboards-default1
-              mountPath: "/var/lib/grafana/dashboards/default1"
-            - name: dashboards-system1
-              mountPath: "/var/lib/grafana/dashboards/system1"
+            - name: dashboards-default
+              mountPath: "/var/lib/grafana/dashboards/default/k8s-status-test1.json"
+              subPath: "k8s-status-test1.json"
+            - name: dashboards-default
+              mountPath: "/var/lib/grafana/dashboards/default/k8s-status-test2.json"
+              subPath: "k8s-status-test2.json"
+            - name: dashboards-default
+              mountPath: "/var/lib/grafana/dashboards/default/k8s-status-test3.json"
+              subPath: "k8s-status-test3.json"
             - name: config
               mountPath: "/etc/grafana/provisioning/dashboards/dashboardproviders.yaml"
               subPath: "dashboardproviders.yaml"
@@ -55607,15 +55235,9 @@ spec:
         - name: config
           configMap:
             name: rancher-monitoring-grafana
-        - name: dashboards-system
+        - name: dashboards-default
           configMap:
-            name: rancher-monitoring-grafana-dashboards-system
-        - name: dashboards-default1
-          configMap:
-            name: grafana-dashboards-k8s-status
-        - name: dashboards-system1
-          configMap:
-            name: grafana-dashboards-k8s-status-1
+            name: rancher-monitoring-grafana-dashboards-default
         - name: storage
           emptyDir: {}
         - name: sc-dashboard-volume
@@ -56111,7 +55733,7 @@ spec:
   versionPriority: 100
 ---
 # Source: rancher-monitoring/charts/rke2ControllerManager/templates/validate-install-crd.yaml
-###map[monitoring.coreos.com/v1/ServiceMonitor:false]#############################################################################################################################map[monitoring.coreos.com/v1/ServiceMonitor:true]##############################################################################################################################################################################################################################################################################################################################################################
+###map[monitoring.coreos.com/v1/ServiceMonitor:false]#####################################################################################################################################################################################################################################################################################################################################################################################################################################map[monitoring.coreos.com/v1/ServiceMonitor:true]######################################################
 ---
 # Source: rancher-monitoring/charts/rke2ControllerManager/templates/validate-psp-install.yaml
 ##
@@ -56121,14 +55743,14 @@ spec:
 ---
 ---
 # Source: rancher-monitoring/charts/rke2Etcd/templates/validate-install-crd.yaml
-###map[monitoring.coreos.com/v1/ServiceMonitor:false]#############################################################################################################################map[monitoring.coreos.com/v1/ServiceMonitor:true]##############################################################################################################################################################################################################################################################################################################################################################
+###map[monitoring.coreos.com/v1/ServiceMonitor:false]#####################################################################################################################################################################################################################################################################################################################################################################################################################################map[monitoring.coreos.com/v1/ServiceMonitor:true]######################################################
 ---
 # Source: rancher-monitoring/charts/rke2Etcd/templates/validate-psp-install.yaml
 ##
 #
 ---
 # Source: rancher-monitoring/charts/rke2IngressNginx/templates/validate-install-crd.yaml
-###map[monitoring.coreos.com/v1/ServiceMonitor:false]#############################################################################################################################map[monitoring.coreos.com/v1/ServiceMonitor:true]##############################################################################################################################################################################################################################################################################################################################################################
+###map[monitoring.coreos.com/v1/ServiceMonitor:false]#####################################################################################################################################################################################################################################################################################################################################################################################################################################map[monitoring.coreos.com/v1/ServiceMonitor:true]######################################################
 ---
 # Source: rancher-monitoring/charts/rke2IngressNginx/templates/validate-psp-install.yaml
 ##
@@ -56138,21 +55760,21 @@ spec:
 ---
 ---
 # Source: rancher-monitoring/charts/rke2Proxy/templates/validate-install-crd.yaml
-###map[monitoring.coreos.com/v1/ServiceMonitor:false]#############################################################################################################################map[monitoring.coreos.com/v1/ServiceMonitor:true]##############################################################################################################################################################################################################################################################################################################################################################
+###map[monitoring.coreos.com/v1/ServiceMonitor:false]#####################################################################################################################################################################################################################################################################################################################################################################################################################################map[monitoring.coreos.com/v1/ServiceMonitor:true]######################################################
 ---
 # Source: rancher-monitoring/charts/rke2Proxy/templates/validate-psp-install.yaml
 ##
 #
 ---
 # Source: rancher-monitoring/charts/rke2Scheduler/templates/validate-install-crd.yaml
-###map[monitoring.coreos.com/v1/ServiceMonitor:false]#############################################################################################################################map[monitoring.coreos.com/v1/ServiceMonitor:true]##############################################################################################################################################################################################################################################################################################################################################################
+###map[monitoring.coreos.com/v1/ServiceMonitor:false]#####################################################################################################################################################################################################################################################################################################################################################################################################################################map[monitoring.coreos.com/v1/ServiceMonitor:true]######################################################
 ---
 # Source: rancher-monitoring/charts/rke2Scheduler/templates/validate-psp-install.yaml
 ##
 #
 ---
 # Source: rancher-monitoring/templates/validate-install-crd.yaml
-###map[monitoring.coreos.com/v1alpha1/AlertmanagerConfig:false]#map[monitoring.coreos.com/v1/Alertmanager:false monitoring.coreos.com/v1alpha1/AlertmanagerConfig:false]#map[monitoring.coreos.com/v1/Alertmanager:false monitoring.coreos.com/v1/PodMonitor:false monitoring.coreos.com/v1alpha1/AlertmanagerConfig:false]#map[monitoring.coreos.com/v1/Alertmanager:false monitoring.coreos.com/v1/PodMonitor:false monitoring.coreos.com/v1/Probe:false monitoring.coreos.com/v1alpha1/AlertmanagerConfig:false]#map[monitoring.coreos.com/v1/Alertmanager:false monitoring.coreos.com/v1/PodMonitor:false monitoring.coreos.com/v1/Probe:false monitoring.coreos.com/v1/Prometheus:false monitoring.coreos.com/v1alpha1/AlertmanagerConfig:false]#map[monitoring.coreos.com/v1/Alertmanager:false monitoring.coreos.com/v1/PodMonitor:false monitoring.coreos.com/v1/Probe:false monitoring.coreos.com/v1/Prometheus:false monitoring.coreos.com/v1/PrometheusRule:false monitoring.coreos.com/v1alpha1/AlertmanagerConfig:false]#map[monitoring.coreos.com/v1/Alertmanager:false monitoring.coreos.com/v1/PodMonitor:false monitoring.coreos.com/v1/Probe:false monitoring.coreos.com/v1/Prometheus:false monitoring.coreos.com/v1/PrometheusRule:false monitoring.coreos.com/v1/ServiceMonitor:false monitoring.coreos.com/v1alpha1/AlertmanagerConfig:false]#map[monitoring.coreos.com/v1/Alertmanager:false monitoring.coreos.com/v1/PodMonitor:false monitoring.coreos.com/v1/Probe:false monitoring.coreos.com/v1/Prometheus:false monitoring.coreos.com/v1/PrometheusRule:false monitoring.coreos.com/v1/ServiceMonitor:false monitoring.coreos.com/v1/ThanosRuler:false monitoring.coreos.com/v1alpha1/AlertmanagerConfig:false]#####################################################################map[monitoring.coreos.com/v1/Alertmanager:true monitoring.coreos.com/v1/PodMonitor:false monitoring.coreos.com/v1/Probe:false monitoring.coreos.com/v1/Prometheus:false monitoring.coreos.com/v1/PrometheusRule:false monitoring.coreos.com/v1/ServiceMonitor:false monitoring.coreos.com/v1/ThanosRuler:false monitoring.coreos.com/v1alpha1/AlertmanagerConfig:false]##########################################################map[monitoring.coreos.com/v1/Alertmanager:true monitoring.coreos.com/v1/PodMonitor:false monitoring.coreos.com/v1/Probe:false monitoring.coreos.com/v1/Prometheus:false monitoring.coreos.com/v1/PrometheusRule:false monitoring.coreos.com/v1/ServiceMonitor:true monitoring.coreos.com/v1/ThanosRuler:false monitoring.coreos.com/v1alpha1/AlertmanagerConfig:false]######################map[monitoring.coreos.com/v1/Alertmanager:true monitoring.coreos.com/v1/PodMonitor:false monitoring.coreos.com/v1/Probe:false monitoring.coreos.com/v1/Prometheus:false monitoring.coreos.com/v1/PrometheusRule:true monitoring.coreos.com/v1/ServiceMonitor:true monitoring.coreos.com/v1/ThanosRuler:false monitoring.coreos.com/v1alpha1/AlertmanagerConfig:false]################map[monitoring.coreos.com/v1/Alertmanager:true monitoring.coreos.com/v1/PodMonitor:false monitoring.coreos.com/v1/Probe:false monitoring.coreos.com/v1/Prometheus:true monitoring.coreos.com/v1/PrometheusRule:true monitoring.coreos.com/v1/ServiceMonitor:true monitoring.coreos.com/v1/ThanosRuler:false monitoring.coreos.com/v1alpha1/AlertmanagerConfig:false]####################map[monitoring.coreos.com/v1/Alertmanager:true monitoring.coreos.com/v1/PodMonitor:false monitoring.coreos.com/v1/Probe:true monitoring.coreos.com/v1/Prometheus:true monitoring.coreos.com/v1/PrometheusRule:true monitoring.coreos.com/v1/ServiceMonitor:true monitoring.coreos.com/v1/ThanosRuler:false monitoring.coreos.com/v1alpha1/AlertmanagerConfig:false]######################map[monitoring.coreos.com/v1/Alertmanager:true monitoring.coreos.com/v1/PodMonitor:true monitoring.coreos.com/v1/Probe:true monitoring.coreos.com/v1/Prometheus:true monitoring.coreos.com/v1/PrometheusRule:true monitoring.coreos.com/v1/ServiceMonitor:true monitoring.coreos.com/v1/ThanosRuler:false monitoring.coreos.com/v1alpha1/AlertmanagerConfig:false]######################################map[monitoring.coreos.com/v1/Alertmanager:true monitoring.coreos.com/v1/PodMonitor:true monitoring.coreos.com/v1/Probe:true monitoring.coreos.com/v1/Prometheus:true monitoring.coreos.com/v1/PrometheusRule:true monitoring.coreos.com/v1/ServiceMonitor:true monitoring.coreos.com/v1/ThanosRuler:false monitoring.coreos.com/v1alpha1/AlertmanagerConfig:true]######################################################################################################################################################################################################################map[monitoring.coreos.com/v1/Alertmanager:true monitoring.coreos.com/v1/PodMonitor:true monitoring.coreos.com/v1/Probe:true monitoring.coreos.com/v1/Prometheus:true monitoring.coreos.com/v1/PrometheusRule:true monitoring.coreos.com/v1/ServiceMonitor:true monitoring.coreos.com/v1/ThanosRuler:true monitoring.coreos.com/v1alpha1/AlertmanagerConfig:true]############################################
+###map[monitoring.coreos.com/v1alpha1/AlertmanagerConfig:false]#map[monitoring.coreos.com/v1/Alertmanager:false monitoring.coreos.com/v1alpha1/AlertmanagerConfig:false]#map[monitoring.coreos.com/v1/Alertmanager:false monitoring.coreos.com/v1/PodMonitor:false monitoring.coreos.com/v1alpha1/AlertmanagerConfig:false]#map[monitoring.coreos.com/v1/Alertmanager:false monitoring.coreos.com/v1/PodMonitor:false monitoring.coreos.com/v1/Probe:false monitoring.coreos.com/v1alpha1/AlertmanagerConfig:false]#map[monitoring.coreos.com/v1/Alertmanager:false monitoring.coreos.com/v1/PodMonitor:false monitoring.coreos.com/v1/Probe:false monitoring.coreos.com/v1/Prometheus:false monitoring.coreos.com/v1alpha1/AlertmanagerConfig:false]#map[monitoring.coreos.com/v1/Alertmanager:false monitoring.coreos.com/v1/PodMonitor:false monitoring.coreos.com/v1/Probe:false monitoring.coreos.com/v1/Prometheus:false monitoring.coreos.com/v1/PrometheusRule:false monitoring.coreos.com/v1alpha1/AlertmanagerConfig:false]#map[monitoring.coreos.com/v1/Alertmanager:false monitoring.coreos.com/v1/PodMonitor:false monitoring.coreos.com/v1/Probe:false monitoring.coreos.com/v1/Prometheus:false monitoring.coreos.com/v1/PrometheusRule:false monitoring.coreos.com/v1/ServiceMonitor:false monitoring.coreos.com/v1alpha1/AlertmanagerConfig:false]#map[monitoring.coreos.com/v1/Alertmanager:false monitoring.coreos.com/v1/PodMonitor:false monitoring.coreos.com/v1/Probe:false monitoring.coreos.com/v1/Prometheus:false monitoring.coreos.com/v1/PrometheusRule:false monitoring.coreos.com/v1/ServiceMonitor:false monitoring.coreos.com/v1/ThanosRuler:false monitoring.coreos.com/v1alpha1/AlertmanagerConfig:false]#########map[monitoring.coreos.com/v1/Alertmanager:false monitoring.coreos.com/v1/PodMonitor:false monitoring.coreos.com/v1/Probe:false monitoring.coreos.com/v1/Prometheus:false monitoring.coreos.com/v1/PrometheusRule:false monitoring.coreos.com/v1/ServiceMonitor:false monitoring.coreos.com/v1/ThanosRuler:false monitoring.coreos.com/v1alpha1/AlertmanagerConfig:true]##############################################################################################################################map[monitoring.coreos.com/v1/Alertmanager:false monitoring.coreos.com/v1/PodMonitor:false monitoring.coreos.com/v1/Probe:false monitoring.coreos.com/v1/Prometheus:true monitoring.coreos.com/v1/PrometheusRule:false monitoring.coreos.com/v1/ServiceMonitor:false monitoring.coreos.com/v1/ThanosRuler:false monitoring.coreos.com/v1alpha1/AlertmanagerConfig:true]######################################map[monitoring.coreos.com/v1/Alertmanager:false monitoring.coreos.com/v1/PodMonitor:false monitoring.coreos.com/v1/Probe:true monitoring.coreos.com/v1/Prometheus:true monitoring.coreos.com/v1/PrometheusRule:false monitoring.coreos.com/v1/ServiceMonitor:false monitoring.coreos.com/v1/ThanosRuler:false monitoring.coreos.com/v1alpha1/AlertmanagerConfig:true]################################################################################map[monitoring.coreos.com/v1/Alertmanager:false monitoring.coreos.com/v1/PodMonitor:false monitoring.coreos.com/v1/Probe:true monitoring.coreos.com/v1/Prometheus:true monitoring.coreos.com/v1/PrometheusRule:false monitoring.coreos.com/v1/ServiceMonitor:false monitoring.coreos.com/v1/ThanosRuler:true monitoring.coreos.com/v1alpha1/AlertmanagerConfig:true]################################################################################map[monitoring.coreos.com/v1/Alertmanager:false monitoring.coreos.com/v1/PodMonitor:false monitoring.coreos.com/v1/Probe:true monitoring.coreos.com/v1/Prometheus:true monitoring.coreos.com/v1/PrometheusRule:true monitoring.coreos.com/v1/ServiceMonitor:false monitoring.coreos.com/v1/ThanosRuler:true monitoring.coreos.com/v1alpha1/AlertmanagerConfig:true]##############################map[monitoring.coreos.com/v1/Alertmanager:false monitoring.coreos.com/v1/PodMonitor:true monitoring.coreos.com/v1/Probe:true monitoring.coreos.com/v1/Prometheus:true monitoring.coreos.com/v1/PrometheusRule:true monitoring.coreos.com/v1/ServiceMonitor:false monitoring.coreos.com/v1/ThanosRuler:true monitoring.coreos.com/v1alpha1/AlertmanagerConfig:true]####################################################map[monitoring.coreos.com/v1/Alertmanager:true monitoring.coreos.com/v1/PodMonitor:true monitoring.coreos.com/v1/Probe:true monitoring.coreos.com/v1/Prometheus:true monitoring.coreos.com/v1/PrometheusRule:true monitoring.coreos.com/v1/ServiceMonitor:false monitoring.coreos.com/v1/ThanosRuler:true monitoring.coreos.com/v1alpha1/AlertmanagerConfig:true]####################map[monitoring.coreos.com/v1/Alertmanager:true monitoring.coreos.com/v1/PodMonitor:true monitoring.coreos.com/v1/Probe:true monitoring.coreos.com/v1/Prometheus:true monitoring.coreos.com/v1/PrometheusRule:true monitoring.coreos.com/v1/ServiceMonitor:true monitoring.coreos.com/v1/ThanosRuler:true monitoring.coreos.com/v1alpha1/AlertmanagerConfig:true]####################################################################
 ---
 # Source: rancher-monitoring/templates/validate-psp-install.yaml
 ##
