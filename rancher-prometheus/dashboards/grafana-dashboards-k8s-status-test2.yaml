@@ -2,10 +2,10 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   annotations:
-    grafana_dashboard_folder: "/tmp/dashboards/K8S"
+    grafana_dashboard_folder: "/tmp/dashboards/K8S-test2"
   labels:
     grafana_dashboard: "1"
-  name: grafana-dashboards-k8s-status
+  name: grafana-dashboards-k8s-status-test2
   namespace: cattle-monitoring-system
 data: 
   k8s-status.json: |
@@ -1793,8 +1793,8 @@ data:
       },
       "timepicker": {},
       "timezone": "",
-      "title": "K8S Status",
-      "uid": "c8ae1bcb-1d6c-4b23-b939-e288e48056a9",
+      "title": "K8S Status test2",
+      "uid": "c9ae2bcb-1d6c-4b23-b939-e288e48056a9",
       "version": 8,
       "weekStart": ""
     }
