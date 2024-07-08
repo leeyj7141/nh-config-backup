@@ -31,7 +31,9 @@ data:
   
       mutate {
         add_field => {
+          "NHcenter" => "%{[data][result][metric][NHcenter]}"
           "NHcluster" => "%{[data][result][metric][NHcluster]}"
+          "node" => "%{[data][result][metric][node]}"
           "metric" => "%{[data][result][metric][__name__]}"
           "pod" => "%{[data][result][metric][pod]}"
           "container" => "%{[data][result][metric][container]}"
@@ -66,26 +68,26 @@ data:
   
         mutate {
           add_field => {
-            "message" => "%{@timestamp}, %{nhalert}, Cluster: %{NHcluster}, Namespace: %{namespace}, Pod: %{pod}, Container: %{container}, CPUUsage: %{cpu_usage}%"
+            "message" => "%{@timestamp}, %{nhalert}, Center: %{NHcenter}, Cluster: %{NHcluster}, Node: %{node}, Namespace: %{namespace}, Pod: %{pod}, Container: %{container}, CPUUsage: %{cpu_usage}%"
           }
         }
       }
     }
-  
     output {
       if [nhalert] in ["Critical", "Warning"] {
         elasticsearch {
           hosts => ["http://172.31.18.85:9200"]
-          index => "k8s-app3-health-%{+YYYY.MM.dd}"
+          index => "k8s-metric-alert-%{+YYYY.MM.dd}"
         }
         file {
           path => "/var/log/prometheus_metrics_to_sms_agent.log"
           codec => line { format => "%{message}" }
         }
-      } else {
+      }
+      if [nhalert] in ["Critical", "Warning", "Info"] {
         elasticsearch {
           hosts => ["http://172.31.18.85:9200"]
-          index => "k8s-app3-metric-%{+YYYY.MM.dd}"
+          index => "k8s-metric-%{+YYYY.MM.dd}"
         }
       }
     }
@@ -116,7 +118,9 @@ data:
   
       mutate {
         add_field => {
+          "NHcenter" => "%{[data][result][metric][NHcenter]}"
           "NHcluster" => "%{[data][result][metric][NHcluster]}"
+          "node" => "%{[data][result][metric][node]}"
           "metric" => "%{[data][result][metric][__name__]}"
           "container" => "%{[data][result][metric][container]}"
           "pod" => "%{[data][result][metric][pod]}"
@@ -149,26 +153,26 @@ data:
         }
         mutate {
           add_field => {
-            "message" => "%{@timestamp}, %{nhalert}, Cluster: %{NHcluster}, Namespace: %{namespace}, Pod: %{pod}, Container: %{container}, MemoryUsage: %{memory_usage}%"
+            "message" => "%{@timestamp}, %{nhalert}, Center: %{NHcenter}, Cluster: %{NHcluster}, Node: %{node}, Namespace: %{namespace}, Pod: %{pod}, Container: %{container}, MemoryUsage: %{memory_usage}%"
           }
         }
       }
     }
-  
     output {
       if [nhalert] in ["Critical", "Warning"] {
         elasticsearch {
           hosts => ["http://172.31.18.85:9200"]
-          index => "k8s-app3-health-%{+YYYY.MM.dd}"
+          index => "k8s-metric-alert-%{+YYYY.MM.dd}"
         }
         file {
           path => "/var/log/prometheus_metrics_to_sms_agent.log"
           codec => line { format => "%{message}" }
         }
-      } else {
+      }
+      if [nhalert] in ["Critical", "Warning", "Info"] {
         elasticsearch {
           hosts => ["http://172.31.18.85:9200"]
-          index => "k8s-app3-metric-%{+YYYY.MM.dd}"
+          index => "k8s-metric-%{+YYYY.MM.dd}"
         }
       }
     }
@@ -199,8 +203,10 @@ data:
     
       mutate {
         add_field => {
-          "metric" => "%{[data][result][metric][__name__]}"
+          "NHcenter" => "%{[data][result][metric][NHcenter]}"
           "NHcluster" => "%{[data][result][metric][NHcluster]}"
+          "node" => "%{[data][result][metric][node]}"
+          "metric" => "%{[data][result][metric][__name__]}"
           "persistentvolumeclaim" => "%{[data][result][metric][persistentvolumeclaim]}"
           "namespace" => "%{[data][result][metric][namespace]}"
           "pvc_usage" => "%{[data][result][value][1]}"
@@ -240,26 +246,26 @@ data:
       if [pvc_usage] {
         mutate {
           add_field => { 
-            "message" => "%{@timestamp}, %{nhalert}, Cluster: %{NHcluster}, Namespace: %{namespace}, PVC: %{persistentvolumeclaim}, PVCUsage: %{pvc_usage}%" 
+            "message" => "%{@timestamp}, %{nhalert}, Center: %{NHcenter}, Cluster: %{NHcluster}, Node: %{node}, Namespace: %{namespace}, PVC: %{persistentvolumeclaim}, PVCUsage: %{pvc_usage}%" 
           }
         }
       }
     }
-
     output {
       if [nhalert] in ["Critical", "Warning"] {
         elasticsearch {
           hosts => ["http://172.31.18.85:9200"]
-          index => "k8s-app3-health-%{+YYYY.MM.dd}"
+          index => "k8s-metric-alert-%{+YYYY.MM.dd}"
         }
         file {
           path => "/var/log/prometheus_metrics_to_sms_agent.log"
           codec => line { format => "%{message}" }
         }
-      } else {
+      }
+      if [nhalert] in ["Critical", "Warning", "Info"] {
         elasticsearch {
           hosts => ["http://172.31.18.85:9200"]
-          index => "k8s-app3-metric-%{+YYYY.MM.dd}"
+          index => "k8s-metric-%{+YYYY.MM.dd}"
         }
       }
     }
@@ -290,8 +296,10 @@ data:
   
       mutate {
         add_field => {
-          "metric" => "%{[data][result][metric][__name__]}"
+          "NHcenter" => "%{[data][result][metric][NHcenter]}"
           "NHcluster" => "%{[data][result][metric][NHcluster]}"
+          "node" => "%{[data][result][metric][node]}"
+          "metric" => "%{[data][result][metric][__name__]}"
           "namespace" => "%{[data][result][metric][namespace]}"
           "pod" => "%{[data][result][metric][pod]}"
           "pod_fail_status" => "%{[data][result][value][1]}"
@@ -304,22 +312,29 @@ data:
         mutate {
           add_field => {
             "nhalert" => "Warning"
-            "message" => "%{@timestamp}, %{nhalert}, Cluster: %{NHcluster}, Namespace: %{namespace}, Pod: %{pod}, Status: Failed"
+            "message" => "%{@timestamp}, %{nhalert}, Center: %{NHcenter}, Cluster: %{NHcluster}, Node: %{node}, Namespace: %{namespace}, Pod: %{pod}, Status: Failed"
           }
         }
       } else {
         drop { }
       }
     }
-  
     output {
-      elasticsearch {
-        hosts => ["http://172.31.18.85:9200"]
-        index => "k8s-app3-health-%{+YYYY.MM.dd}"
+      if [nhalert] in ["Critical", "Warning"] {
+        elasticsearch {
+          hosts => ["http://172.31.18.85:9200"]
+          index => "k8s-metric-alert-%{+YYYY.MM.dd}"
+        }
+        file {
+          path => "/var/log/prometheus_metrics_to_sms_agent.log"
+          codec => line { format => "%{message}" }
+        }
       }
-      file {
-        path => "/var/log/prometheus_metrics_to_sms_agent.log"
-        codec => line { format => "%{message}" }
+      if [nhalert] in ["Critical", "Warning", "Info"] {
+        elasticsearch {
+          hosts => ["http://172.31.18.85:9200"]
+          index => "k8s-metric-%{+YYYY.MM.dd}"
+        }
       }
     }
 
