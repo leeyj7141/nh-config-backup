@@ -59,6 +59,14 @@ alertmanager:
 grafana: 
   enabled: true
   replicas: 2
+  persistence:
+    type: pvc
+    enabled: true
+    storageClassName: nfs
+    accessModes:
+      - ReadWriteMany
+      #- ReadWriteOnce
+    size: 10Gi
   image: 
     repository: rancher/mirrored-grafana-grafana
     tag: 10.3.3
