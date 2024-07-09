@@ -11,7 +11,17 @@ spec:
     metadata:
       labels:
         app: nginx
+        NHapp: appA
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                - "rancher-master-test2"
       containers:
       - name: nginx
         image: nginx:latest

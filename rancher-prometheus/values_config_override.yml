@@ -158,7 +158,7 @@ grafana:
       isDefault: false
       jsonData:
         includeFrozen: false
-        index: k8s-app3-metric*
+        index: k8s-metric*
         logLevelField: ""
         logMessageField: message
         maxConcurrentShardRequests: 5

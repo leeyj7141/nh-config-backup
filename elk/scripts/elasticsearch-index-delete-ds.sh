@@ -6,3 +6,6 @@ INDEX=${1}
 
 curl -X DELETE "http://nh-elasticsearch-1:9200/_data_stream/${INDEX}"
 #curl -X DELETE "http://nh-elasticsearch-1:9200/_data_stream/.ds-metricbeat-8.0.0-2024.06.27-000001"
+#curl -X DELETE "http://nh-elasticsearch-1:9200/_data_stream/.ds-filebeat-8.9.0-2024.07.05-000001"
+#curl -X GET "http://nh-elasticsearch-1:9200/_data_stream/"
+
