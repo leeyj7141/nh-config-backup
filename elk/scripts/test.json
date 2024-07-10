@@ -1,0 +1,893 @@
+{
+  "took" : 1,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 495,
+      "relation" : "eq"
+    },
+    "max_score" : 1.0,
+    "hits" : [
+      {
+        "_index" : ".ds-k8s-pod-log-audit-2024.07.10-000001",
+        "_id" : "gSjPmpABPuudShw7MQaE",
+        "_score" : 1.0,
+        "_source" : {
+          "@timestamp" : "2024-07-10T04:03:07.289Z",
+          "auditID" : "748155fb-92df-4f94-a4ab-43256a0fc8eb",
+          "log" : {
+            "offset" : 52183185,
+            "file" : {
+              "path" : "/var/log/kubernetes/audit/audit.log"
+            }
+          },
+          "userAgent" : "rke2-supervisor@rancher-master-test2/v1.28.9+rke2r1 (linux/amd64) rke2/07bf87f9118c1386fa73f660142cc28b5bef1886",
+          "stageTimestamp" : "2024-07-10T04:03:06.205532Z",
+          "NHcenter" : "centerA",
+          "NHcluster" : "clusterA",
+          "requestReceivedTimestamp" : "2024-07-10T04:03:06.205532Z",
+          "verb" : "get",
+          "stage" : "RequestReceived",
+          "apiVersion" : "audit.k8s.io/v1",
+          "objectRef" : {
+            "apiVersion" : "v1",
+            "resource" : "leases",
+            "namespace" : "kube-system",
+            "name" : "rke2-etcd",
+            "apiGroup" : "coordination.k8s.io"
+          },
+          "input" : {
+            "type" : "filestream"
+          },
+          "requestURI" : "/apis/coordination.k8s.io/v1/namespaces/kube-system/leases/rke2-etcd",
+          "level" : "Metadata",
+          "sourceIPs" : [
+            "127.0.0.1"
+          ],
+          "user" : {
+            "username" : "system:rke2-supervisor",
+            "groups" : [
+              "system:masters",
+              "system:authenticated"
+            ]
+          },
+          "ecs" : {
+            "version" : "8.0.0"
+          },
+          "host" : {
+            "ip" : [
+              "172.31.39.208",
+              "fe80::815:18ff:fe35:208b",
+              "fe80::ecee:eeff:feee:eeee",
+              "10.42.47.192",
+              "fe80::646d:85ff:febf:5913",
+              "fe80::ecee:eeff:feee:eeee"
+            ],
+            "mac" : [
+              "0A-15-18-35-20-8B",
+              "66-6D-85-BF-59-13",
+              "EE-EE-EE-EE-EE-EE"
+            ],
+            "name" : "rancher-master-test2",
+            "hostname" : "rancher-master-test2",
+            "architecture" : "x86_64",
+            "os" : {
+              "type" : "linux",
+              "platform" : "rocky",
+              "version" : "8.9 (Green Obsidian)",
+              "family" : "redhat",
+              "name" : "Rocky Linux",
+              "kernel" : "4.18.0-513.5.1.el8_9.x86_64",
+              "codename" : "Green Obsidian"
+            },
+            "id" : "ec21c43ce1df5be80ff6fc77c926edc3",
+            "containerized" : false
+          },
+          "kind" : "Event",
+          "agent" : {
+            "id" : "0b5460fa-6126-4864-b37e-fab38af7b3aa",
+            "name" : "rancher-master-test2",
+            "type" : "filebeat",
+            "version" : "8.9.1",
+            "ephemeral_id" : "13899e31-f39b-4088-a378-8fc24b752be6"
+          }
+        }
+      },
+      {
+        "_index" : ".ds-k8s-pod-log-audit-2024.07.10-000001",
+        "_id" : "gijPmpABPuudShw7MQaE",
+        "_score" : 1.0,
+        "_source" : {
+          "@timestamp" : "2024-07-10T04:03:07.289Z",
+          "kind" : "Event",
+          "ecs" : {
+            "version" : "8.0.0"
+          },
+          "auditID" : "748155fb-92df-4f94-a4ab-43256a0fc8eb",
+          "stage" : "ResponseComplete",
+          "agent" : {
+            "name" : "rancher-master-test2",
+            "type" : "filebeat",
+            "version" : "8.9.1",
+            "ephemeral_id" : "13899e31-f39b-4088-a378-8fc24b752be6",
+            "id" : "0b5460fa-6126-4864-b37e-fab38af7b3aa"
+          },
+          "sourceIPs" : [
+            "127.0.0.1"
+          ],
+          "responseStatus" : {
+            "metadata" : { },
+            "code" : 200
+          },
+          "requestURI" : "/apis/coordination.k8s.io/v1/namespaces/kube-system/leases/rke2-etcd",
+          "apiVersion" : "audit.k8s.io/v1",
+          "input" : {
+            "type" : "filestream"
+          },
+          "verb" : "get",
+          "annotations" : {
+            "authorization.k8s.io/decision" : "allow",
+            "authorization.k8s.io/reason" : ""
+          },
+          "requestReceivedTimestamp" : "2024-07-10T04:03:06.205532Z",
+          "objectRef" : {
+            "name" : "rke2-etcd",
+            "apiGroup" : "coordination.k8s.io",
+            "apiVersion" : "v1",
+            "resource" : "leases",
+            "namespace" : "kube-system"
+          },
+          "userAgent" : "rke2-supervisor@rancher-master-test2/v1.28.9+rke2r1 (linux/amd64) rke2/07bf87f9118c1386fa73f660142cc28b5bef1886",
+          "level" : "Metadata",
+          "user" : {
+            "username" : "system:rke2-supervisor",
+            "groups" : [
+              "system:masters",
+              "system:authenticated"
+            ]
+          },
+          "NHcluster" : "clusterA",
+          "log" : {
+            "file" : {
+              "path" : "/var/log/kubernetes/audit/audit.log"
+            },
+            "offset" : 52183906
+          },
+          "stageTimestamp" : "2024-07-10T04:03:06.290358Z",
+          "NHcenter" : "centerA",
+          "host" : {
+            "name" : "rancher-master-test2",
+            "mac" : [
+              "0A-15-18-35-20-8B",
+              "66-6D-85-BF-59-13",
+              "EE-EE-EE-EE-EE-EE"
+            ],
+            "hostname" : "rancher-master-test2",
+            "architecture" : "x86_64",
+            "os" : {
+              "version" : "8.9 (Green Obsidian)",
+              "family" : "redhat",
+              "name" : "Rocky Linux",
+              "kernel" : "4.18.0-513.5.1.el8_9.x86_64",
+              "codename" : "Green Obsidian",
+              "type" : "linux",
+              "platform" : "rocky"
+            },
+            "id" : "ec21c43ce1df5be80ff6fc77c926edc3",
+            "containerized" : false,
+            "ip" : [
+              "172.31.39.208",
+              "fe80::815:18ff:fe35:208b",
+              "fe80::ecee:eeff:feee:eeee",
+              "10.42.47.192",
+              "fe80::646d:85ff:febf:5913",
+              "fe80::ecee:eeff:feee:eeee"
+            ]
+          }
+        }
+      },
+      {
+        "_index" : ".ds-k8s-pod-log-audit-2024.07.10-000001",
+        "_id" : "gyjPmpABPuudShw7MQaE",
+        "_score" : 1.0,
+        "_source" : {
+          "@timestamp" : "2024-07-10T04:03:07.289Z",
+          "user" : {
+            "groups" : [
+              "system:authenticated"
+            ],
+            "username" : "rke2-cloud-controller-manager"
+          },
+          "requestReceivedTimestamp" : "2024-07-10T04:03:07.287482Z",
+          "requestURI" : "/apis/coordination.k8s.io/v1/namespaces/kube-system/leases/rke2-cloud-controller-manager?timeout=5s",
+          "apiVersion" : "audit.k8s.io/v1",
+          "sourceIPs" : [
+            "127.0.0.1"
+          ],
+          "userAgent" : "cloud-controller-manager/v1.29.3 (linux/amd64) kubernetes/d9f75b6/leader-election",
+          "stageTimestamp" : "2024-07-10T04:03:07.287482Z",
+          "input" : {
+            "type" : "filestream"
+          },
+          "host" : {
+            "name" : "rancher-master-test2",
+            "id" : "ec21c43ce1df5be80ff6fc77c926edc3",
+            "containerized" : false,
+            "ip" : [
+              "172.31.39.208",
+              "fe80::815:18ff:fe35:208b",
+              "fe80::ecee:eeff:feee:eeee",
+              "10.42.47.192",
+              "fe80::646d:85ff:febf:5913",
+              "fe80::ecee:eeff:feee:eeee"
+            ],
+            "mac" : [
+              "0A-15-18-35-20-8B",
+              "66-6D-85-BF-59-13",
+              "EE-EE-EE-EE-EE-EE"
+            ],
+            "hostname" : "rancher-master-test2",
+            "architecture" : "x86_64",
+            "os" : {
+              "platform" : "rocky",
+              "version" : "8.9 (Green Obsidian)",
+              "family" : "redhat",
+              "name" : "Rocky Linux",
+              "kernel" : "4.18.0-513.5.1.el8_9.x86_64",
+              "codename" : "Green Obsidian",
+              "type" : "linux"
+            }
+          },
+          "kind" : "Event",
+          "stage" : "RequestReceived",
+          "level" : "Metadata",
+          "ecs" : {
+            "version" : "8.0.0"
+          },
+          "agent" : {
+            "ephemeral_id" : "13899e31-f39b-4088-a378-8fc24b752be6",
+            "id" : "0b5460fa-6126-4864-b37e-fab38af7b3aa",
+            "name" : "rancher-master-test2",
+            "type" : "filebeat",
+            "version" : "8.9.1"
+          },
+          "objectRef" : {
+            "apiVersion" : "v1",
+            "resource" : "leases",
+            "namespace" : "kube-system",
+            "name" : "rke2-cloud-controller-manager",
+            "apiGroup" : "coordination.k8s.io"
+          },
+          "log" : {
+            "offset" : 52184761,
+            "file" : {
+              "path" : "/var/log/kubernetes/audit/audit.log"
+            }
+          },
+          "auditID" : "4e801929-c93e-4faa-844d-364a70051708",
+          "verb" : "get",
+          "NHcenter" : "centerA",
+          "NHcluster" : "clusterA"
+        }
+      },
+      {
+        "_index" : ".ds-k8s-pod-log-audit-2024.07.10-000001",
+        "_id" : "jijPmpABPuudShw7OQZW",
+        "_score" : 1.0,
+        "_source" : {
+          "@timestamp" : "2024-07-10T04:03:09.290Z",
+          "ecs" : {
+            "version" : "8.0.0"
+          },
+          "user" : {
+            "username" : "rke2-cloud-controller-manager",
+            "groups" : [
+              "system:authenticated"
+            ]
+          },
+          "stage" : "ResponseComplete",
+          "input" : {
+            "type" : "filestream"
+          },
+          "userAgent" : "cloud-controller-manager/v1.29.3 (linux/amd64) kubernetes/d9f75b6/leader-election",
+          "objectRef" : {
+            "name" : "rke2-cloud-controller-manager",
+            "apiGroup" : "coordination.k8s.io",
+            "apiVersion" : "v1",
+            "resource" : "leases",
+            "namespace" : "kube-system"
+          },
+          "NHcenter" : "centerA",
+          "NHcluster" : "clusterA",
+          "host" : {
+            "containerized" : false,
+            "ip" : [
+              "172.31.39.208",
+              "fe80::815:18ff:fe35:208b",
+              "fe80::ecee:eeff:feee:eeee",
+              "10.42.47.192",
+              "fe80::646d:85ff:febf:5913",
+              "fe80::ecee:eeff:feee:eeee"
+            ],
+            "mac" : [
+              "0A-15-18-35-20-8B",
+              "66-6D-85-BF-59-13",
+              "EE-EE-EE-EE-EE-EE"
+            ],
+            "name" : "rancher-master-test2",
+            "hostname" : "rancher-master-test2",
+            "architecture" : "x86_64",
+            "os" : {
+              "family" : "redhat",
+              "name" : "Rocky Linux",
+              "kernel" : "4.18.0-513.5.1.el8_9.x86_64",
+              "codename" : "Green Obsidian",
+              "type" : "linux",
+              "platform" : "rocky",
+              "version" : "8.9 (Green Obsidian)"
+            },
+            "id" : "ec21c43ce1df5be80ff6fc77c926edc3"
+          },
+          "stageTimestamp" : "2024-07-10T04:03:07.408470Z",
+          "annotations" : {
+            "authorization.k8s.io/reason" : "RBAC: allowed by ClusterRoleBinding \"rke2-cloud-controller-manager\" of ClusterRole \"rke2-cloud-controller-manager\" to User \"rke2-cloud-controller-manager\"",
+            "authorization.k8s.io/decision" : "allow"
+          },
+          "level" : "Metadata",
+          "agent" : {
+            "type" : "filebeat",
+            "version" : "8.9.1",
+            "ephemeral_id" : "13899e31-f39b-4088-a378-8fc24b752be6",
+            "id" : "0b5460fa-6126-4864-b37e-fab38af7b3aa",
+            "name" : "rancher-master-test2"
+          },
+          "kind" : "Event",
+          "verb" : "get",
+          "requestReceivedTimestamp" : "2024-07-10T04:03:07.287482Z",
+          "apiVersion" : "audit.k8s.io/v1",
+          "responseStatus" : {
+            "code" : 200,
+            "metadata" : { }
+          },
+          "auditID" : "4e801929-c93e-4faa-844d-364a70051708",
+          "log" : {
+            "offset" : 52185493,
+            "file" : {
+              "path" : "/var/log/kubernetes/audit/audit.log"
+            }
+          },
+          "requestURI" : "/apis/coordination.k8s.io/v1/namespaces/kube-system/leases/rke2-cloud-controller-manager?timeout=5s",
+          "sourceIPs" : [
+            "127.0.0.1"
+          ]
+        }
+      },
+      {
+        "_index" : ".ds-k8s-pod-log-audit-2024.07.10-000001",
+        "_id" : "jyjPmpABPuudShw7OQZW",
+        "_score" : 1.0,
+        "_source" : {
+          "@timestamp" : "2024-07-10T04:03:09.290Z",
+          "NHcluster" : "clusterA",
+          "agent" : {
+            "id" : "0b5460fa-6126-4864-b37e-fab38af7b3aa",
+            "name" : "rancher-master-test2",
+            "type" : "filebeat",
+            "version" : "8.9.1",
+            "ephemeral_id" : "13899e31-f39b-4088-a378-8fc24b752be6"
+          },
+          "apiVersion" : "audit.k8s.io/v1",
+          "userAgent" : "kube-controller-manager/v1.28.9+rke2r1 (linux/amd64) kubernetes/587f5fe/leader-election",
+          "level" : "Metadata",
+          "requestReceivedTimestamp" : "2024-07-10T04:03:07.461985Z",
+          "input" : {
+            "type" : "filestream"
+          },
+          "NHcenter" : "centerA",
+          "ecs" : {
+            "version" : "8.0.0"
+          },
+          "host" : {
+            "ip" : [
+              "172.31.39.208",
+              "fe80::815:18ff:fe35:208b",
+              "fe80::ecee:eeff:feee:eeee",
+              "10.42.47.192",
+              "fe80::646d:85ff:febf:5913",
+              "fe80::ecee:eeff:feee:eeee"
+            ],
+            "mac" : [
+              "0A-15-18-35-20-8B",
+              "66-6D-85-BF-59-13",
+              "EE-EE-EE-EE-EE-EE"
+            ],
+            "name" : "rancher-master-test2",
+            "hostname" : "rancher-master-test2",
+            "architecture" : "x86_64",
+            "os" : {
+              "platform" : "rocky",
+              "version" : "8.9 (Green Obsidian)",
+              "family" : "redhat",
+              "name" : "Rocky Linux",
+              "kernel" : "4.18.0-513.5.1.el8_9.x86_64",
+              "codename" : "Green Obsidian",
+              "type" : "linux"
+            },
+            "id" : "ec21c43ce1df5be80ff6fc77c926edc3",
+            "containerized" : false
+          },
+          "stage" : "RequestReceived",
+          "auditID" : "af45c4f9-e44f-4df6-a4e5-8d71bf06dcbc",
+          "sourceIPs" : [
+            "127.0.0.1"
+          ],
+          "kind" : "Event",
+          "verb" : "get",
+          "user" : {
+            "username" : "system:kube-controller-manager",
+            "groups" : [
+              "system:authenticated"
+            ]
+          },
+          "log" : {
+            "offset" : 52186519,
+            "file" : {
+              "path" : "/var/log/kubernetes/audit/audit.log"
+            }
+          },
+          "objectRef" : {
+            "resource" : "leases",
+            "namespace" : "kube-system",
+            "name" : "kube-controller-manager",
+            "apiGroup" : "coordination.k8s.io",
+            "apiVersion" : "v1"
+          },
+          "requestURI" : "/apis/coordination.k8s.io/v1/namespaces/kube-system/leases/kube-controller-manager?timeout=5s",
+          "stageTimestamp" : "2024-07-10T04:03:07.461985Z"
+        }
+      },
+      {
+        "_index" : ".ds-k8s-pod-log-audit-2024.07.10-000001",
+        "_id" : "kCjPmpABPuudShw7OQZW",
+        "_score" : 1.0,
+        "_source" : {
+          "@timestamp" : "2024-07-10T04:03:09.290Z",
+          "NHcluster" : "clusterA",
+          "ecs" : {
+            "version" : "8.0.0"
+          },
+          "objectRef" : {
+            "resource" : "leases",
+            "namespace" : "kube-system",
+            "name" : "kube-controller-manager",
+            "apiGroup" : "coordination.k8s.io",
+            "apiVersion" : "v1"
+          },
+          "log" : {
+            "offset" : 52187246,
+            "file" : {
+              "path" : "/var/log/kubernetes/audit/audit.log"
+            }
+          },
+          "userAgent" : "kube-controller-manager/v1.28.9+rke2r1 (linux/amd64) kubernetes/587f5fe/leader-election",
+          "user" : {
+            "groups" : [
+              "system:authenticated"
+            ],
+            "username" : "system:kube-controller-manager"
+          },
+          "annotations" : {
+            "authorization.k8s.io/decision" : "allow",
+            "authorization.k8s.io/reason" : "RBAC: allowed by ClusterRoleBinding \"system:kube-controller-manager\" of ClusterRole \"system:kube-controller-manager\" to User \"system:kube-controller-manager\""
+          },
+          "level" : "Metadata",
+          "auditID" : "af45c4f9-e44f-4df6-a4e5-8d71bf06dcbc",
+          "responseStatus" : {
+            "code" : 200,
+            "metadata" : { }
+          },
+          "sourceIPs" : [
+            "127.0.0.1"
+          ],
+          "requestURI" : "/apis/coordination.k8s.io/v1/namespaces/kube-system/leases/kube-controller-manager?timeout=5s",
+          "kind" : "Event",
+          "input" : {
+            "type" : "filestream"
+          },
+          "host" : {
+            "ip" : [
+              "172.31.39.208",
+              "fe80::815:18ff:fe35:208b",
+              "fe80::ecee:eeff:feee:eeee",
+              "10.42.47.192",
+              "fe80::646d:85ff:febf:5913",
+              "fe80::ecee:eeff:feee:eeee"
+            ],
+            "mac" : [
+              "0A-15-18-35-20-8B",
+              "66-6D-85-BF-59-13",
+              "EE-EE-EE-EE-EE-EE"
+            ],
+            "name" : "rancher-master-test2",
+            "hostname" : "rancher-master-test2",
+            "architecture" : "x86_64",
+            "os" : {
+              "kernel" : "4.18.0-513.5.1.el8_9.x86_64",
+              "codename" : "Green Obsidian",
+              "type" : "linux",
+              "platform" : "rocky",
+              "version" : "8.9 (Green Obsidian)",
+              "family" : "redhat",
+              "name" : "Rocky Linux"
+            },
+            "id" : "ec21c43ce1df5be80ff6fc77c926edc3",
+            "containerized" : false
+          },
+          "apiVersion" : "audit.k8s.io/v1",
+          "requestReceivedTimestamp" : "2024-07-10T04:03:07.461985Z",
+          "stageTimestamp" : "2024-07-10T04:03:07.465273Z",
+          "stage" : "ResponseComplete",
+          "verb" : "get",
+          "NHcenter" : "centerA",
+          "agent" : {
+            "version" : "8.9.1",
+            "ephemeral_id" : "13899e31-f39b-4088-a378-8fc24b752be6",
+            "id" : "0b5460fa-6126-4864-b37e-fab38af7b3aa",
+            "name" : "rancher-master-test2",
+            "type" : "filebeat"
+          }
+        }
+      },
+      {
+        "_index" : ".ds-k8s-pod-log-audit-2024.07.10-000001",
+        "_id" : "kSjPmpABPuudShw7OQZW",
+        "_score" : 1.0,
+        "_source" : {
+          "@timestamp" : "2024-07-10T04:03:09.290Z",
+          "objectRef" : {
+            "apiGroup" : "coordination.k8s.io",
+            "apiVersion" : "v1",
+            "resource" : "leases",
+            "namespace" : "kube-system",
+            "name" : "apiserver-3ogzhfz4wua5udibyu4my3vwqe"
+          },
+          "apiVersion" : "audit.k8s.io/v1",
+          "requestReceivedTimestamp" : "2024-07-10T04:03:08.194713Z",
+          "user" : {
+            "username" : "system:apiserver",
+            "uid" : "849c20f0-9ced-42b9-9e08-a6ae6d40f4ce",
+            "groups" : [
+              "system:masters"
+            ]
+          },
+          "auditID" : "676041b3-1505-409c-897f-1f16895e4c14",
+          "kind" : "Event",
+          "log" : {
+            "offset" : 52188270,
+            "file" : {
+              "path" : "/var/log/kubernetes/audit/audit.log"
+            }
+          },
+          "sourceIPs" : [
+            "::1"
+          ],
+          "level" : "Metadata",
+          "stageTimestamp" : "2024-07-10T04:03:08.194713Z",
+          "NHcluster" : "clusterA",
+          "input" : {
+            "type" : "filestream"
+          },
+          "NHcenter" : "centerA",
+          "host" : {
+            "architecture" : "x86_64",
+            "name" : "rancher-master-test2",
+            "os" : {
+              "type" : "linux",
+              "platform" : "rocky",
+              "version" : "8.9 (Green Obsidian)",
+              "family" : "redhat",
+              "name" : "Rocky Linux",
+              "kernel" : "4.18.0-513.5.1.el8_9.x86_64",
+              "codename" : "Green Obsidian"
+            },
+            "id" : "ec21c43ce1df5be80ff6fc77c926edc3",
+            "containerized" : false,
+            "ip" : [
+              "172.31.39.208",
+              "fe80::815:18ff:fe35:208b",
+              "fe80::ecee:eeff:feee:eeee",
+              "10.42.47.192",
+              "fe80::646d:85ff:febf:5913",
+              "fe80::ecee:eeff:feee:eeee"
+            ],
+            "mac" : [
+              "0A-15-18-35-20-8B",
+              "66-6D-85-BF-59-13",
+              "EE-EE-EE-EE-EE-EE"
+            ],
+            "hostname" : "rancher-master-test2"
+          },
+          "verb" : "update",
+          "stage" : "RequestReceived",
+          "userAgent" : "kube-apiserver/v1.28.9+rke2r1 (linux/amd64) kubernetes/587f5fe",
+          "requestURI" : "/apis/coordination.k8s.io/v1/namespaces/kube-system/leases/apiserver-3ogzhfz4wua5udibyu4my3vwqe",
+          "agent" : {
+            "ephemeral_id" : "13899e31-f39b-4088-a378-8fc24b752be6",
+            "id" : "0b5460fa-6126-4864-b37e-fab38af7b3aa",
+            "name" : "rancher-master-test2",
+            "type" : "filebeat",
+            "version" : "8.9.1"
+          },
+          "ecs" : {
+            "version" : "8.0.0"
+          }
+        }
+      },
+      {
+        "_index" : ".ds-k8s-pod-log-audit-2024.07.10-000001",
+        "_id" : "kijPmpABPuudShw7OQZW",
+        "_score" : 1.0,
+        "_source" : {
+          "@timestamp" : "2024-07-10T04:03:09.290Z",
+          "requestReceivedTimestamp" : "2024-07-10T04:03:08.194713Z",
+          "log" : {
+            "offset" : 52189009,
+            "file" : {
+              "path" : "/var/log/kubernetes/audit/audit.log"
+            }
+          },
+          "input" : {
+            "type" : "filestream"
+          },
+          "agent" : {
+            "name" : "rancher-master-test2",
+            "type" : "filebeat",
+            "version" : "8.9.1",
+            "ephemeral_id" : "13899e31-f39b-4088-a378-8fc24b752be6",
+            "id" : "0b5460fa-6126-4864-b37e-fab38af7b3aa"
+          },
+          "ecs" : {
+            "version" : "8.0.0"
+          },
+          "userAgent" : "kube-apiserver/v1.28.9+rke2r1 (linux/amd64) kubernetes/587f5fe",
+          "sourceIPs" : [
+            "::1"
+          ],
+          "objectRef" : {
+            "apiVersion" : "v1",
+            "resourceVersion" : "9039348",
+            "resource" : "leases",
+            "namespace" : "kube-system",
+            "name" : "apiserver-3ogzhfz4wua5udibyu4my3vwqe",
+            "uid" : "228ca531-9f5c-4986-ae08-766fdc3211ba",
+            "apiGroup" : "coordination.k8s.io"
+          },
+          "NHcenter" : "centerA",
+          "host" : {
+            "mac" : [
+              "0A-15-18-35-20-8B",
+              "66-6D-85-BF-59-13",
+              "EE-EE-EE-EE-EE-EE"
+            ],
+            "hostname" : "rancher-master-test2",
+            "architecture" : "x86_64",
+            "os" : {
+              "version" : "8.9 (Green Obsidian)",
+              "family" : "redhat",
+              "name" : "Rocky Linux",
+              "kernel" : "4.18.0-513.5.1.el8_9.x86_64",
+              "codename" : "Green Obsidian",
+              "type" : "linux",
+              "platform" : "rocky"
+            },
+            "id" : "ec21c43ce1df5be80ff6fc77c926edc3",
+            "containerized" : false,
+            "ip" : [
+              "172.31.39.208",
+              "fe80::815:18ff:fe35:208b",
+              "fe80::ecee:eeff:feee:eeee",
+              "10.42.47.192",
+              "fe80::646d:85ff:febf:5913",
+              "fe80::ecee:eeff:feee:eeee"
+            ],
+            "name" : "rancher-master-test2"
+          },
+          "NHcluster" : "clusterA",
+          "responseStatus" : {
+            "metadata" : { },
+            "code" : 200
+          },
+          "stageTimestamp" : "2024-07-10T04:03:08.232840Z",
+          "auditID" : "676041b3-1505-409c-897f-1f16895e4c14",
+          "user" : {
+            "uid" : "849c20f0-9ced-42b9-9e08-a6ae6d40f4ce",
+            "groups" : [
+              "system:masters"
+            ],
+            "username" : "system:apiserver"
+          },
+          "verb" : "update",
+          "annotations" : {
+            "authorization.k8s.io/decision" : "allow",
+            "authorization.k8s.io/reason" : ""
+          },
+          "apiVersion" : "audit.k8s.io/v1",
+          "stage" : "ResponseComplete",
+          "level" : "Metadata",
+          "kind" : "Event",
+          "requestURI" : "/apis/coordination.k8s.io/v1/namespaces/kube-system/leases/apiserver-3ogzhfz4wua5udibyu4my3vwqe"
+        }
+      },
+      {
+        "_index" : ".ds-k8s-pod-log-audit-2024.07.10-000001",
+        "_id" : "kyjPmpABPuudShw7OQZW",
+        "_score" : 1.0,
+        "_source" : {
+          "@timestamp" : "2024-07-10T04:03:09.291Z",
+          "requestURI" : "/readyz",
+          "NHcenter" : "centerA",
+          "input" : {
+            "type" : "filestream"
+          },
+          "NHcluster" : "clusterA",
+          "host" : {
+            "mac" : [
+              "0A-15-18-35-20-8B",
+              "66-6D-85-BF-59-13",
+              "EE-EE-EE-EE-EE-EE"
+            ],
+            "hostname" : "rancher-master-test2",
+            "name" : "rancher-master-test2",
+            "architecture" : "x86_64",
+            "os" : {
+              "codename" : "Green Obsidian",
+              "type" : "linux",
+              "platform" : "rocky",
+              "version" : "8.9 (Green Obsidian)",
+              "family" : "redhat",
+              "name" : "Rocky Linux",
+              "kernel" : "4.18.0-513.5.1.el8_9.x86_64"
+            },
+            "id" : "ec21c43ce1df5be80ff6fc77c926edc3",
+            "containerized" : false,
+            "ip" : [
+              "172.31.39.208",
+              "fe80::815:18ff:fe35:208b",
+              "fe80::ecee:eeff:feee:eeee",
+              "10.42.47.192",
+              "fe80::646d:85ff:febf:5913",
+              "fe80::ecee:eeff:feee:eeee"
+            ]
+          },
+          "stageTimestamp" : "2024-07-10T04:03:08.262760Z",
+          "user" : {
+            "username" : "system:apiserver",
+            "groups" : [
+              "system:masters",
+              "system:authenticated"
+            ]
+          },
+          "kind" : "Event",
+          "sourceIPs" : [
+            "::1"
+          ],
+          "level" : "Metadata",
+          "agent" : {
+            "type" : "filebeat",
+            "version" : "8.9.1",
+            "ephemeral_id" : "13899e31-f39b-4088-a378-8fc24b752be6",
+            "id" : "0b5460fa-6126-4864-b37e-fab38af7b3aa",
+            "name" : "rancher-master-test2"
+          },
+          "apiVersion" : "audit.k8s.io/v1",
+          "verb" : "get",
+          "stage" : "RequestReceived",
+          "auditID" : "3fa800e3-5c3a-42ce-ae38-cea25032d65f",
+          "log" : {
+            "offset" : 52189955,
+            "file" : {
+              "path" : "/var/log/kubernetes/audit/audit.log"
+            }
+          },
+          "requestReceivedTimestamp" : "2024-07-10T04:03:08.262760Z",
+          "userAgent" : "kubectl/v1.28.9+rke2r1 (linux/amd64) kubernetes/587f5fe",
+          "ecs" : {
+            "version" : "8.0.0"
+          }
+        }
+      },
+      {
+        "_index" : ".ds-k8s-pod-log-audit-2024.07.10-000001",
+        "_id" : "lCjPmpABPuudShw7OQZW",
+        "_score" : 1.0,
+        "_source" : {
+          "@timestamp" : "2024-07-10T04:03:09.291Z",
+          "log" : {
+            "offset" : 52190417,
+            "file" : {
+              "path" : "/var/log/kubernetes/audit/audit.log"
+            }
+          },
+          "stage" : "ResponseComplete",
+          "annotations" : {
+            "authorization.k8s.io/decision" : "allow",
+            "authorization.k8s.io/reason" : ""
+          },
+          "input" : {
+            "type" : "filestream"
+          },
+          "userAgent" : "kubectl/v1.28.9+rke2r1 (linux/amd64) kubernetes/587f5fe",
+          "requestReceivedTimestamp" : "2024-07-10T04:03:08.262760Z",
+          "stageTimestamp" : "2024-07-10T04:03:08.273015Z",
+          "kind" : "Event",
+          "sourceIPs" : [
+            "::1"
+          ],
+          "host" : {
+            "containerized" : false,
+            "ip" : [
+              "172.31.39.208",
+              "fe80::815:18ff:fe35:208b",
+              "fe80::ecee:eeff:feee:eeee",
+              "10.42.47.192",
+              "fe80::646d:85ff:febf:5913",
+              "fe80::ecee:eeff:feee:eeee"
+            ],
+            "mac" : [
+              "0A-15-18-35-20-8B",
+              "66-6D-85-BF-59-13",
+              "EE-EE-EE-EE-EE-EE"
+            ],
+            "hostname" : "rancher-master-test2",
+            "architecture" : "x86_64",
+            "name" : "rancher-master-test2",
+            "os" : {
+              "name" : "Rocky Linux",
+              "kernel" : "4.18.0-513.5.1.el8_9.x86_64",
+              "codename" : "Green Obsidian",
+              "type" : "linux",
+              "platform" : "rocky",
+              "version" : "8.9 (Green Obsidian)",
+              "family" : "redhat"
+            },
+            "id" : "ec21c43ce1df5be80ff6fc77c926edc3"
+          },
+          "user" : {
+            "groups" : [
+              "system:masters",
+              "system:authenticated"
+            ],
+            "username" : "system:apiserver"
+          },
+          "verb" : "get",
+          "requestURI" : "/readyz",
+          "level" : "Metadata",
+          "NHcenter" : "centerA",
+          "ecs" : {
+            "version" : "8.0.0"
+          },
+          "apiVersion" : "audit.k8s.io/v1",
+          "auditID" : "3fa800e3-5c3a-42ce-ae38-cea25032d65f",
+          "responseStatus" : {
+            "metadata" : { },
+            "code" : 200
+          },
+          "NHcluster" : "clusterA",
+          "agent" : {
+            "version" : "8.9.1",
+            "ephemeral_id" : "13899e31-f39b-4088-a378-8fc24b752be6",
+            "id" : "0b5460fa-6126-4864-b37e-fab38af7b3aa",
+            "name" : "rancher-master-test2",
+            "type" : "filebeat"
+          }
+        }
+      }
+    ]
+  }
+}

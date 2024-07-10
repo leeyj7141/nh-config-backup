@@ -4,8 +4,6 @@ filebeat.autodiscover:
       templates:
         - condition:
             and:
-              - equals:
-                  kubernetes.node.name: rancher-master-test2
               - not:
                   contains:
                     kubernetes.labels.NHapp: "app"
@@ -16,11 +14,7 @@ filebeat.autodiscover:
 processors:
   - add_kubernetes_metadata:
       in_cluster: false
-      host: "https://172.31.39.208:6443"
-      ssl.certificate: "/var/lib/rancher/rke2/agent/client-kubelet.crt"
-      ssl.key: "/var/lib/rancher/rke2/agent/client-kubelet.key"
-      ssl.certificate_authorities:
-        - "/var/lib/rancher/rke2/agent/client-ca.crt"
+      host: "rancher-master-test2"
   - add_fields:
       target: ""  
       fields:
