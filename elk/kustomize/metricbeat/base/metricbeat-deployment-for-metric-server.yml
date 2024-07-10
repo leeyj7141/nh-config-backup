@@ -19,7 +19,7 @@ spec:
       serviceAccountName: metricbeat
       containers:
       - name: metricbeat-kube-state
-        image: docker.elastic.co/beats/metricbeat:8.9.1
+        image: docker.elastic.co/beats/metricbeat:8.9.2
         args: [
           "-c", "/etc/metricbeat.yml",
           "-e",

@@ -2,7 +2,6 @@ metricbeat.config.modules:
   path: ${path.config}/modules.d/*.yml
   reload.enabled: false
 
-# 지정된 period마다 메트릭을 수집
 metricbeat.modules:
 - module: system
   metricsets:
@@ -21,18 +20,16 @@ metricbeat.modules:
   cpu.metrics: ["percentages", "normalized_percentages"]  # CPU 메트릭 상세 옵션
   core.metrics: ["percentages"]  # Core 메트릭 상세 옵션
 
-# 출력 설정
 output.elasticsearch:
   hosts: ["http://172.31.29.94:9200"]
-  index: "k8s-node-metric"
+  index: "k8s-metric-node"
 
-setup.template.name: "k8s-node-metric"
-setup.template.pattern: "k8s-node-metric"
+setup.template.name: "k8s-metric-node"
+setup.template.pattern: "k8s-metric-node"
 
 setup.kibana:
   host: "172.31.29.94:5601"
 
-# 로그 설정
 logging.level: info
 logging.to_files: true
 logging.files:

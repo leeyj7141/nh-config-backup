@@ -31,3 +31,7 @@ data:
       index: "${INDEX_TEMPLATE}"
     setup.template.name: "${INDEX_TEMPLATE}"
     setup.template.pattern: "${INDEX_TEMPLATE}"
+
+    leader_election:
+      lease_name: metricbeat-kube-state-leader
+    #  lease_namespace: kube-system
