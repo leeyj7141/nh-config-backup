@@ -1,0 +1,52 @@
+metricbeat.config.modules:
+  path: ${path.config}/modules.d/*.yml
+  reload.enabled: false
+
+# 지정된 period마다 메트릭을 수집
+metricbeat.modules:
+- module: system
+  metricsets:
+    - cpu             # CPU usage
+    - load            # CPU load averages
+    - memory          # Memory usage
+    - network         # Network IO
+    - process         # System processes
+    - process_summary # Process summary
+    - diskio          # Disk IO
+    - filesystem      # File system usage
+    - fsstat          # File system stats
+  enabled: true
+  period: 10s
+  processes: ['.*']   # 모든 프로세스 포함
+  cpu.metrics: ["percentages", "normalized_percentages"]  # CPU 메트릭 상세 옵션
+  core.metrics: ["percentages"]  # Core 메트릭 상세 옵션
+
+# 출력 설정
+output.elasticsearch:
+  hosts: ["http://172.31.29.94:9200"]
+  index: "k8s-node-metric"
+
+setup.template.name: "k8s-node-metric"
+setup.template.pattern: "k8s-node-metric"
+
+setup.kibana:
+  host: "172.31.29.94:5601"
+
+# 로그 설정
+logging.level: info
+logging.to_files: true
+logging.files:
+  path: /var/log/metricbeat
+  name: metricbeat.log
+  keepfiles: 7
+  permissions: 0644
+
+# Optional SSL/TLS 설정
+#output.elasticsearch:
+#  hosts: ["https://your-es-cluster:9200"]
+#  username: "your-username"
+#  password: "your-password"
+#  ssl.certificate_authorities: ["/path/to/your/ca.crt"]
+#  ssl.certificate: "/path/to/your/client.crt"
+#  ssl.key: "/path/to/your/client.key"
+

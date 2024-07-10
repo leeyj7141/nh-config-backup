@@ -1,0 +1,49 @@
+namespace: elk-logging-metrics-test
+
+resources:
+  - ../../base/
+
+patches:
+  - target:
+      kind: Deployment
+      name: metricbeat-kube-state
+    patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: metricbeat-kube-state
+      spec:
+        template:
+          spec:
+            containers:
+              - name: metricbeat-kube-state
+                env:
+                  - name: ES_HOST
+                    value: "172.31.18.85"
+                  - name: ES_PORT
+                    value: "9200"
+                  - name: INDEX_TEMPLATE
+                    value: "k8s-kube-state-metric"
+                  - name: KUBE_STATE_METRIC_URL
+                    value: "rancher-monitoring-kube-state-metrics.cattle-monitoring-system.svc.cluster.local.:8080"
+
+  - target:
+      kind: DaemonSet
+      name: metricbeat-kubelet
+    patch: |-
+      apiVersion: apps/v1
+      kind: DaemonSet
+      metadata:
+        name: metricbeat-kubelet
+      spec:
+        template:
+          spec:
+            containers:
+              - name: metricbeat-kubelet
+                env:
+                  - name: ES_HOST
+                    value: "172.31.18.85"
+                  - name: ES_PORT
+                    value: "9200"
+                  - name: INDEX_TEMPLATE
+                    value: "k8s-kube-state-metric"

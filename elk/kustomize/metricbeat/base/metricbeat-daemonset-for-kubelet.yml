@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: metricbeat-kubelet
+  namespace: kube-system
+  labels:
+    k8s-app: metricbeat-kubelet
+spec:
+  selector:
+    matchLabels:
+      k8s-app: metricbeat-kubelet
+  template:
+    metadata:
+      labels:
+        k8s-app: metricbeat-kubelet
+    spec:
+      serviceAccountName: metricbeat
+      containers:
+      - name: metricbeat-kubelet
+        image: docker.elastic.co/beats/metricbeat:8.9.1
+        args: [
+          "-c", "/etc/metricbeat.yml",
+          "-e",
+        ]
+        env:
+        - name: ES_HOST
+          value: "172.31.18.85"
+        - name: ES_PORT
+          value: "9200"
+        - name: INDEX_TEMPLATE
+          value: "k8s-kubelet-metric"
+        - name: HOST_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP
+        securityContext:
+          runAsNonRoot: true
+        resources:
+          limits:
+            cpu: 500m
+            memory: 500Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        volumeMounts:
+        - name: config
+          mountPath: /etc/metricbeat.yml
+          readOnly: true
+          subPath: metricbeat.yml
+      volumes:
+      - name: config
+        configMap:
+          defaultMode: 0640
+          name: metricbeat-daemonset-config

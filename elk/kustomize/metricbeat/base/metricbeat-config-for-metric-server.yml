@@ -1,0 +1,33 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: metricbeat-deployment-config
+  namespace: kube-system
+data:
+  metricbeat.yml: |-
+    metricbeat.modules:
+    - module: kubernetes
+      metricsets:
+        - state_node
+        - state_daemonset
+        - state_deployment
+        - state_replicaset
+        - state_statefulset
+        - state_pod
+        - state_container
+        - state_job
+        - state_cronjob
+        - state_resourcequota
+        - state_service
+        - state_persistentvolume
+        - state_persistentvolumeclaim
+        - state_storageclass
+      period: 30s
+      hosts: ["${KUBE_STATE_METRIC_URL}"]
+    
+    output.elasticsearch:
+      hosts: ["${ES_HOST}:${ES_PORT}"]
+      index: "${INDEX_TEMPLATE}"
+    setup.template.name: "${INDEX_TEMPLATE}"
+    setup.template.pattern: "${INDEX_TEMPLATE}"

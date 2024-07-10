@@ -1,0 +1,54 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: metricbeat-kube-state
+  namespace: kube-system
+  labels:
+    k8s-app: metricbeat-kube-state
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: metricbeat-kube-state
+  template:
+    metadata:
+      labels:
+        k8s-app: metricbeat-kube-state
+    spec:
+      serviceAccountName: metricbeat
+      containers:
+      - name: metricbeat-kube-state
+        image: docker.elastic.co/beats/metricbeat:8.9.1
+        args: [
+          "-c", "/etc/metricbeat.yml",
+          "-e",
+        ]
+        securityContext:
+          runAsNonRoot: true
+        env:
+        - name: ES_HOST
+          value: "172.31.18.85"
+        - name: ES_PORT
+          value: "9200"
+        - name: INDEX_TEMPLATE
+          value: "k8s-kube-state-metric"
+        - name: KUBE_STATE_METRIC_URL
+          value: "rancher-monitoring-kube-state-metrics.cattle-monitoring-system.svc.cluster.local.:8080"
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1000Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        volumeMounts:
+        - name: config
+          mountPath: /etc/metricbeat.yml
+          readOnly: true
+          subPath: metricbeat.yml
+      volumes:
+      - name: config
+        configMap:
+          defaultMode: 0640
+          name: metricbeat-deployment-config

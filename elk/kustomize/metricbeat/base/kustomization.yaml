@@ -1,0 +1,8 @@
+resources:
+ - metricbeat-clusterrolebinding.yml
+ - metricbeat-clusterrole.yml
+ - metricbeat-config-for-kubelet.yml
+ - metricbeat-config-for-metric-server.yml
+ - metricbeat-daemonset-for-kubelet.yml
+ - metricbeat-deployment-for-metric-server.yml
+ - metricbeat-service-account.yml
