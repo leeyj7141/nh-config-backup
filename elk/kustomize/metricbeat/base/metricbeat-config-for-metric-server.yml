@@ -25,7 +25,12 @@ data:
         - state_storageclass
       period: 30s
       hosts: ["${KUBE_STATE_METRIC_URL}"]
-    
+    processors: 
+      - add_fields:
+          target: ""
+          fields:
+            NHcenter: "centerA"
+            NHcluster: "clusterA" 
     output.elasticsearch:
       hosts: ["${ES_HOST}:${ES_PORT}"]
       index: "${INDEX_TEMPLATE}"

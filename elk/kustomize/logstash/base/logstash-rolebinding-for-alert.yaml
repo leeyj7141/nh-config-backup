@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: logstash-rolebinding
+  namespace: logging
+subjects:
+- kind: ServiceAccount
+  name: logstash-sa
+  namespace: logging
+roleRef:
+  kind: Role
+  name: logstash-role
+  apiGroup: rbac.authorization.k8s.io

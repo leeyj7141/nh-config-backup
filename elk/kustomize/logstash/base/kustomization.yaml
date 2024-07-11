@@ -2,3 +2,6 @@ resources:
  - logstash-configmap-for-alert.yaml
  - logstash-deployment-for-alert.yaml
  - logstash-pvc-for-alert.yaml
+ - logstash-rolebinding-for-alert.yaml
+ - logstash-role-for-alert.yaml
+ - logstash-serviceaccount-for-alert.yaml

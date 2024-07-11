@@ -17,6 +17,8 @@ spec:
         k8s-app: metricbeat-kube-state
     spec:
       serviceAccountName: metricbeat
+      securityContext:
+        runAsNonRoot: true
       containers:
       - name: metricbeat-kube-state
         image: docker.elastic.co/beats/metricbeat:8.9.2
@@ -24,8 +26,6 @@ spec:
           "-c", "/etc/metricbeat.yml",
           "-e",
         ]
-        securityContext:
-          runAsNonRoot: true
         env:
         - name: ES_HOST
           value: "172.31.18.85"

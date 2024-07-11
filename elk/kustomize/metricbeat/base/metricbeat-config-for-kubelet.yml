@@ -19,11 +19,12 @@ data:
       hosts: ["https://${HOST_IP}:10250"]
       bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
       ssl.verification_mode: "none"
-
-processors:                                                                                                                                                                                                                                       - add_kubernetes_metadata:                                                                                                                                                                                                                          in_cluster: false                                                                                                                                                                                                                               host: "rancher-master-test2"                                                                                                                                                                                                                - add_fields:
-      target: ""
-      fields:                                                                                                                                                                                                                                           NHcenter: "centerA"                                                                                                                                                                                                                             NHcluster: "clusterA"
-    
+    processors:
+      - add_fields:
+          target: ""
+          fields:
+            NHcenter: "centerA" 
+            NHcluster: "clusterA"
     output.elasticsearch:
       hosts: ["${ES_HOST}:${ES_PORT}"]
       index: "${INDEX_TEMPLATE}"
