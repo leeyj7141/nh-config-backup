@@ -1,0 +1,21 @@
+From: User Name <leeyj7141@naver.com>
+To: John Doe <leeyj7141@gmail.com>
+Subject: You are awesome!
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="boundary"
+
+--boundary
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+
+Congrats for sending test email with Mailtrap on Linux!
+
+--boundary
+Content-Type: text/plain; name="attachment.txt"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="attachment.txt"
+
+MTI3LjAuMC4xICAgbG9jYWxob3N0IGxvY2FsaG9zdC5sb2NhbGRvbWFpbiBsb2NhbGhvc3Q0IGxvY2FsaG9zdDQubG9jYWxkb21haW40Cjo6MSAgICAgICAgIGxvY2FsaG9zdCBsb2NhbGhvc3QubG9jYWxkb21haW4gbG9jYWxob3N0NiBsb2NhbGhvc3Q2LmxvY2FsZG9tYWluNgoKMTMuMjA5LjY1LjE4MSAJdHNzLWRldi5jb3JlLmhhcmJvci5kZXYubGFiCgoxNzIuMzEuMzkuMjA4CW1hc3Rlci10ZXN0MiAgbWluaW8uaW8gICAgbmdpbngtdGVzdC50ZXN0LmRvbQoxNzIuMzEuNDQuNjIJbWFzdGVyLXRlc3QzCjE3Mi4zMS4zNi43NQltYXN0ZXItdGVzdDQKMTcyLjMxLjQ1LjEwNwlyYW5jaGVyLWhhcmJvcgoxNzIuMzEuMzIuMjQxCXdvcmtlci10ZXN0MgoxNzIuMzEuMzYuOTgJd29ya2VyLXRlc3QzCgoxNzIuMzEuMTguODUgICAgbmgtZWxhc3RpY3NlYXJjaC0xCjE3Mi4zMS4yOS45NCAgICBuaC1lbGFzdGljc2VhcmNoLTIKMTcyLjMxLjE3LjE0MyAgIG5oLWVsYXN0aWNzZWFyY2gtMwoKMTMuMTI1LjExNy45OCAgICBtb29uLXRlc3QKCjE3Mi4zMS41LjIzMCAgIG5oLWRldnN0YWNrLXVidW50dQoxNzIuMzEuOC40OCAgICByaGVsLTg3LW1vb24tdGVzdAo=
+
+--boundary--
