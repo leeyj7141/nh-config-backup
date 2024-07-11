@@ -1,0 +1,325 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: logstash-config-for-sms-agent
+  namespace: logging
+data:
+  logstash-cpu.conf: |
+    input {
+      http_poller {
+        urls => {
+          prometheus_metrics => {
+            method => get
+            url => "http://thanos-query.thanos.svc.cluster.local:9090/api/v1/query?query=nh_pod_cpu_usage:rate5m"
+            headers => {
+              Accept => "application/json"
+            }
+          }
+        }
+        request_timeout => 60
+        schedule => { every => "30s" }
+        codec => "json"
+        metadata_target => "http_poller_metadata"
+      }
+    }
+  
+    filter {
+      split {
+        field => "[data][result]"
+      }
+  
+      mutate {
+        add_field => {
+          "NHcenter" => "%{[data][result][metric][NHcenter]}"
+          "NHcluster" => "%{[data][result][metric][NHcluster]}"
+          "node" => "%{[data][result][metric][node]}"
+          "metric" => "%{[data][result][metric][__name__]}"
+          "pod" => "%{[data][result][metric][pod]}"
+          "container" => "%{[data][result][metric][container]}"
+          "namespace" => "%{[data][result][metric][namespace]}"
+          "cpu_usage" => "%{[data][result][value][1]}"
+        }
+        remove_field => ["data", "http_poller_metadata"]
+        remove_field => ["event"]
+      }
+  
+      if [cpu_usage] {
+        mutate {
+          convert => { "cpu_usage" => "float" }
+        }
+        ruby {
+          code => 'event.set("cpu_usage", event.get("cpu_usage").to_i)'
+        }
+  
+        if [cpu_usage] >= 30 {
+          mutate {
+            add_field => { "nhalert" => "Critical" }
+          }
+        } else if [cpu_usage] >= 20 {
+          mutate {
+            add_field => { "nhalert" => "Warning" }
+          }
+        } else if [cpu_usage] < 20 {
+          mutate {
+            add_field => { "nhalert" => "Info" }
+          }
+        }
+  
+        mutate {
+          add_field => {
+            "message" => "%{@timestamp}, %{nhalert}, Center: %{NHcenter}, Cluster: %{NHcluster}, Node: %{node}, Namespace: %{namespace}, Pod: %{pod}, Container: %{container}, CPUUsage: %{cpu_usage}%"
+          }
+        }
+      }
+    }
+    output {
+      if [nhalert] in ["Critical", "Warning"] {
+        elasticsearch {
+          hosts => ["http://172.31.18.85:9200"]
+          index => "k8s-metric-alert-%{+YYYY.MM.dd}"
+        }
+        file {
+          path => "/var/log/prometheus_metrics_to_sms_agent.log"
+          codec => line { format => "%{message}" }
+        }
+      }
+    }
+
+  logstash-memory-usage.conf: |
+    input {
+      http_poller {
+        urls => {
+          prometheus_metrics => {
+            method => get
+            url => "http://thanos-query.thanos.svc.cluster.local:9090/api/v1/query?query=nh_pod_memory_usage:ratio"
+            headers => {
+              Accept => "application/json"
+            }
+          }
+        }
+        request_timeout => 60
+        schedule => { every => "30s" }
+        codec => "json"
+        metadata_target => "http_poller_metadata"
+      }
+    }
+  
+    filter {
+      split {
+        field => "[data][result]"
+      }
+  
+      mutate {
+        add_field => {
+          "NHcenter" => "%{[data][result][metric][NHcenter]}"
+          "NHcluster" => "%{[data][result][metric][NHcluster]}"
+          "node" => "%{[data][result][metric][node]}"
+          "metric" => "%{[data][result][metric][__name__]}"
+          "container" => "%{[data][result][metric][container]}"
+          "pod" => "%{[data][result][metric][pod]}"
+          "namespace" => "%{[data][result][metric][namespace]}"
+          "memory_usage" => "%{[data][result][value][1]}"
+        }
+        remove_field => ["data", "http_poller_metadata"]
+        remove_field => ["event"]
+      }
+  
+      if [memory_usage] {
+        mutate {
+          convert => { "memory_usage" => "float" }
+        }
+        ruby {
+          code => 'event.set("memory_usage", event.get("memory_usage").to_i)'
+        }
+        if [memory_usage] >= 35 {
+          mutate {
+            add_field => { "nhalert" => "Critical" }
+          }
+        } else if [memory_usage] >= 25 {
+          mutate {
+            add_field => { "nhalert" => "Warning" }
+          }
+        } else if [memory_usage] < 25 {
+          mutate {
+            add_field => { "nhalert" => "Info" }
+          }
+        }
+        mutate {
+          add_field => {
+            "message" => "%{@timestamp}, %{nhalert}, Center: %{NHcenter}, Cluster: %{NHcluster}, Node: %{node}, Namespace: %{namespace}, Pod: %{pod}, Container: %{container}, MemoryUsage: %{memory_usage}%"
+          }
+        }
+      }
+    }
+    output {
+      if [nhalert] in ["Critical", "Warning"] {
+        elasticsearch {
+          hosts => ["http://172.31.18.85:9200"]
+          index => "k8s-metric-alert-%{+YYYY.MM.dd}"
+        }
+        file {
+          path => "/var/log/prometheus_metrics_to_sms_agent.log"
+          codec => line { format => "%{message}" }
+        }
+      }
+    }
+
+  logstash-pvc.conf: |
+    input {
+      http_poller {
+        urls => {
+          prometheus_metrics => {
+            method => get
+            url => "http://thanos-query.thanos.svc.cluster.local.:9090/api/v1/query?query=nh_pvc_usage:ratio"
+            headers => {
+              Accept => "application/json"
+            }
+          }
+        }
+        request_timeout => 60
+        schedule => { every => "30s" }
+        codec => "json"
+        metadata_target => "http_poller_metadata"
+      }
+    }
+    
+    filter {
+      split {
+        field => "[data][result]"
+      }
+    
+      mutate {
+        add_field => {
+          "NHcenter" => "%{[data][result][metric][NHcenter]}"
+          "NHcluster" => "%{[data][result][metric][NHcluster]}"
+          "node" => "%{[data][result][metric][node]}"
+          "metric" => "%{[data][result][metric][__name__]}"
+          "persistentvolumeclaim" => "%{[data][result][metric][persistentvolumeclaim]}"
+          "namespace" => "%{[data][result][metric][namespace]}"
+          "pvc_usage" => "%{[data][result][value][1]}"
+        }
+        remove_field => ["data", "http_poller_metadata"]
+        remove_field => ["event"]
+      }
+    
+      if [pvc_usage] {
+        mutate {
+          convert => { "pvc_usage" => "float" }
+        }
+        ruby {
+          code => 'event.set("pvc_usage", event.get("pvc_usage").to_i)' 
+        }
+
+        if [pvc_usage] > 35 {
+          mutate {
+            add_field => { 
+              "nhalert" => "Critical" 
+            }
+          }
+        } else if [pvc_usage] > 25 {
+          mutate {
+            add_field => { 
+              "nhalert" => "Warning" 
+            }
+          }
+        } else if [pvc_usage] <= 25 {
+          mutate {
+            add_field => { 
+              "nhalert" => "Info" 
+            }
+          }
+        }
+      } 
+      if [pvc_usage] {
+        mutate {
+          add_field => { 
+            "message" => "%{@timestamp}, %{nhalert}, Center: %{NHcenter}, Cluster: %{NHcluster}, Node: %{node}, Namespace: %{namespace}, PVC: %{persistentvolumeclaim}, PVCUsage: %{pvc_usage}%" 
+          }
+        }
+      }
+    }
+    output {
+      if [nhalert] in ["Critical", "Warning"] {
+        elasticsearch {
+          hosts => ["http://172.31.18.85:9200"]
+          index => "k8s-metric-alert-%{+YYYY.MM.dd}"
+        }
+        file {
+          path => "/var/log/prometheus_metrics_to_sms_agent.log"
+          codec => line { format => "%{message}" }
+        }
+      }
+    }
+
+  logstash-pod-status.conf: |
+    input {
+      http_poller {
+        urls => {
+          prometheus_failed_pods => {
+            method => get
+            url => 'http://thanos-query.thanos.svc.cluster.local:9090/api/v1/query?query=kube_pod_status_phase%7Bphase%3D%22Failed%22%7D'
+            headers => {
+              Accept => "application/json"
+            }
+          }
+        }
+        request_timeout => 60
+        schedule => { every => "30s" }
+        codec => "json"
+        metadata_target => "http_poller_metadata"
+      }
+    }
+  
+    filter {
+      split {
+        field => "[data][result]"
+      }
+  
+      mutate {
+        add_field => {
+          "NHcenter" => "%{[data][result][metric][NHcenter]}"
+          "NHcluster" => "%{[data][result][metric][NHcluster]}"
+          "node" => "%{[data][result][metric][node]}"
+          "metric" => "%{[data][result][metric][__name__]}"
+          "namespace" => "%{[data][result][metric][namespace]}"
+          "pod" => "%{[data][result][metric][pod]}"
+          "pod_fail_status" => "%{[data][result][value][1]}"
+        }
+        remove_field => ["data", "http_poller_metadata"]
+        remove_field => ["event"]
+      }
+  
+      if [pod_fail_status] == "1" {
+        mutate {
+          add_field => {
+            "nhalert" => "Warning"
+            "message" => "%{@timestamp}, %{nhalert}, Center: %{NHcenter}, Cluster: %{NHcluster}, Node: %{node}, Namespace: %{namespace}, Pod: %{pod}, Status: Failed"
+          }
+        }
+      } else {
+        drop { }
+      }
+    }
+    output {
+      if [nhalert] in ["Critical", "Warning"] {
+        elasticsearch {
+          hosts => ["http://172.31.18.85:9200"]
+          index => "k8s-metric-alert-%{+YYYY.MM.dd}"
+        }
+        file {
+          path => "/var/log/prometheus_metrics_to_sms_agent.log"
+          codec => line { format => "%{message}" }
+        }
+      }
+    }
+
+  pipelines.yml: |
+    - pipeline.id: cpu-metrics
+      path.config: "/usr/share/logstash/pipeline/logstash-cpu.conf"
+    - pipeline.id: memory-metrics
+      path.config: "/usr/share/logstash/pipeline/logstash-memory.conf"
+    - pipeline.id: pvc-metrics
+      path.config: "/usr/share/logstash/pipeline/logstash-pvc.conf"
+    - pipeline.id: pod-status-metrics
+      path.config: "/usr/share/logstash/pipeline/logstash-pod-status.conf"

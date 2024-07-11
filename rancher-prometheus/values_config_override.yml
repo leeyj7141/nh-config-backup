@@ -58,7 +58,7 @@ alertmanager:
 
 grafana: 
   enabled: true
-  replicas: 2
+  replicas: 1
   persistence:
     type: pvc
     enabled: true

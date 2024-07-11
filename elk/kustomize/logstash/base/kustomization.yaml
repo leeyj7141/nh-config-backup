@@ -1,0 +1,4 @@
+resources:
+ - logstash-configmap-for-alert.yaml
+ - logstash-deployment-for-alert.yaml
+ - logstash-pvc-for-alert.yaml
