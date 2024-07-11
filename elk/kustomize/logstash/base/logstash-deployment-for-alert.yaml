@@ -55,6 +55,12 @@ spec:
           subPath: pipelines.yml
         - name: sms-log
           mountPath: /var/log/
+      - name: busybox
+        image: busybox
+        command: ["sleep", "infinity"]
+        volumeMounts:
+          - name: sms-log
+            mountPath: /var/log/
       volumes:
       - name: logstash-config
         configMap:
@@ -65,3 +71,5 @@ spec:
       - name: sms-log
         persistentVolumeClaim:
           claimName: logstash-sms-log
+
+
