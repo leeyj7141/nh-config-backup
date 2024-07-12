@@ -9,7 +9,7 @@
 
 - name: Copy kubeconfig to /root/.kube
   copy:
-    src: "kubeconfig"
+    src: "{{ local_kubeconfig_path }}"
     dest: "{{ kubeconfig_path }}"
     mode: '0644'
 
@@ -32,6 +32,8 @@
   loop: "{{ filebeat_master_services }}"
   when: inventory_hostname in groups["master"]
   register: filebeat_master_config_output
+  notify:
+    - Restart filebeat for master
 
 - name: Copy Filebeat configuration files for worker node
   template:
@@ -41,6 +43,8 @@
   loop: "{{ filebeat_worker_services }}"
   when: inventory_hostname in groups["master"] or inventory_hostname in groups["worker"] 
   register: filebeat_worker_config_output
+  notify:
+    - Restart filebeat for worker
 
 - name: Copy Filebeat configuration files for node
   template:
@@ -50,6 +54,8 @@
   loop: "{{ filebeat_node_services }}"
   when: inventory_hostname in groups["master"] or inventory_hostname in groups["worker"] 
   register: filebeat_node_config_output
+  notify:
+    - Restart filebeat for node
 
 - name: Deploy filebeat service files from template for master node 
   template:
@@ -58,6 +64,9 @@
   loop: "{{ filebeat_master_services }}"
   when: inventory_hostname in groups["master"] 
   register: filebeat_master_service_output
+  notify:
+    - Reload systemd
+    - Restart filebeat for master
 
 - name: Deploy filebeat service files from template for worker node
   template:
@@ -66,6 +75,9 @@
   loop: "{{ filebeat_worker_services }}"
   when: inventory_hostname in groups["master"] or inventory_hostname in groups["worker"] 
   register: filebeat_worker_service_output
+  notify:
+    - Reload systemd
+    - Restart filebeat for worker
 
 - name: Deploy filebeat service files from template for node
   template:
@@ -74,24 +86,6 @@
   loop: "{{ filebeat_node_services }}"
   when: inventory_hostname in groups["master"] or inventory_hostname in groups["worker"] 
   register: filebeat_node_service_output
-
-- name: Call Restart systemd for master 
-  shell: echo "call handler"
-  when: filebeat_master_service_output.changed or filebeat_master_config_output.changed 
-  notify:
-    - Reload systemd
-    - Restart filebeat for master 
-
-- name: Call Restart systemd for worker
-  shell: echo "call handler"
-  when: filebeat_worker_service_output.changed or filebeat_worker_config_output.changed 
-  notify:
-    - Reload systemd
-    - Restart filebeat for worker
-
-- name: Call Restart systemd for node
-  shell: echo "call handler"
-  when: filebeat_node_service_output.changed or filebeat_node_config_output.changed 
   notify:
     - Reload systemd
     - Restart filebeat for node

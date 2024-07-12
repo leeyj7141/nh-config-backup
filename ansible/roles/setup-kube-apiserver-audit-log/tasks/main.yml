@@ -13,6 +13,8 @@
     dest: "/etc/rancher/rke2/"
     mode: '0644'
   register: kube_apiserver_audit_policy_ouptut
+  notify:
+    - Restart rke2-server 
 
 - name: Copy rancher rke2 config.yaml 
   copy:
@@ -20,10 +22,5 @@
     dest: "/etc/rancher/rke2/"
     mode: '0644'
   register: rke2_config_output
-
-- name: Restart rancher server systemd for kube-apiserver
-  shell: echo "call handler"
-  when: kube_apiserver_audit_policy_ouptut.changed or rke2_config_output.changed
   notify:
-    - Reload systemd
     - Restart rke2-server 

@@ -18,10 +18,6 @@
     dest: "/etc/metricbeat/metricbeat.yml"
     mode: '0644'
   register: metricbeat_config_output
-
-- name: Call Restart systemd handler
-  shell: echo "call handler"
-  when: metricbeat_config_output.changed
   notify:
     - Reload systemd
     - Restart metricbeat
