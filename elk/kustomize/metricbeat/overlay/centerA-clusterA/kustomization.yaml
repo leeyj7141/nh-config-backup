@@ -3,6 +3,10 @@ namespace: elk-logging-metrics
 resources:
   - ../../base/
 
+images:
+  - name: docker.elastic.co/beats/metricbeat
+    newTag: 8.9.0
+
 patches:
   - target:
       kind: Deployment
