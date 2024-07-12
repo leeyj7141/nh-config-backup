@@ -9,4 +9,6 @@
     - role: install-filebeat
       vars:
         kubeconfig_path: "/root/.kube/kube_config_cluster.yaml"
+        local_kubeconfig_path: "kubeconfig"
+        #local_kubeconfig_path: "/home/rocky/.kube/config"
     - role: install-metricbeat

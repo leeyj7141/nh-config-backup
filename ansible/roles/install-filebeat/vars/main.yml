@@ -1,6 +1,7 @@
 ---
 # vars file for install-filebeat
 
+local_kubeconfig_path: "/home/rocky/.kube/config"
 kubeconfig_path: "/root/.kube/kube_config_cluster.yaml"
 filebeat_package: "filebeat-8.9.0-1.x86_64"
 filebeat_master_services:
