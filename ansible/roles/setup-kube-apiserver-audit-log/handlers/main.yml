@@ -1,0 +1,10 @@
+---
+# handlers file for setup-kube-apiserver-audit-log
+
+- name: Reload systemd
+  command: systemctl daemon-reload
+
+- name: Restart rke2-server
+  service:
+    name: "rke2-server"
+    state: restarted

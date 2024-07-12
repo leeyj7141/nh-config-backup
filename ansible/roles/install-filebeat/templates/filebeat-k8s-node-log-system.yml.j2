@@ -1,0 +1,21 @@
+filebeat.inputs:
+- type: filestream
+  enabled: true
+  paths:
+    - /var/log/messages
+    - /var/log/*log
+  fields_under_root: true
+  fields:
+    NHcenter: "centerA" 
+    NHcluster: "clusterA"
+
+processors:
+- add_host_metadata: {}
+
+output.elasticsearch:
+  hosts: 
+    - "{{ es_host }}"
+  index: "k8s-node-log-system"
+
+setup.template.name: "k8s-node-log-system"
+setup.template.pattern: "k8s-node-log-system"

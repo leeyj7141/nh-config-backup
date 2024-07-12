@@ -1,0 +1,97 @@
+---
+# tasks file for install-filebeat
+
+- name: Ensure /root/.kube directory exists
+  file:
+    path: /root/.kube
+    state: directory
+    mode: '0755'
+
+- name: Copy kubeconfig to /root/.kube
+  copy:
+    src: "kubeconfig"
+    dest: "{{ kubeconfig_path }}"
+    mode: '0644'
+
+- name: Copy ELK repository file
+  copy:
+    src: elasticsearch.repo
+    dest: /etc/yum.repos.d/elasticsearch.repo
+    mode: '0644'
+
+- name: Install Filebeat
+  package:
+    name: "{{ filebeat_package }}"
+    state: present
+
+- name: Copy Filebeat configuration files for master node
+  template:
+    src: "filebeat-{{ item }}.yml.j2"
+    dest: "/etc/filebeat/filebeat-{{ item }}.yml"
+    mode: '0644'
+  loop: "{{ filebeat_master_services }}"
+  when: inventory_hostname in master
+  register: filebeat_master_config_output
+
+- name: Copy Filebeat configuration files for worker node
+  template:
+    src: "filebeat-{{ item }}.yml.j2"
+    dest: "/etc/filebeat/filebeat-{{ item }}.yml"
+    mode: '0644'
+  loop: "{{ filebeat_worker_services }}"
+  when: inventory_hostname in master or inventory_hostname in worker
+  register: filebeat_worker_config_output
+
+- name: Copy Filebeat configuration files for node
+  template:
+    src: "filebeat-{{ item }}.yml.j2"
+    dest: "/etc/filebeat/filebeat-{{ item }}.yml"
+    mode: '0644'
+  loop: "{{ filebeat_node_services }}"
+  when: inventory_hostname in master or inventory_hostname in worker
+  register: filebeat_node_config_output
+
+- name: Deploy filebeat service files from template for master node 
+  template:
+    src: filebeat-master.service.j2
+    dest: "/etc/systemd/system/filebeat-{{ item }}.service"
+  loop: "{{ filebeat_master_services }}"
+  when: inventory_hostname in master 
+  register: filebeat_master_service_output
+
+- name: Deploy filebeat service files from template for worker node
+  template:
+    src: filebeat-pod.service.j2
+    dest: "/etc/systemd/system/filebeat-{{ item }}.service"
+  loop: "{{ filebeat_worker_services }}"
+  when: inventory_hostname in master or inventory_hostname in worker
+  register: filebeat_worker_service_output
+
+- name: Deploy filebeat service files from template for node
+  template:
+    src: filebeat-node.service.j2
+    dest: "/etc/systemd/system/filebeat-{{ item }}.service"
+  loop: "{{ filebeat_node_services }}"
+  when: inventory_hostname in master or inventory_hostname in worker
+  register: filebeat_node_service_output
+
+- name: Restart systemd for master 
+  shell: echo "call handler"
+  when: filebeat_master_service_output.changed or filebeat_master_config_output.changed 
+  notify:
+    - Reload systemd
+    - Restart filebeat for master 
+
+- name: Restart systemd for worker
+  shell: echo "call handler"
+  when: filebeat_worker_service_output.changed or filebeat_worker_config_output.changed 
+  notify:
+    - Reload systemd
+    - Restart filebeat for worker
+
+- name: Restart systemd for node
+  shell: echo "call handler"
+  when: filebeat_node_service_output.changed or filebeat_node_config_output.changed 
+  notify:
+    - Reload systemd
+    - Restart filebeat for node

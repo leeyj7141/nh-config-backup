@@ -1,0 +1,29 @@
+---
+# tasks file for setup-kube-apiserver-audit-log
+
+- name: Ensure /var/log/kubernetes directory exists
+  file:
+    path: /var/log/kubernetes/
+    state: directory
+    mode: '0755'
+
+- name: Copy kube-apiserver audit policy configuration file
+  copy:
+    src: "k8s-api-audit-policies.yml"
+    dest: "/etc/rancher/rke2/"
+    mode: '0644'
+  register: kube_apiserver_audit_policy_ouptut
+
+- name: Copy rancher rke2 config.yaml 
+  copy:
+    src: "config.yaml"
+    dest: "/etc/rancher/rke2/"
+    mode: '0644'
+  register: rke2_config_output
+
+- name: Restart rancher server systemd for kube-apiserver
+  shell: echo "call handler"
+  when: kube_apiserver_audit_policy_ouptut.changed or rke2_config_output.changed
+  notify:
+    - Reload systemd
+    - Restart rke2-server 

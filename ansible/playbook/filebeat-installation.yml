@@ -1,0 +1,9 @@
+- name: filebeat installation play
+  gather_facts: yes
+  hosts: 
+    - master
+    - worker
+  roles:
+    - role: install-filebeat
+      vars:
+        kubeconfig_path: "/root/.kube/kube_config_cluster.yaml"

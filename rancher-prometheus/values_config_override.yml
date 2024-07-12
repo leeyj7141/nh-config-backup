@@ -8,7 +8,6 @@ prometheus:
 #     - url: http://metricbeat.logging.svc.cluster.local.:9201/write
     thanos:
       objectStorageConfig:
-        #key: minio_conf.yml
         key: objstore.yml
         name: thanos-obstore-secret
 #  thanosService:

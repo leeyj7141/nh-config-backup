@@ -1,0 +1,21 @@
+filebeat.inputs:
+- type: filestream
+  enabled: true
+  paths:
+    - /var/log/kubernetes/audit/audit.log
+  fields_under_root: true
+  fields:
+    NHcenter: "centerA"
+    NHcluster: "clusterA"
+  parsers:
+    - ndjson:
+        keys_under_root: true
+processors:
+- add_host_metadata: {}
+
+output.elasticsearch:
+  hosts: 
+   - "{{ es_host }}" 
+  index: "k8s-pod-log-audit"
+setup.template.name: "k8s-pod-log-audit"
+setup.template.pattern: "k8s-pod-log-audit"

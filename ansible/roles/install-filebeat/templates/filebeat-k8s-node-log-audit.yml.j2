@@ -1,0 +1,20 @@
+filebeat.inputs:
+- type: filestream
+  enabled: true
+  paths:
+    - /var/log/audit/audit.log
+  fields_under_root: true
+  fields:
+    NHcenter: "centerA" 
+    NHcluster: "clusterA"
+
+processors:
+- add_host_metadata: {}
+
+output.elasticsearch:
+  hosts: 
+    - "{{ es_host }}"
+  index: "k8s-node-log-audit"
+
+setup.template.name: "k8s-node-log-audit"
+setup.template.pattern: "k8s-node-log-audit"

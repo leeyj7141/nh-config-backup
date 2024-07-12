@@ -1,0 +1,14 @@
+---
+# vars file for install-filebeat
+
+kubeconfig_path: "/root/.kube/kube_config_cluster.yaml"
+filebeat_package: "filebeat-8.9.0-1.x86_64"
+filebeat_master_services:
+  - "k8s-pod-log-audit"
+filebeat_node_services:
+  - "k8s-node-log-audit"
+  - "k8s-node-log-system"
+filebeat_worker_services:
+  - "k8s-pod-log-app"
+  - "k8s-pod-log-system"
+es_host: "172.31.18.85:9200"

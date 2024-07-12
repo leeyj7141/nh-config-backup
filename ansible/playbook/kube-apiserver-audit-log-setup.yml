@@ -1,0 +1,8 @@
+- name: kube-apiserver audit log setup play
+  gather_facts: no
+  become: true
+  serial: 1 
+  hosts: 
+    - master
+  roles:
+    - role: setup-kube-apiserver-audit-log
