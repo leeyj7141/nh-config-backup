@@ -13,7 +13,6 @@ filebeat.autodiscover:
 processors:
   - add_kubernetes_metadata:
       in_cluster: false
-      host: "rancher-master-test2"
       host: "{{ ansible_hostname }}"
   - add_fields:
       target: ""  

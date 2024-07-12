@@ -1,5 +1,6 @@
 - name: filebeat installation play
   gather_facts: yes
+  become: true
   hosts: 
     - master
     - worker

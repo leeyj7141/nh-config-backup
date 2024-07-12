@@ -30,7 +30,7 @@
     dest: "/etc/filebeat/filebeat-{{ item }}.yml"
     mode: '0644'
   loop: "{{ filebeat_master_services }}"
-  when: inventory_hostname in master
+  when: inventory_hostname in groups["master"]
   register: filebeat_master_config_output
 
 - name: Copy Filebeat configuration files for worker node
@@ -39,7 +39,7 @@
     dest: "/etc/filebeat/filebeat-{{ item }}.yml"
     mode: '0644'
   loop: "{{ filebeat_worker_services }}"
-  when: inventory_hostname in master or inventory_hostname in worker
+  when: inventory_hostname in groups["master"] or inventory_hostname in groups["worker"] 
   register: filebeat_worker_config_output
 
 - name: Copy Filebeat configuration files for node
@@ -48,7 +48,7 @@
     dest: "/etc/filebeat/filebeat-{{ item }}.yml"
     mode: '0644'
   loop: "{{ filebeat_node_services }}"
-  when: inventory_hostname in master or inventory_hostname in worker
+  when: inventory_hostname in groups["master"] or inventory_hostname in groups["worker"] 
   register: filebeat_node_config_output
 
 - name: Deploy filebeat service files from template for master node 
@@ -56,7 +56,7 @@
     src: filebeat-master.service.j2
     dest: "/etc/systemd/system/filebeat-{{ item }}.service"
   loop: "{{ filebeat_master_services }}"
-  when: inventory_hostname in master 
+  when: inventory_hostname in groups["master"] 
   register: filebeat_master_service_output
 
 - name: Deploy filebeat service files from template for worker node
@@ -64,7 +64,7 @@
     src: filebeat-pod.service.j2
     dest: "/etc/systemd/system/filebeat-{{ item }}.service"
   loop: "{{ filebeat_worker_services }}"
-  when: inventory_hostname in master or inventory_hostname in worker
+  when: inventory_hostname in groups["master"] or inventory_hostname in groups["worker"] 
   register: filebeat_worker_service_output
 
 - name: Deploy filebeat service files from template for node
@@ -72,7 +72,7 @@
     src: filebeat-node.service.j2
     dest: "/etc/systemd/system/filebeat-{{ item }}.service"
   loop: "{{ filebeat_node_services }}"
-  when: inventory_hostname in master or inventory_hostname in worker
+  when: inventory_hostname in groups["master"] or inventory_hostname in groups["worker"] 
   register: filebeat_node_service_output
 
 - name: Restart systemd for master 
