@@ -1,2 +1,27 @@
 ---
 # tasks file for install-metricbeat
+
+- name: Copy ELK repository file
+  copy:
+    src: elasticsearch.repo
+    dest: /etc/yum.repos.d/elasticsearch.repo
+    mode: '0644'
+
+- name: Install Metricbeat
+  package:
+    name: "{{ metricbeat_package }}"
+    state: present
+
+- name: Copy Metricbeat configuration files 
+  template:
+    src: "metricbeat.yml.j2"
+    dest: "/etc/metricbeat/metricbeat.yml"
+    mode: '0644'
+  register: metricbeat_config_output
+
+- name: Call Restart systemd handler
+  shell: echo "call handler"
+  when: metricbeat_config_output.changed
+  notify:
+    - Reload systemd
+    - Restart metricbeat

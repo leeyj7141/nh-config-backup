@@ -1,2 +1,11 @@
 ---
 # handlers file for install-metricbeat
+
+- name: Reload systemd
+  command: systemctl daemon-reload
+
+- name: Restart metricbeat
+  service:
+    name: "metricbeat"
+    enabled: true
+    state: restarted

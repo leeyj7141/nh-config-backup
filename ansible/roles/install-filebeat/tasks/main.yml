@@ -75,21 +75,21 @@
   when: inventory_hostname in groups["master"] or inventory_hostname in groups["worker"] 
   register: filebeat_node_service_output
 
-- name: Restart systemd for master 
+- name: Call Restart systemd for master 
   shell: echo "call handler"
   when: filebeat_master_service_output.changed or filebeat_master_config_output.changed 
   notify:
     - Reload systemd
     - Restart filebeat for master 
 
-- name: Restart systemd for worker
+- name: Call Restart systemd for worker
   shell: echo "call handler"
   when: filebeat_worker_service_output.changed or filebeat_worker_config_output.changed 
   notify:
     - Reload systemd
     - Restart filebeat for worker
 
-- name: Restart systemd for node
+- name: Call Restart systemd for node
   shell: echo "call handler"
   when: filebeat_node_service_output.changed or filebeat_node_config_output.changed 
   notify:

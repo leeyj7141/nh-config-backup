@@ -1,2 +1,6 @@
 ---
 # vars file for install-metricbeat
+
+metricbeat_package: "metricbeat-8.9.0-1.x86_64"
+es_host: "http://172.31.29.94:9200"
+kibana_host: "http://172.31.29.94:5601"
