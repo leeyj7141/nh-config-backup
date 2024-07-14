@@ -3,6 +3,8 @@ Description=Filebeat sends log files to Logstash or directly to Elasticsearch.
 Documentation=https://www.elastic.co/beats/filebeat
 Wants=network-online.target
 After=network-online.target
+After=rke2-{% if 'master' in group_names %}server{% elif 'worker' in group_names %}agent{% endif %}.service
+Requires=rke2-{% if 'master' in group_names %}server{% elif 'worker' in group_names %}agent{% endif %}.service
 
 [Service]
 
