@@ -16,10 +16,8 @@ images='
  rancher/mirrored-kiwigrid-k8s-sidecar:1.24.6
  rancher/mirrored-grafana-grafana:10.3.3
  rancher/mirrored-ingress-nginx-kube-webhook-certgen:v20221220-controller-v1.5.1-58-g787ea74b6
- rancher/mirrored-prometheus-operator-prometheus-operator:v0.65.1
  rancher/mirrored-prometheus-operator-prometheus-config-reloader:v0.65.1
  rancher/mirrored-prometheus-prometheus:v2.45.0
- rancher/mirrored-library-nginx:1.24.0-alpine
  rancher/mirrored-thanos-thanos:v0.30.2
  rancher/mirrored-curlimages-curl:7.85.0
  nginx:1.14.2
@@ -31,6 +29,8 @@ images='
  docker.elastic.co/logstash/logstash:8.9.0
  docker.elastic.co/beats/metricbeat:8.9.0
  docker.elastic.co/beats/filebeat:8.9.0
+ rancher/pushprox-client:v0.1.3-rancher2-client
+ rancher/pushprox-proxy:v0.1.3-rancher2-proxy
 '
 
 #for i in $images 
