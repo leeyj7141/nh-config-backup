@@ -36,6 +36,16 @@ spec:
           "-c", "/etc/metricbeat.yml",
           "-e",
         ]
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - "ps aux |grep -i metricbeat.yml"
+          initialDelaySeconds: 30
+          failureThreshold: 3
+          periodSeconds: 10
+          timeoutSeconds: 5
         env:
         - name: ES_HOST
           value: "172.31.18.85"
