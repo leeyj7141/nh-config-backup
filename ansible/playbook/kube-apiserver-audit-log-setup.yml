@@ -5,4 +5,4 @@
   hosts: 
     - master
   roles:
-    - role: setup-kube-apiserver-audit-log
+    - role: setup-rke2-server-for-master

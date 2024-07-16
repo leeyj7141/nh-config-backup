@@ -1,11 +1,21 @@
-- name: Setup kube-apiserver audit log configuration
+--- 
+
+- name: Setup rke2 server  configuration
   gather_facts: no
   become: true
   serial: 1
   hosts:
     - master
   roles:
-    - role: setup-kube-apiserver-audit-log
+    - role: setup-rke2-server-for-master
+
+- name: Setup rke2-agent configuration
+  gather_facts: no
+  become: true
+  hosts:
+    - worker
+  roles:
+    - role: setup-rke2-agent-for-worker
 
 - name: Setup Monitoring system for elasticsearch
   gather_facts: yes

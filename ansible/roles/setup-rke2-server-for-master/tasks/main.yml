@@ -1,0 +1,47 @@
+---
+# tasks file for setup-rke2-server-for-master
+
+- name: Ensure /var/log/kubernetes directory exists
+  file:
+    path: /var/log/kubernetes/
+    state: directory
+    mode: '0755'
+
+- name: Copy kube-apiserver audit policy configuration file
+  copy:
+    src: "k8s-api-audit-policies.yml"
+    dest: "/etc/rancher/rke2/"
+    mode: '0644'
+  register: kube_apiserver_audit_policy_ouptut
+  notify:
+    - Restart rke2-server 
+
+- name: Copy rancher rke2 kube-apisever audit config.yaml 
+  copy:
+    src: "kube-apiserver-audit-config.yaml"
+    dest: "/etc/rancher/rke2/config.yaml.d/"
+    mode: '0644'
+  register: rke2_config_output
+  notify:
+    - Restart rke2-server 
+
+- name: Copy rancher rke2 kubelet config.yaml 
+  copy:
+    src: "kubelet-config.yaml"
+    dest: "/etc/rancher/rke2/config.yaml.d/"
+    mode: '0644'
+  register: rke2_config_output
+  notify:
+    - Restart rke2-server 
+
+- name: Force handlers to run
+  meta: flush_handlers
+
+- name: Wait for rke2-server service to be active
+  command: >
+    bash -c 'systemctl is-active rke2-server'
+  register: wait_result
+  until: wait_result.rc == 0
+  retries: 36
+  delay: 5
+  changed_when: false
