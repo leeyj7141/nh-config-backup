@@ -17,9 +17,29 @@ spec:
       serviceAccountName: logstash-sa
       securityContext:
         runAsNonRoot: true
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - logstash
+              topologyKey: "kubernetes.io/hostname"
       containers:
       - name: logstash
         image: docker.elastic.co/logstash/logstash:8.9.0
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - "ps aux |grep -i pipelines.yml| grep -iv grep "
+          initialDelaySeconds: 30
+          failureThreshold: 3
+          periodSeconds: 10
+          timeoutSeconds: 5
         env:
         - name: QUERY_INTERVAL
           value: "1m"
@@ -47,6 +67,13 @@ spec:
           value: "85"
         - name: PVC_WARNING_LIMIT
           value: "75"
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1000Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
         volumeMounts:
         - name: logstash-config
           mountPath: /usr/share/logstash/pipeline/
