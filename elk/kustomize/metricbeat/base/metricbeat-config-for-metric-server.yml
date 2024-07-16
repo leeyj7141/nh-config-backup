@@ -6,25 +6,35 @@ metadata:
   namespace: kube-system
 data:
   metricbeat.yml: |-
-    metricbeat.modules:
-    - module: kubernetes
-      metricsets:
-        - state_node
-        - state_daemonset
-        - state_deployment
-        - state_replicaset
-        - state_statefulset
-        - state_pod
-        - state_container
-        - state_job
-        - state_cronjob
-        - state_resourcequota
-        - state_service
-        - state_persistentvolume
-        - state_persistentvolumeclaim
-        - state_storageclass
-      period: 30s
-      hosts: ["${KUBE_STATE_METRIC_URL}"]
+    metricbeat.autodiscover:
+      providers:
+        - type: kubernetes
+          scope: cluster
+          node: ${NODE_NAME}
+          unique: true
+          leader_lease: metricbeat-leader-election
+          identifier: leader-metricbeat
+          templates:
+            - config:
+                - module: kubernetes
+                  add_metadata: true
+                  metricsets:
+                    - state_node
+                    - state_daemonset
+                    - state_deployment
+                    - state_replicaset
+                    - state_statefulset
+                    - state_pod
+                    - state_container
+                    - state_job
+                    - state_cronjob
+                    - state_resourcequota
+                    - state_service
+                    - state_persistentvolume
+                    - state_persistentvolumeclaim
+                    - state_storageclass
+                  period: 30s
+                  hosts: ["${KUBE_STATE_METRIC_URL}"]
     processors: 
       - add_fields:
           target: ""
@@ -36,7 +46,3 @@ data:
       index: "${INDEX_TEMPLATE}"
     setup.template.name: "${INDEX_TEMPLATE}"
     setup.template.pattern: "${INDEX_TEMPLATE}"
-
-    leader_election:
-      lease_name: metricbeat-kube-state-leader
-    #  lease_namespace: kube-system

@@ -17,7 +17,7 @@ patches:
       metadata:
         name: metricbeat-kube-state
       spec:
-        replicas: 1
+        replicas: 2
         template:
           spec:
             containers:
