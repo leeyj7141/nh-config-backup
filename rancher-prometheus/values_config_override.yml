@@ -4,21 +4,10 @@ prometheus:
       NHcenter: "centerA"
       NHcluster: "clusterA"
     replicas: 2
-#    remoteWrite: 
-#     - url: http://metricbeat.logging.svc.cluster.local.:9201/write
     thanos:
       objectStorageConfig:
         key: objstore.yml
         name: thanos-obstore-secret
-#  thanosService:
-#    annotations: {}
-#    clusterIP: ""
-#    enabled: true
-#    labels: {}
-#    port: 10901
-#    portName: grpc
-#    targetPort: grpc
-#    type: ClusterIP
   thanosService:
     enabled: true 
     annotations: {}
@@ -57,14 +46,13 @@ alertmanager:
 
 grafana: 
   enabled: true
-  replicas: 1
+  replicas: 2
   persistence:
     type: pvc
     enabled: true
     storageClassName: nfs
     accessModes:
       - ReadWriteMany
-      #- ReadWriteOnce
     size: 10Gi
   image: 
     repository: rancher/mirrored-grafana-grafana
@@ -174,9 +162,8 @@ prometheus-node-exporter:
   image:
     registry: docker.io
     repository: rancher/mirrored-prometheus-node-exporter
-    # Overrides the image tag whose default is {{ printf "v%s" .Chart.AppVersion }}
     tag: v1.7.0
   extraArgs:
     - --collector.tcpstat
-    - --collector.processes   # resource 사용률 높음. 
+    - --collector.processes 
     #- --collector.ipvs
