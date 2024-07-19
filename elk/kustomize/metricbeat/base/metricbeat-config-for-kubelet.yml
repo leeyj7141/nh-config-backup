@@ -20,6 +20,7 @@ data:
       bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
       ssl.verification_mode: "none"
     processors:
+      - add_cloud_metadata: {}
       - add_fields:
           target: ""
           fields:
@@ -27,6 +28,6 @@ data:
             NHcluster: "clusterA"
     output.elasticsearch:
       hosts: ["${ES_HOST}:${ES_PORT}"]
-      index: "${INDEX_TEMPLATE}"
+      index: "${INDEX_TEMPLATE}-%{+yyyy.MM.dd}"
     setup.template.name: "${INDEX_TEMPLATE}"
-    setup.template.pattern: "${INDEX_TEMPLATE}"
+    setup.template.pattern: "${INDEX_TEMPLATE}-*"

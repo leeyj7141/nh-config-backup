@@ -6,4 +6,3 @@ resources:
  - metricbeat-daemonset-for-kubelet.yml
  - metricbeat-deployment-for-metric-server.yml
  - metricbeat-service-account.yml
- - metricbeat-kube-state-leader.yml

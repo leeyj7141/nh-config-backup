@@ -11,11 +11,12 @@ filebeat.inputs:
     - ndjson:
         keys_under_root: true
 processors:
+- add_cloud_metadata: {}
 - add_host_metadata: {}
 
 output.elasticsearch:
   hosts: 
    - "{{ es_host }}" 
-  index: "k8s-pod-log-audit"
+  index: "k8s-pod-log-audit-%{+yyyy.MM.dd}"
 setup.template.name: "k8s-pod-log-audit"
-setup.template.pattern: "k8s-pod-log-audit"
+setup.template.pattern: "k8s-pod-log-audit-*"

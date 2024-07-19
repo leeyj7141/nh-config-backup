@@ -10,12 +10,13 @@ filebeat.inputs:
     NHcluster: "clusterA"
 
 processors:
+- add_cloud_metadata: {}
 - add_host_metadata: {}
 
 output.elasticsearch:
   hosts: 
     - "{{ es_host }}"
-  index: "k8s-node-log-system"
+  index: "k8s-node-log-system-%{+yyyy.MM.dd}"
 
 setup.template.name: "k8s-node-log-system"
-setup.template.pattern: "k8s-node-log-system"
+setup.template.pattern: "k8s-node-log-system-*"

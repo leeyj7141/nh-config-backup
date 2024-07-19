@@ -1,6 +1,6 @@
 --- 
 
-- name: Setup rke2 server  configuration
+- name: Setup rke2 server configuration
   gather_facts: no
   become: true
   serial: 1

@@ -9,12 +9,13 @@ filebeat.inputs:
     NHcluster: "clusterA"
 
 processors:
+- add_cloud_metadata: {}
 - add_host_metadata: {}
 
 output.elasticsearch:
   hosts: 
     - "{{ es_host }}"
-  index: "k8s-node-log-audit"
+  index: "k8s-node-log-audit-%{+yyyy.MM.dd}"
 
 setup.template.name: "k8s-node-log-audit"
-setup.template.pattern: "k8s-node-log-audit"
+setup.template.pattern: "k8s-node-log-audit-*"

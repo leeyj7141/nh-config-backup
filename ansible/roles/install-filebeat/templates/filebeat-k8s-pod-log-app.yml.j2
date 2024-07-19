@@ -11,6 +11,7 @@ filebeat.autodiscover:
               paths:
                 - /var/log/containers/*-${data.kubernetes.container.id}.log
 processors:
+  - add_cloud_metadata: {}
   - add_kubernetes_metadata:
       in_cluster: false
       host: "{{ ansible_hostname }}"
@@ -23,7 +24,7 @@ processors:
 output.elasticsearch:
   hosts: 
     - "{{ es_host }}"
-  index: "k8s-pod-log-app"
+  index: "k8s-pod-log-app-%{+yyyy.MM.dd}"
 
 setup.template.name: "k8s-pod-log-app"
-setup.template.pattern: "k8s-pod-log-app"
+setup.template.pattern: "k8s-pod-log-app-*"

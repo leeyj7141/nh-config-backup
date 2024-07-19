@@ -5,28 +5,32 @@ metricbeat.config.modules:
 metricbeat.modules:
 - module: system
   metricsets:
-    - cpu             # CPU usage
-    - load            # CPU load averages
-    - memory          # Memory usage
-    - network         # Network IO
-    - process         # System processes
-    - process_summary # Process summary
-    - diskio          # Disk IO
-    - filesystem      # File system usage
-    - fsstat          # File system stats
+    - cpu             
+    - load            
+    - memory          
+    - network         
+    - process         
+    - process_summary 
+    - diskio          
+    - filesystem      
+    - fsstat          
   enabled: true
   period: 10s
   processes: ['.*']   # 모든 프로세스 포함
   cpu.metrics: ["percentages", "normalized_percentages"]  # CPU 메트릭 상세 옵션
   core.metrics: ["percentages"]  # Core 메트릭 상세 옵션
 
+processors:
+  - add_cloud_metadata: {}
+  - add_host_metadata: {}
+
 output.elasticsearch:
   hosts: 
     - "{{ es_host }}"
-  index: "k8s-metric-node"
+  index: "k8s-metric-node-%{+yyyy.MM.dd}"
 
 setup.template.name: "k8s-metric-node"
-setup.template.pattern: "k8s-metric-node"
+setup.template.pattern: "k8s-metric-node-*"
 
 setup.kibana:
   host: "{{ kibana_host }}"

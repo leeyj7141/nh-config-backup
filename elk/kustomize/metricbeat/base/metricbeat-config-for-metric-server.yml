@@ -36,6 +36,7 @@ data:
                   period: 30s
                   hosts: ["${KUBE_STATE_METRIC_URL}"]
     processors: 
+      - add_cloud_metadata: {}
       - add_fields:
           target: ""
           fields:
@@ -43,6 +44,6 @@ data:
             NHcluster: "clusterA" 
     output.elasticsearch:
       hosts: ["${ES_HOST}:${ES_PORT}"]
-      index: "${INDEX_TEMPLATE}"
+      index: "${INDEX_TEMPLATE}-%{+yyyy.MM.dd}"
     setup.template.name: "${INDEX_TEMPLATE}"
-    setup.template.pattern: "${INDEX_TEMPLATE}"
+    setup.template.pattern: "${INDEX_TEMPLATE}-*"
