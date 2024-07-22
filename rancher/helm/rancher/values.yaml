@@ -135,7 +135,7 @@ useBundledSystemChart: false
 
 # Certmanager version compatibility
 certmanager:
-  version: ""
+  version: "v1.15.1"
 
 # Rancher custom logos persistence
 customLogos:

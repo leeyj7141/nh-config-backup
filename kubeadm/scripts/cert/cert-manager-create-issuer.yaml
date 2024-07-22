@@ -1,0 +1,9 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: rancher-issuer
+  namespace: cert-manager  
+spec:
+  ca:
+    secretName: ca-secret
+

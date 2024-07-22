@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: tools
 
 resources:
-  - busybox-with-nfs-pvc.yml
+#  - busybox-with-nfs-pvc.yml
   - busybox.yml
   - curl.yml
   - dnsutils.yml

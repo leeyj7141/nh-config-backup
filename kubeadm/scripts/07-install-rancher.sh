@@ -6,15 +6,22 @@
 
 #kubectl create ns cattle-system
 
-## uninstall
-#helm uninstall rancher --namespace cattle-system
+### uninstall
+helm uninstall rancher --namespace cattle-system
 
-# install
-helm install rancher rancher-stable/rancher --namespace cattle-system \
---set hostname=rancher2.test.dom \
---set bootstrapPassword=admin  \
---set ingress.tls.source=secret \
---set privateCA=true
+# install with cert-manager
+#helm install rancher rancher-stable/rancher --namespace cattle-system \
+#--set hostname=rancher3.test.dom \
+#--set bootstrapPassword=admin  \
+#--set certmanager.version=v1.15.1
+
+
+## install with private certificate
+#helm install rancher rancher-stable/rancher --namespace cattle-system \
+#--set hostname=rancher3.test.dom \
+#--set bootstrapPassword=admin  \
+#--set ingress.tls.source=secret \
+#--set privateCA=true
 
 
 ## upgrade
