@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rancher-config
+  namespace: cluster-autoscaler
+data:
+  rancher-config.yaml: |
+    url: "https://172.31.5.44:31443"
+    token: "token-xvs99:rn4jwp2tl2r2qp6dz2nqnrsm4v55vsllvk82sh5pxcjrrjb9cc8gjm"
+    clusterName: "nh-test-cluster-yjlee-5"
+    clusterNamespace: "fleet-default"

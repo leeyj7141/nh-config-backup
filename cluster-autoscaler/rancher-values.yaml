@@ -1,0 +1,22 @@
+---
+cloudProvider: "rancher"
+cloudConfigPath: "/etc/rancher/rancher-config.yaml"
+extraVolumes: 
+   - name: rancher-configmap
+     configMap:
+       name: rancher-config
+   - name: rancher-ssl-certs
+     configMap:
+       name: rancher-ssl-ca
+extraVolumeMounts: 
+   - name: rancher-configmap
+     mountPath: /etc/rancher/
+     readOnly: true
+   - name: rancher-ssl-certs
+     mountPath: /etc/ssl/certs
+     readOnly: true
+
+autoDiscovery:
+  clusterName: "nh-test-cluster-yjlee-5"
+  namespace:  "fleet-default"
+  roles: worker
