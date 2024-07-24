@@ -4,9 +4,9 @@ kubectl taint nodes --all node-role.kubernetes.io/control-plane-
 
 
 node='
-nh-rancher-test-cluster-b-1
-nh-rancher-test-cluster-b-2
-nh-rancher-test-cluster-b-3
+nh-rancher-test-cluster-f-1
+nh-rancher-test-cluster-f-2
+nh-rancher-test-cluster-f-3
 '
 for i in $node
 do
