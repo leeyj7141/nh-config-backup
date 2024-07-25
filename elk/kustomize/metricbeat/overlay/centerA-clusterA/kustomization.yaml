@@ -1,4 +1,4 @@
-namespace: elk-logging-metrics
+namespace: elk-beats
 
 resources:
   - ../../base/
