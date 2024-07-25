@@ -8,6 +8,18 @@ prometheus:
       objectStorageConfig:
         key: objstore.yml
         name: thanos-obstore-secret
+    #additionalScrapeConfigs:
+    #  - job_name: 'external-node-exporters'
+    #    static_configs:
+    #      - targets:
+    #        - 'external-node-1:9100'
+    #        - 'external-node-2:9100'
+    #        - 'external-node-3:9100'
+    #    scheme: https
+    #    tls_config:
+    #      ca_file:   /etc/prometheus/secrets/etcd-client-cert/etcd-ca
+    #      cert_file: /etc/prometheus/secrets/etcd-client-cert/etcd-client
+    #      key_file:  /etc/prometheus/secrets/etcd-client-cert/etcd-client-key
   thanosService:
     enabled: true 
     annotations: {}
@@ -125,27 +137,40 @@ grafana:
         prometheusType: Thanos
         prometheusVersion: 0.31.1
         timeInterval: 1m
-    - name: elasticsearch-k8s-log
+    - name: elasticsearch-k8s-node-log
       type: elasticsearch
       access: proxy
       url: http://172.31.18.85:9200
       isDefault: false
       jsonData:
         includeFrozen: false
-        index: k8s-log*
+        index: k8s-node-log*
         logLevelField: ""
         logMessageField: message
         maxConcurrentShardRequests: 5
         timeField: "@timestamp"
         timeInterval: 30s
-    - name: elasticsearch-k8s-app
+    - name: elasticsearch-k8s-pod-log
       type: elasticsearch
       access: proxy
       url: http://172.31.18.85:9200
       isDefault: false
       jsonData:
         includeFrozen: false
-        index: k8s-metric*
+        index: k8s-pod-log*
+        logLevelField: ""
+        logMessageField: message
+        maxConcurrentShardRequests: 5
+        timeField: "@timestamp"
+        timeInterval: 30s
+    - name: elasticsearch-k8s-sms-agent-alert
+      type: elasticsearch
+      access: proxy
+      url: http://172.31.18.85:9200
+      isDefault: false
+      jsonData:
+        includeFrozen: false
+        index: k8s-metric-alert*
         logLevelField: ""
         logMessageField: message
         maxConcurrentShardRequests: 5
