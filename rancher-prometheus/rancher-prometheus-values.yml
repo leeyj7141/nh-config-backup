@@ -1,0 +1,199 @@
+prometheus:
+  prometheusSpec:
+    externalLabels:
+      NHcenter: "centerA"
+      NHcluster: "clusterA"
+    replicas: 2
+    thanos:
+      objectStorageConfig:
+        key: objstore.yml
+        name: thanos-obstore-secret
+    #additionalScrapeConfigs:
+    #  - job_name: 'external-node-exporters'
+    #    static_configs:
+    #      - targets:
+    #        - 'external-node-1:9100'
+    #        - 'external-node-2:9100'
+    #        - 'external-node-3:9100'
+    #    scheme: https
+    #    tls_config:
+    #      ca_file:   /etc/prometheus/secrets/etcd-client-cert/etcd-ca
+    #      cert_file: /etc/prometheus/secrets/etcd-client-cert/etcd-client
+    #      key_file:  /etc/prometheus/secrets/etcd-client-cert/etcd-client-key
+  thanosService:
+    enabled: true 
+    annotations: {}
+    labels: {}
+    externalTrafficPolicy: Cluster
+    type: ClusterIP
+    portName: grpc
+    port: 10901
+    targetPort: "grpc"
+    httpPortName: http
+    httpPort: 10902
+    targetHttpPort: "http"
+    clusterIP: ""
+    nodePort: 30901
+    httpNodePort: 30902
+
+alertmanager:
+  enabled: true
+  alertmanagerSpec:
+    logLevel: debug
+    alertmanagerConfiguration: 
+      name: example-alertcfg
+    clusterGossipInterval: "15s"
+    replicas: 1
+    #replicas: 3
+    alertmanagerConfigSelector:
+      matchExpressions:
+        - key: alertconfig
+          operator: In
+          values:
+            - example
+            - example-config
+  service:
+    type: NodePort
+    nodePort: 31112
+
+grafana: 
+  enabled: true
+  replicas: 2
+  grafana.ini:
+    auth:
+      disable_login_form: false
+      login_maximum_inactive_lifetime_duration: 800s
+      login_maximum_lifetime_duration: 800s
+  persistence:
+    type: pvc
+    enabled: true
+    storageClassName: nfs
+    accessModes:
+      - ReadWriteMany
+    size: 10Gi
+  image: 
+    repository: rancher/mirrored-grafana-grafana
+    tag: 10.3.3
+  service:
+    type: NodePort
+    nodePort: 31111
+    isessionAffinity: ClientIP
+  sidecar:
+    datasources:
+      enabled: true
+      isDefaultDatasource: false
+    label: "grafana_dashboard"
+    labelValue: "1"
+    dashboards:
+      enabled: true
+      folderAnnotation: "grafana_dashboard_folder"
+      provider:
+        name: 'sidecarProvider'
+        orgId: 1
+        folder: ''
+        type: file
+        disableDelete: false
+        allowUiUpdates: false
+        foldersFromFilesStructure: true
+  #dashboardProviders: 
+  #  dashboardproviders.yaml:
+  #    apiVersion: 1
+  #    providers:
+  #    - name: 'default'
+  #      orgId: 1
+  #      folder: 'Test-dashboard-default'
+  #      type: file
+  #      disableDeletion: false
+  #      editable: true
+  #      options:
+  #        path: /var/lib/grafana/dashboards/default
+  #    - name: 'system'
+  #      orgId: 1
+  #      folder: 'Test-dashboard-system'
+  #      type: file
+  #      disableDeletion: false
+  #      editable: true
+  #      options:
+  #        path: /var/lib/grafana/dashboards/system
+  #dashboards:
+  #  default: 
+  #  system: 
+  #    kubernetes-cluster:
+  #      # Ref: https://grafana.com/dashboards/6417 - Kubernetes cluster 
+  #      gnetId: 6417
+  #      revision: 1
+  #      datasource: Thanos
+  #dashboardsConfigMaps:
+  #  k8s-status: "grafana-dashboards-k8s-status"
+  #  node-status: "grafana-dashboards-node-status"
+  #  node-exporter-full: "grafana-dashboards-node-exporter-full"
+  additionalDataSources:
+    - name: Thanos
+      type: prometheus
+      access: proxy
+      url: http://thanos-query.thanos.svc.cluster.local.:9090
+      isDefault: true
+      jsonData:
+        cacheLevel: Medium
+        defaultEditor: builder
+        disableRecordingRules: false
+        exemplarTraceIdDestinations: []
+        httpMethod: POST
+        prometheusType: Thanos
+        prometheusVersion: 0.31.1
+        timeInterval: 1m
+    - name: elasticsearch-k8s-node-log
+      type: elasticsearch
+      access: proxy
+      url: http://172.31.18.85:9200
+      isDefault: false
+      jsonData:
+        includeFrozen: false
+        index: k8s-node-log*
+        logLevelField: ""
+        logMessageField: message
+        maxConcurrentShardRequests: 5
+        timeField: "@timestamp"
+        timeInterval: 30s
+    - name: elasticsearch-k8s-pod-log
+      type: elasticsearch
+      access: proxy
+      url: http://172.31.18.85:9200
+      isDefault: false
+      jsonData:
+        includeFrozen: false
+        index: k8s-pod-log*
+        logLevelField: ""
+        logMessageField: message
+        maxConcurrentShardRequests: 5
+        timeField: "@timestamp"
+        timeInterval: 30s
+    - name: elasticsearch-k8s-sms-agent-alert
+      type: elasticsearch
+      access: proxy
+      url: http://172.31.18.85:9200
+      isDefault: false
+      jsonData:
+        includeFrozen: false
+        index: k8s-metric-alert*
+        logLevelField: ""
+        logMessageField: message
+        maxConcurrentShardRequests: 5
+        timeField: "@timestamp"
+        timeInterval: 30s
+
+kube-state-metrics:
+  replicas: 2
+
+prometheus-adapter:
+  replicas: 2
+
+prometheus-node-exporter:
+  image:
+    registry: docker.io
+    repository: rancher/mirrored-prometheus-node-exporter
+    tag: v1.7.0
+  extraArgs:
+    - --collector.tcpstat
+    - --collector.processes 
+    #- --collector.ipvs
