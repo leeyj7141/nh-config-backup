@@ -35,8 +35,8 @@ spec:
             command:
             - sh
             - -c
-            - "ps aux |grep -i pipelines.yml| grep -iv grep "
-          initialDelaySeconds: 30
+            - "ps aux |grep -i logstash-core | grep -iv grep "
+          initialDelaySeconds: 300
           failureThreshold: 3
           periodSeconds: 10
           timeoutSeconds: 5
