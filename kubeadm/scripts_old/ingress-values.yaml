@@ -1,9 +1,0 @@
-controller:
-  hostNetwork: true
-  replicaCount: 3
-  service:
-    type: NodePort
-    httpPort:
-      nodePort: 30080
-    httpsPort:
-      nodePort: 30443
