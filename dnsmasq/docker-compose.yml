@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  dnsmasq:
+    image: rancher/mirrored-k8s-dns-dnsmasq-nanny:1.23.0
+    container_name: dnsmasq
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+    volumes:
+      - /etc/hosts:/etc/hosts:ro
+#    command: ["--conf-file=/etc/dnsmasq.conf"]
+#
