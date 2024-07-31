@@ -1,0 +1,60 @@
+input {
+  http_poller {
+    urls => {
+      prometheus_failed_pods => {
+        method => get
+        url => '{{ pod_state_query }}'
+        headers => {
+          Accept => "application/json"
+        }
+      }
+    }
+    request_timeout => 60
+    schedule => { every => "{{ query_interval }}" }
+    codec => "json"
+    metadata_target => "http_poller_metadata"
+  }
+}
+
+filter {
+  split {
+    field => "[data][result]"
+  }
+
+  mutate {
+    add_field => {
+      "NHcenter" => "%{[data][result][metric][NHcenter]}"
+      "NHcluster" => "%{[data][result][metric][NHcluster]}"
+      "node" => "%{[data][result][metric][node]}"
+      "metric" => "%{[data][result][metric][__name__]}"
+      "namespace" => "%{[data][result][metric][namespace]}"
+      "pod" => "%{[data][result][metric][pod]}"
+      "pod_fail_status" => "%{[data][result][value][1]}"
+    }
+    remove_field => ["data", "http_poller_metadata"]
+    remove_field => ["event"]
+  }
+
+  if [pod_fail_status] == "1" {
+    mutate {
+      add_field => {
+        "nhalert" => "Warning"
+        "message" => "%{@timestamp}, %{nhalert}, Center: %{NHcenter}, Cluster: %{NHcluster}, Node: %{node}, Namespace: %{namespace}, Pod: %{pod}, Status: Failed"
+      }
+    }
+  } else {
+    drop { }
+  }
+}
+output {
+  if [nhalert] in ["Critical", "Warning"] {
+    elasticsearch {
+      hosts => ["{{ es_url }}"]
+      index => "{{ alert_index }}"
+    }
+    file {
+      path => "/var/log/prometheus_metrics_to_sms_agent.log"
+      codec => line { format => "%{message}" }
+    }
+  }
+}

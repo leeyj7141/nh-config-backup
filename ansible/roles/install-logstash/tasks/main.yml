@@ -1,0 +1,49 @@
+---
+# tasks file for install-logstash
+
+- name: Copy ELK repository file
+  copy:
+    src: elasticsearch.repo
+    dest: /etc/yum.repos.d/elasticsearch.repo
+    mode: '0644'
+
+- name: Install Logstash
+  package:
+    name: "{{ logstash_package }}"
+    state: present
+
+- name: Ensure logstash pipeline configuration directory exists
+  file:
+    path: /usr/share/logstash/{{ item }}/
+    state: directory
+    mode: '0755'
+  loop: 
+    - pipeline
+    - config
+
+- name: Copy logstash pipeline configuration files
+  template:
+    src: "{{ item }}.j2"
+    dest: "/etc/logstash/conf.d/{{ item }}"
+    #dest: "/usr/share/logstash/pipeline/{{ item }}"
+    mode: '0644'
+  loop: 
+    - logstash-cpu.conf
+    - logstash-memory-usage.conf
+    - logstash-pvc.conf
+    - logstash-pod-status.conf
+  register: logstash_pipeline_config_output
+  notify:
+    - Restart logstash
+
+- name: Copy logstash configuration files 
+  template:
+    src: "{{ item }}.j2"
+    dest: "/etc/logstash/{{ item }}"
+    #dest: "/usr/share/logstash/config/"
+    mode: '0644'
+  loop: 
+    - pipelines.yml
+  register: logstash_config_output
+  notify:
+    - Restart logstash

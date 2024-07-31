@@ -1,0 +1,11 @@
+---
+# handlers file for install-logstash
+
+- name: Reload systemd
+  command: systemctl daemon-reload
+
+- name: Restart logstash 
+  service:
+    name: "logstash"
+    enabled: true
+    state: restarted

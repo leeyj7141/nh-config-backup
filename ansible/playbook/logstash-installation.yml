@@ -1,0 +1,7 @@
+- name: logstash installation play
+  gather_facts: no
+  become: true
+  hosts: 
+    - logstash
+  roles:
+    - role: install-logstash

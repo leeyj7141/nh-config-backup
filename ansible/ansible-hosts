@@ -25,6 +25,8 @@ ansible_become=true
 [all:vars]
 ansible_user=rocky
 
-
 [moon]
 moon-test
+
+[logstash]
+nh-rancher-test-logstash-yjlee

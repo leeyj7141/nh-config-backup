@@ -1,0 +1,79 @@
+input {
+  http_poller {
+    urls => {
+      prometheus_metrics => {
+        method => get
+        url => "{{ cpu_query }}"
+        headers => {
+          Accept => "application/json"
+        }
+      }
+    }
+    request_timeout => 60
+    schedule => { every => "{{ query_interval }}" }
+    codec => "json"
+    metadata_target => "http_poller_metadata"
+  }
+}
+
+filter {
+  split {
+    field => "[data][result]"
+  }
+
+  mutate {
+    add_field => {
+      "NHcenter" => "%{[data][result][metric][NHcenter]}"
+      "NHcluster" => "%{[data][result][metric][NHcluster]}"
+      "node" => "%{[data][result][metric][node]}"
+      "metric" => "%{[data][result][metric][__name__]}"
+      "pod" => "%{[data][result][metric][pod]}"
+      "container" => "%{[data][result][metric][container]}"
+      "namespace" => "%{[data][result][metric][namespace]}"
+      "cpu_usage" => "%{[data][result][value][1]}"
+    }
+    remove_field => ["data", "http_poller_metadata"]
+    remove_field => ["event"]
+  }
+
+  if [cpu_usage] {
+    mutate {
+      convert => { "cpu_usage" => "float" }
+    }
+    ruby {
+      code => 'event.set("cpu_usage", event.get("cpu_usage").to_i)'
+    }
+
+    if [cpu_usage] >= {{ cpu_critical_limit }} {
+      mutate {
+        add_field => { "nhalert" => "Critical" }
+      }
+    } else if [cpu_usage] >= {{ cpu_warning_limit }} {
+      mutate {
+        add_field => { "nhalert" => "Warning" }
+      }
+    } else if [cpu_usage] < {{ cpu_warning_limit }} {
+      mutate {
+        add_field => { "nhalert" => "Info" }
+      }
+    }
+
+    mutate {
+      add_field => {
+        "message" => "%{@timestamp}, %{nhalert}, Center: %{NHcenter}, Cluster: %{NHcluster}, Node: %{node}, Namespace: %{namespace}, Pod: %{pod}, Container: %{container}, CPUUsage: %{cpu_usage}%"
+      }
+    }
+  }
+}
+output {
+  if [nhalert] in ["Critical", "Warning"] {
+    elasticsearch {
+      hosts => ["{{ es_url }}"]
+      index => "{{ alert_index }}"
+    }
+    file {
+      path => "/var/log/prometheus_metrics_to_sms_agent.log"
+      codec => line { format => "%{message}" }
+    }
+  }
+}

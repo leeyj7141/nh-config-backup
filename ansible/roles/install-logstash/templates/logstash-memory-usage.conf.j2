@@ -1,0 +1,77 @@
+input {
+  http_poller {
+    urls => {
+      prometheus_metrics => {
+        method => get
+        url => "{{ memory_query }}"
+        headers => {
+          Accept => "application/json"
+        }
+      }
+    }
+    request_timeout => 60
+    schedule => { every => "{{ query_interval }}" }
+    codec => "json"
+    metadata_target => "http_poller_metadata"
+  }
+}
+
+filter {
+  split {
+    field => "[data][result]"
+  }
+
+  mutate {
+    add_field => {
+      "NHcenter" => "%{[data][result][metric][NHcenter]}"
+      "NHcluster" => "%{[data][result][metric][NHcluster]}"
+      "node" => "%{[data][result][metric][node]}"
+      "metric" => "%{[data][result][metric][__name__]}"
+      "container" => "%{[data][result][metric][container]}"
+      "pod" => "%{[data][result][metric][pod]}"
+      "namespace" => "%{[data][result][metric][namespace]}"
+      "memory_usage" => "%{[data][result][value][1]}"
+    }
+    remove_field => ["data", "http_poller_metadata"]
+    remove_field => ["event"]
+  }
+
+  if [memory_usage] {
+    mutate {
+      convert => { "memory_usage" => "float" }
+    }
+    ruby {
+      code => 'event.set("memory_usage", event.get("memory_usage").to_i)'
+    }
+    if [memory_usage] >= {{ memory_critical_limit }} {
+      mutate {
+        add_field => { "nhalert" => "Critical" }
+      }
+    } else if [memory_usage] >= {{ memory_warning_limit }} {
+      mutate {
+        add_field => { "nhalert" => "Warning" }
+      }
+    } else if [memory_usage] < {{ memory_warning_limit }} {
+      mutate {
+        add_field => { "nhalert" => "Info" }
+      }
+    }
+    mutate {
+      add_field => {
+        "message" => "%{@timestamp}, %{nhalert}, Center: %{NHcenter}, Cluster: %{NHcluster}, Node: %{node}, Namespace: %{namespace}, Pod: %{pod}, Container: %{container}, MemoryUsage: %{memory_usage}%"
+      }
+    }
+  }
+}
+output {
+  if [nhalert] in ["Critical", "Warning"] {
+    elasticsearch {
+      hosts => ["{{ es_url }}"]
+      index => "{{ alert_index }}"
+    }
+    file {
+      path => "/var/log/prometheus_metrics_to_sms_agent.log"
+      codec => line { format => "%{message}" }
+    }
+  }
+}

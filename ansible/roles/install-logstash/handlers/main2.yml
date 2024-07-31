@@ -1,0 +1,25 @@
+---
+
+- name: Reload systemd
+  command: systemctl daemon-reload
+
+- name: Restart filebeat for master 
+  service:
+    name: "filebeat-{{ item }}"
+    enabled: true
+    state: restarted
+  loop: "{{ filebeat_master_services }}"
+
+- name: Restart filebeat for worker
+  service:
+    name: "filebeat-{{ item }}"
+    enabled: true
+    state: restarted
+  loop: "{{ filebeat_worker_services }}"
+
+- name: Restart filebeat for node
+  service:
+    name: "filebeat-{{ item }}"
+    enabled: true
+    state: restarted
+  loop: "{{ filebeat_node_services }}"

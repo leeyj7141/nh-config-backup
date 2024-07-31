@@ -1,0 +1,17 @@
+---
+# vars file for install-logstash
+
+logstash_package: "logstash-1:8.9.0-1.x86_64"
+query_interval: "30s"
+cpu_query: "http://thanos-query.thanos.svc.cluster.local:9090/api/v1/query?query=nh_pod_cpu_usage:rate5m"
+memory_query: "http://thanos-query.thanos.svc.cluster.local:9090/api/v1/query?query=nh_pod_memory_usage:ratio"
+pvc_query: "http://thanos-query.thanos.svc.cluster.local.:9090/api/v1/query?query=nh_pvc_usage:ratio"
+pod_state_query: "http://thanos-query.thanos.svc.cluster.local:9090/api/v1/query?query=kube_pod_status_phase%7Bphase%3D%22Failed%22%7D"
+es_url: "http://172.31.18.85:9200"
+alert_index: "k8s-metric-alert-%{+YYYY.MM.dd}"
+cpu_critical_limit: "30"
+cpu_warning_limit: "20"
+memory_critical_limit: "25"
+memory_warning_limit: "15"
+pvc_critical_limit: "55"
+pvc_warning_limit: "45"
