@@ -78,7 +78,7 @@ output {
       index => "{{ alert_index }}"
     }
     file {
-      path => "/var/log/prometheus_metrics_to_sms_agent.log"
+      path => "{{ sms_agent_log_path }}"
       codec => line { format => "%{message}" }
     }
   }

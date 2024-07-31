@@ -12,14 +12,14 @@
     name: "{{ logstash_package }}"
     state: present
 
-- name: Ensure logstash pipeline configuration directory exists
-  file:
-    path: /usr/share/logstash/{{ item }}/
-    state: directory
-    mode: '0755'
-  loop: 
-    - pipeline
-    - config
+#- name: Ensure logstash pipeline configuration directory exists
+#  file:
+#    path: /usr/share/logstash/{{ item }}/
+#    state: directory
+#    mode: '0755'
+#  loop: 
+#    - pipeline
+#    - config
 
 - name: Copy logstash pipeline configuration files
   template:
@@ -36,14 +36,14 @@
   notify:
     - Restart logstash
 
-- name: Copy logstash configuration files 
-  template:
-    src: "{{ item }}.j2"
-    dest: "/etc/logstash/{{ item }}"
-    #dest: "/usr/share/logstash/config/"
-    mode: '0644'
-  loop: 
-    - pipelines.yml
-  register: logstash_config_output
-  notify:
-    - Restart logstash
+#- name: Copy logstash configuration files 
+#  template:
+#    src: "{{ item }}.j2"
+#    dest: "/etc/logstash/{{ item }}"
+#    #dest: "/usr/share/logstash/config/"
+#    mode: '0644'
+#  loop: 
+#    - pipelines.yml
+#  register: logstash_config_output
+#  notify:
+#    - Restart logstash
