@@ -1,0 +1,7 @@
+- name: backup etc directory play 
+  gather_facts: yes
+  become: true
+  hosts: 
+    - logstash
+  roles:
+    - role: backup-etc

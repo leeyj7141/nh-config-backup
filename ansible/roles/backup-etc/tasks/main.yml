@@ -1,0 +1,15 @@
+---
+# tasks file for backup-etc
+
+- name: Ensure backup  directory exists
+  file:
+    path: /root/backup/
+    state: directory
+    mode: '0755'
+
+- name: Create etc directory backup tar.gz file
+  archive:
+    path: /etc/
+    dest: /root/backup/etc-backup-{{ inventory_hostname }}-{{ ansible_date_time.year }}-{{ ansible_date_time.month }}-{{ ansible_date_time.day }}_{{ ansible_date_time.hour }}:{{ ansible_date_time.minute }}.tar.gz
+    format: gz
+    force_archive: true
