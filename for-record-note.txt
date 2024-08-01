@@ -1,0 +1,3 @@
+Thu Aug  1 01:32:37 UTC 2024
+- helm chart uploaded in nexus3 at vmware development cluster
+- rpm package uploaded in nexus3 at vmware development cluster
