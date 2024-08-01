@@ -5,4 +5,6 @@ kube-apiserver-extra-mount:
 kube-apiserver-arg:
    - --audit-policy-file=/etc/rancher/rke2/k8s-api-audit-policies.yml
    - --audit-log-path=/var/log/kubernetes/audit/audit.log
-   - --audit-log-maxage=7
+   - --audit-log-maxage=3
+   - --audit-log-maxbackup=30
+   - --audit-log-maxsize=100

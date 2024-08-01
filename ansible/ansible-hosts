@@ -9,7 +9,8 @@ ansible_become=true
 rancher-master-test[2:4]
 
 [worker]
-rancher-worker-test2
+nh-rancher-worker-test-3-yjlee
+#rancher-worker-test2
 #worker-test3
 
 [harbor]
