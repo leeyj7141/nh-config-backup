@@ -25,7 +25,6 @@ filter {
     add_field => {
       "NHcenter" => "%{[data][result][metric][NHcenter]}"
       "NHcluster" => "%{[data][result][metric][NHcluster]}"
-      "node" => "%{[data][result][metric][node]}"
       "metric" => "%{[data][result][metric][__name__]}"
       "namespace" => "%{[data][result][metric][namespace]}"
       "pod" => "%{[data][result][metric][pod]}"
@@ -39,7 +38,7 @@ filter {
     mutate {
       add_field => {
         "nhalert" => "Warning"
-        "message" => "%{@timestamp}, %{nhalert}, Center: %{NHcenter}, Cluster: %{NHcluster}, Node: %{node}, Namespace: %{namespace}, Pod: %{pod}, Status: Failed"
+        "message" => "%{@timestamp}, %{nhalert}, Center: %{NHcenter}, Cluster: %{NHcluster}, Namespace: %{namespace}, Pod: %{pod}, Status: Failed"
       }
     }
   } else {
