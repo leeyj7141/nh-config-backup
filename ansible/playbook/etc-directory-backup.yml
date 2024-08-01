@@ -1,0 +1,7 @@
+- name: etc directory backup
+  gather_facts: yes
+  become: true
+  hosts: 
+    - all
+  roles:
+    - role: backup-etc
