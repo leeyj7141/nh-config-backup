@@ -10,3 +10,4 @@ Mon Aug  5 02:19:02 UTC 2024
 - logstash-install ansible role edited 
 - filebeat-install ansible role edited 
 - metricbeat kustomize edited 
+- metricbeat deployed on mgmt master cluster 
