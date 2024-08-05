@@ -1,3 +1,12 @@
 Thu Aug  1 01:32:37 UTC 2024
 - helm chart uploaded in nexus3 at vmware development cluster
 - rpm package uploaded in nexus3 at vmware development cluster
+
+
+Mon Aug  5 02:19:02 UTC 2024
+- vaccine debugging, ds_agent, scvagtstop, scvwatch 
+- vaccine stop, start ansible role added 
+- metricbeat-install ansible role edited 
+- logstash-install ansible role edited 
+- filebeat-install ansible role edited 
+- metricbeat kustomize edited 
