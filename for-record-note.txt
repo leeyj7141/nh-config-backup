@@ -14,3 +14,4 @@ Mon Aug  5 02:19:02 UTC 2024
 
 Mon Aug  5 23:28:40 UTC 2024
 - filebeat deployed on mgmt master cluster
+- metricbeat pod deployed on mgmt master cluster
