@@ -1,0 +1,21 @@
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  creationTimestamp: "2024-08-12T05:55:13Z"
+  generation: 1
+  labels:
+    kiali_wizard: request_routing
+  name: productpage-gateway
+  namespace: istio-example
+  resourceVersion: "15551672"
+  uid: 201bad20-cc4c-44c9-8272-d12fa6220820
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - hosts:
+    - prod.test.dom
+    port:
+      name: http
+      number: 80
+      protocol: HTTP

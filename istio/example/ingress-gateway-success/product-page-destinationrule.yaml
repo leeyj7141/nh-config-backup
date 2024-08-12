@@ -1,0 +1,20 @@
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  creationTimestamp: "2024-08-12T05:50:19Z"
+  generation: 1
+  labels:
+    kiali_wizard: request_routing
+  name: productpage
+  namespace: istio-example
+  resourceVersion: "15549345"
+  uid: ab1c1477-4cf6-4542-8d69-201427977d22
+spec:
+  host: productpage.istio-example.svc.cluster.local
+  subsets:
+  - labels:
+      version: v1
+    name: v1
+  - labels:
+      version: v2
+    name: v2
