@@ -1,0 +1,7 @@
+namespace: istio-example2
+
+resources:
+ - istio-ingress-gateway-example-deployment.yaml
+ - istio-ingress-gateway-example-destinationrule.yaml
+ - istio-ingress-gateway-example-ingressgateway.yaml
+ - istio-ingress-gateway-example-virtualservice.yaml

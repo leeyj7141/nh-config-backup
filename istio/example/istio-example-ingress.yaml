@@ -3,8 +3,9 @@ kind: Ingress
 metadata:
   name: bookinfo
   annotations:
-#    kubernetes.io/ingress.class: istio
+    #kubernetes.io/ingress.class: nginx
 spec:
+  ingressClassName: nginx
   rules:
   - host: bookinfo.test.dom
     http:

@@ -1,0 +1,63 @@
+#apiVersion: networking.istio.io/v1alpha3
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: ingress-gateway-configuration # 1. 원하는 이름으로 변경
+spec:
+  selector:
+    #istio: ingressgateway # 2. ingress-gateway를 적용할 pod를 선택
+    #                      # istio: ingressgateway 라벨이 있는 pod를 선택 
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*" # 3. Domain name of the external website
+    #- bookinfo.test.dom
+---
+kind: VirtualService
+#apiVersion: networking.istio.io/v1alpha3
+apiVersion: networking.istio.io/v1beta1
+metadata:
+  name: vs-productpage
+  namespace: istio-example
+spec:
+  hosts: # 외부에서 접속하는 host 중 어떤 host에 proxy rule을 적용할지 결정
+         # gateway에 접속 가능하도록 설정된 host를 여기에 동일하게 적용해야 함. (실습에서는 “*”)  
+    - "*"
+    #- bookinfo.test.dom
+  gateways:
+    - ingress-gateway-configuration  #4. Gateway name
+  http:
+    - route:
+        - destination:
+            host: productpage.istio-example.svc.cluster.local
+            port:
+              number: 8090
+              #name: http
+            #subset: v1
+          weight: 100
+        #- destination:
+        #    host: productpage.istio-example.svc.cluster.local
+        #    port:
+        #      number: 8090
+        #    subset: v2
+        #  weight: 40
+---
+kind: DestinationRule
+#apiVersion: networking.istio.io/v1alpha3
+apiVersion: networking.istio.io/v1beta1
+metadata:
+  name: ds-productpage
+  namespace: istio-example
+spec:
+  host: bookinfo.test.dom
+  subsets:
+    - labels:
+        version: v1
+      name: v1
+    - labels:
+        version: v2
+      name: v2
