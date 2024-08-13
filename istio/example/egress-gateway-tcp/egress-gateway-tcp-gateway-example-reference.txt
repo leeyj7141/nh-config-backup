@@ -1,0 +1,1 @@
+https://istio.io/latest/blog/2018/egress-mongo/?_ga=2.67022311.878246577.1723448497-1725151777.1721002619#direct-tcp-egress-traffic-through-an-egress-gateway

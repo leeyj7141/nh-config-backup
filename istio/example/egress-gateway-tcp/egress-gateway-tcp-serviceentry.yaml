@@ -1,0 +1,18 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: mongo
+  namespace: istio-example2
+spec:
+  hosts:
+  - mongo.my.ghlee
+  addresses:
+  - 172.31.35.88/32
+  ports:
+  - number: 7777
+    name: tcp
+    protocol: TCP
+  location: MESH_EXTERNAL
+  resolution: STATIC
+  endpoints:
+  - address: 172.31.35.88

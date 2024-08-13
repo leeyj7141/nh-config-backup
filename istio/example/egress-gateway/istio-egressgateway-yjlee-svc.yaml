@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    meta.helm.sh/release-name: istio-egressgateway
+    meta.helm.sh/release-namespace: istio-system
+  creationTimestamp: "2024-08-13T04:37:47Z"
+  labels:
+    app: istio-egressgateway
+    app.kubernetes.io/managed-by: Helm
+    install.operator.istio.io/owning-resource: unknown
+    istio: egressgateway
+    istio.io/rev: default
+    operator.istio.io/component: EgressGateways
+    release: istio-egressgateway
+  name: istio-egressgateway-yjlee
+  namespace: istio-system
+  resourceVersion: "15807393"
+  uid: 2f05d549-94fa-4057-ba1a-471034840e9c
+spec:
+  clusterIP: 10.43.116.109
+  clusterIPs:
+  - 10.43.116.109
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: http2
+    port: 80
+    protocol: TCP
+    targetPort: 8080
+  - name: https
+    port: 443
+    protocol: TCP
+    targetPort: 8443
+  - name: mongo
+    port: 7777
+    protocol: TCP
+    targetPort: 7777
+  selector:
+    app: istio-egressgateway
+    istio: egressgateway
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

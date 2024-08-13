@@ -1,0 +1,72 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: istio-egressgateway-mongo
+  namespace: istio-example2
+spec:
+  selector:
+    istio: egressgateway
+  servers:
+  - port:
+      number: 7777
+      name: tcp
+      protocol: TCP
+    hosts:
+    - mongo.my.ghlee
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: egressgateway-for-mongo
+  namespace: istio-example2
+spec:
+  #host: istio-egressgateway-yjlee.istio-system.svc.cluster.local
+  host: istio-egressgateway.istio-system.svc.cluster.local
+  subsets:
+  - name: mongo
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: mongo
+  namespace: istio-example2
+spec:
+  host: mongo.my.ghlee
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: direct-mongo-through-egress-gateway
+  namespace: istio-example2
+spec:
+  hosts:
+  - mongo.my.ghlee
+  gateways:
+  - mesh
+  #- istio-egressgateway
+  - istio-egressgateway-mongo
+  tcp:
+  - match:
+    - gateways:
+      - mesh
+      destinationSubnets:
+      - 172.31.35.88/32
+      port: 7777
+    route:
+    - destination:
+        #host: istio-egressgateway-yjlee.istio-system.svc.cluster.local
+        host: istio-egressgateway.istio-system.svc.cluster.local
+        subset: mongo
+        port:
+          number: 7777
+  - match:
+    - gateways:
+      #- istio-egressgateway
+      - istio-egressgateway-mongo
+      port: 7777
+    route:
+    - destination:
+        host: mongo.my.ghlee
+        port:
+          number: 7777
+      weight: 100

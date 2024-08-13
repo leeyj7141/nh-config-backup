@@ -1,0 +1,48 @@
+# mysql-egress-gateway.yaml  
+apiVersion: networking.istio.io/v1alpha3  
+kind: Gateway  
+metadata:  
+  name: mysql-egress-gateway  
+  namespace: istio-system  
+spec:  
+  selector:  
+    istio: egressgateway # Use Istio egress gateway  
+  servers:  
+    - port:  
+        number: 3306  # MySQL port  
+        name: mysql  
+        protocol: TCP  
+      hosts:  
+        - "mysql.my.ghlee"  # MySQL DB의 호스트명   
+---  
+# mysql-destination-rule.yaml  
+apiVersion: networking.istio.io/v1alpha3  
+kind: DestinationRule  
+metadata:  
+  name: mysql  
+  namespace: istio-system  
+spec:  
+  host: "mysql.my.ghlee"  
+  trafficPolicy:  
+    tls:  
+      mode: DISABLE  # MySQL은 기본적으로 TLS를 사용하지 않으므로 DISABLE로 설정  
+---  
+# mysql-virtual-service.yaml  
+apiVersion: networking.istio.io/v1alpha3  
+kind: VirtualService  
+metadata:  
+  name: mysql  
+  namespace: istio-system  
+spec:  
+  hosts:  
+    - "mysql.my.ghlee"  
+  gateways:  
+    - mysql-egress-gateway  
+  tcp:  
+    - match:  
+        - port: 3306  
+      route:  
+        - destination:  
+            host: "mysql.my.ghlee"  
+            port:  
+              number: 3306
