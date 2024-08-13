@@ -51,7 +51,8 @@ spec:
       - mesh
       destinationSubnets:
       - 172.31.35.88/32
-      port: 7777
+      port: 8888
+     # port: 7777
     route:
     - destination:
         #host: istio-egressgateway-yjlee.istio-system.svc.cluster.local
@@ -68,5 +69,5 @@ spec:
     - destination:
         host: mongo.my.ghlee
         port:
-          number: 7777
+          number: 8888
       weight: 100

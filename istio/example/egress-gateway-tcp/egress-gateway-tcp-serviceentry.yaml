@@ -9,7 +9,8 @@ spec:
   addresses:
   - 172.31.35.88/32
   ports:
-  - number: 7777
+  #- number: 7777
+  - number: 8888
     name: tcp
     protocol: TCP
   location: MESH_EXTERNAL
