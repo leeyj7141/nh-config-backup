@@ -65,6 +65,8 @@ grafana:
       disable_login_form: false
       login_maximum_inactive_lifetime_duration: 800s
       login_maximum_lifetime_duration: 800s
+    auth.anonymous:
+      enabled: false
   persistence:
     type: pvc
     enabled: true
