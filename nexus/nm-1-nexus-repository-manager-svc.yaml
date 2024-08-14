@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    field.cattle.io/publicEndpoints: '[{"port":30520,"protocol":"TCP","serviceName":"nexus:nm-1-nexus-repository-manager","allNodes":true}]'
+    meta.helm.sh/release-name: nm-1
+    meta.helm.sh/release-namespace: nexus
+  creationTimestamp: "2024-08-14T06:29:56Z"
+  labels:
+    app.kubernetes.io/instance: nm-1
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: nexus-repository-manager
+    app.kubernetes.io/version: 3.61.0
+    helm.sh/chart: nexus-repository-manager-61.0.2
+  name: nm-1-nexus-repository-manager
+  namespace: nexus
+  resourceVersion: "2773820"
+  uid: 480b12c1-54b1-4e60-93c6-9ef8e7cf8828
+spec:
+  clusterIP: 10.127.222.144
+  clusterIPs:
+  - 10.127.222.144
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: nexus-ui
+    nodePort: 30520
+    port: 8081
+    protocol: TCP
+    targetPort: 8081
+  - name: nexus-docker
+    port: 5000
+    protocol: TCP
+    targetPort: 5000
+  selector:
+    app.kubernetes.io/instance: nm-1
+    app.kubernetes.io/name: nexus-repository-manager
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}

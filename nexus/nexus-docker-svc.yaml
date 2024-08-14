@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    field.cattle.io/publicEndpoints: '[{"port":32544,"protocol":"TCP","serviceName":"nexus:nexus-docker","allNodes":true}]'
+  creationTimestamp: "2024-08-14T06:31:30Z"
+  name: nexus-docker
+  namespace: nexus
+  resourceVersion: "2748883"
+  uid: aba521da-48b8-4c38-8d60-1dd8a843f300
+spec:
+  clusterIP: 10.127.45.216
+  clusterIPs:
+  - 10.127.45.216
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: nexus-docker
+    nodePort: 32544
+    port: 5000
+    protocol: TCP
+    targetPort: 5000
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}

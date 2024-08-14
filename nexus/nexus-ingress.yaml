@@ -1,0 +1,57 @@
+apiVersion: v1
+items:
+- apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    annotations:
+      field.cattle.io/publicEndpoints: '[{"addresses":["10.127.180.62"],"port":443,"protocol":"HTTPS","serviceName":"nexus:nm-1-nexus-repository-manager","ingressName":"nexus:nm-1-nexus-repository-manager","hostname":"nexus.local.com","path":"/","allNodes":false}]'
+      meta.helm.sh/release-name: nm-1
+      meta.helm.sh/release-namespace: nexus
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    creationTimestamp: "2024-08-14T06:29:56Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/instance: nm-1
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: nexus-repository-manager
+      app.kubernetes.io/version: 3.61.0
+      helm.sh/chart: nexus-repository-manager-61.0.2
+    name: nm-1-nexus-repository-manager
+    namespace: nexus
+    resourceVersion: "2748475"
+    uid: 995f19a1-f7e3-4379-a53a-12201638136c
+  spec:
+    ingressClassName: nginx
+    rules:
+    - host: nexus.local.com
+    #- host: ingress.local
+      http:
+        paths:
+        #- backend:
+        #    service:
+        #      name: nm-1-nexus-repository-manager
+        #      port:
+        #        number: 5000
+        #  path: /
+          #path: /repository/docker
+        #  pathType: Prefix
+        - backend:
+            service:
+              name: nm-1-nexus-repository-manager
+              port:
+                number: 8081
+          path: /
+          pathType: Prefix
+    tls:
+    - hosts:
+      #- ingress.local
+      - nexus.local.com
+      secretName: nexus-local-com
+      #secretName: nexus-local-tls
+  status:
+    loadBalancer:
+      ingress:
+      - ip: 10.127.180.62
+kind: List
+metadata:
+  resourceVersion: ""
