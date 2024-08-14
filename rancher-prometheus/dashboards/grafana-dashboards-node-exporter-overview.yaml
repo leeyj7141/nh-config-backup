@@ -1,0 +1,1208 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  annotations:
+    grafana_dashboard_folder: "/tmp/dashboards/Node"
+  labels:
+    grafana_dashboard: "1"
+  name: grafana-dashboards-node-exporter-overview
+  namespace: cattle-monitoring-system
+data: 
+  node-exporter-overview.json: |
+    {
+      "annotations": {
+        "list": [
+          {
+            "$$hashKey": "object:2875",
+            "builtIn": 1,
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "enable": true,
+            "hide": true,
+            "iconColor": "rgba(0, 211, 255, 1)",
+            "name": "Annotations & Alerts",
+            "target": {
+              "limit": 100,
+              "matchAny": false,
+              "tags": [],
+              "type": "dashboard"
+            },
+            "type": "dashboard"
+          }
+        ]
+      },
+      "description": "Create by yjlee@linux.com",
+      "editable": true,
+      "fiscalYearStartMonth": 0,
+      "gnetId": 15172,
+      "graphTooltip": 0,
+      "id": 153,
+      "links": [
+        {
+          "$$hashKey": "object:2300",
+          "icon": "bolt",
+          "tags": [],
+          "targetBlank": true,
+          "title": "Update",
+          "tooltip": "Update dashboard",
+          "type": "link",
+          "url": "https://grafana.com/grafana/dashboards/11074"
+        },
+        {
+          "$$hashKey": "object:2301",
+          "icon": "question",
+          "tags": [],
+          "targetBlank": true,
+          "title": "GitHub",
+          "tooltip": "more dashboard",
+          "type": "link",
+          "url": "https://github.com/starsliao"
+        },
+        {
+          "$$hashKey": "object:2302",
+          "asDropdown": true,
+          "icon": "external link",
+          "tags": [],
+          "targetBlank": true,
+          "title": "",
+          "type": "dashboards"
+        }
+      ],
+      "liveNow": false,
+      "panels": [
+        {
+          "columns": [],
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P5DCFC7561CCDE821"
+          },
+          "description": "Partition utilization, disk read, disk write, download bandwidth, upload bandwidth, if there are multiple network cards or multiple partitions, it is the value of the network card or partition with the highest utilization rate collected.\n\nCurrEstab: The number of TCP connections whose current status is ESTABLISHED or CLOSE-WAIT.",
+          "fontSize": "80%",
+          "gridPos": {
+            "h": 6,
+            "w": 24,
+            "x": 0,
+            "y": 0
+          },
+          "id": 185,
+          "showHeader": true,
+          "sort": {
+            "col": 16,
+            "desc": true
+          },
+          "styles": [
+            {
+              "$$hashKey": "object:1600",
+              "alias": "Hostname",
+              "align": "auto",
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 1,
+              "link": false,
+              "linkTooltip": "",
+              "linkUrl": "",
+              "mappingType": 1,
+              "pattern": "nodename",
+              "thresholds": [],
+              "type": "string",
+              "unit": "bytes"
+            },
+            {
+              "$$hashKey": "object:1601",
+              "alias": "IP(Link to details)",
+              "align": "auto",
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "link": true,
+              "linkTargetBlank": false,
+              "linkTooltip": "Browse host details",
+              "linkUrl": "d/xfpJB9FGz/node-exporter?orgId=1&var-job=${job}&var-hostname=All&var-node=${__cell}&var-device=All&var-origin_prometheus=$origin_prometheus",
+              "mappingType": 1,
+              "pattern": "instance",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
+            },
+            {
+              "$$hashKey": "object:1602",
+              "alias": "Mem",
+              "align": "auto",
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "link": false,
+              "mappingType": 1,
+              "pattern": "Value #B",
+              "thresholds": [],
+              "type": "number",
+              "unit": "bytes"
+            },
+            {
+              "$$hashKey": "object:1603",
+              "alias": "CPU",
+              "align": "auto",
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "mappingType": 1,
+              "pattern": "Value #C",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
+            },
+            {
+              "$$hashKey": "object:1604",
+              "alias": " Uptime",
+              "align": "auto",
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "Value #D",
+              "thresholds": [],
+              "type": "number",
+              "unit": "s"
+            },
+            {
+              "$$hashKey": "object:1605",
+              "alias": "Part used%",
+              "align": "auto",
+              "colorMode": "cell",
+              "colors": [
+                "rgba(50, 172, 45, 0.97)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(245, 54, 54, 0.9)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "Value #E",
+              "thresholds": [
+                "70",
+                "85"
+              ],
+              "type": "number",
+              "unit": "percent"
+            },
+            {
+              "$$hashKey": "object:1606",
+              "alias": "CPU used%",
+              "align": "auto",
+              "colorMode": "cell",
+              "colors": [
+                "rgba(50, 172, 45, 0.97)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(245, 54, 54, 0.9)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "Value #F",
+              "thresholds": [
+                "70",
+                "85"
+              ],
+              "type": "number",
+              "unit": "percent"
+            },
+            {
+              "$$hashKey": "object:1607",
+              "alias": "Mem used%",
+              "align": "auto",
+              "colorMode": "cell",
+              "colors": [
+                "rgba(50, 172, 45, 0.97)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(245, 54, 54, 0.9)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "Value #G",
+              "thresholds": [
+                "70",
+                "85"
+              ],
+              "type": "number",
+              "unit": "percent"
+            },
+            {
+              "$$hashKey": "object:1608",
+              "alias": "Disk read",
+              "align": "auto",
+              "colorMode": "cell",
+              "colors": [
+                "rgba(50, 172, 45, 0.97)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(245, 54, 54, 0.9)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "Value #H",
+              "thresholds": [
+                "10485760",
+                "20485760"
+              ],
+              "type": "number",
+              "unit": "Bps"
+            },
+            {
+              "$$hashKey": "object:1609",
+              "alias": "Disk write",
+              "align": "auto",
+              "colorMode": "cell",
+              "colors": [
+                "rgba(50, 172, 45, 0.97)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(245, 54, 54, 0.9)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "Value #I",
+              "thresholds": [
+                "10485760",
+                "20485760"
+              ],
+              "type": "number",
+              "unit": "Bps"
+            },
+            {
+              "$$hashKey": "object:1610",
+              "alias": "Receive",
+              "align": "auto",
+              "colorMode": "cell",
+              "colors": [
+                "rgba(50, 172, 45, 0.97)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(245, 54, 54, 0.9)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "Value #J",
+              "thresholds": [
+                "30485760",
+                "104857600"
+              ],
+              "type": "number",
+              "unit": "bps"
+            },
+            {
+              "$$hashKey": "object:1611",
+              "alias": "Transmit",
+              "align": "auto",
+              "colorMode": "cell",
+              "colors": [
+                "rgba(50, 172, 45, 0.97)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(245, 54, 54, 0.9)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "Value #K",
+              "thresholds": [
+                "30485760",
+                "104857600"
+              ],
+              "type": "number",
+              "unit": "bps"
+            },
+            {
+              "$$hashKey": "object:1612",
+              "alias": "Load(5m)",
+              "align": "auto",
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "Value #L",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
+            },
+            {
+              "$$hashKey": "object:1613",
+              "alias": "TCP_estab",
+              "align": "auto",
+              "colorMode": "cell",
+              "colors": [
+                "rgba(50, 172, 45, 0.97)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(245, 54, 54, 0.9)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "Value #M",
+              "thresholds": [
+                "1000",
+                "1500"
+              ],
+              "type": "string",
+              "unit": "short"
+            },
+            {
+              "$$hashKey": "object:1614",
+              "alias": "TCP_tw",
+              "align": "center",
+              "colorMode": "cell",
+              "colors": [
+                "rgba(50, 172, 45, 0.97)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(245, 54, 54, 0.9)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "mappingType": 1,
+              "pattern": "Value #N",
+              "thresholds": [
+                "5000",
+                "20000"
+              ],
+              "type": "number",
+              "unit": "short"
+            },
+            {
+              "$$hashKey": "object:1615",
+              "alias": "",
+              "align": "right",
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "decimals": 2,
+              "pattern": "/.*/",
+              "thresholds": [],
+              "type": "hidden",
+              "unit": "short"
+            }
+          ],
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P5DCFC7561CCDE821"
+              },
+              "editorMode": "code",
+              "expr": "node_uname_info{NHcenter=\"$center\", job=~\"$job\"} - 0",
+              "format": "table",
+              "instant": true,
+              "interval": "",
+              "legendFormat": "主机名",
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P5DCFC7561CCDE821"
+              },
+              "editorMode": "code",
+              "expr": "sum(time() - node_boot_time_seconds{NHcenter=~\"$center\",job=~\"$job\"})by(instance)",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "interval": "",
+              "legendFormat": "运行时间",
+              "refId": "D"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P5DCFC7561CCDE821"
+              },
+              "editorMode": "code",
+              "expr": "node_memory_MemTotal_bytes{NHcenter=~\"$center\",job=~\"$job\"} - 0",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "interval": "",
+              "legendFormat": "总内存",
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P5DCFC7561CCDE821"
+              },
+              "editorMode": "code",
+              "expr": "count(node_cpu_seconds_total{NHcenter=~\"$center\",job=~\"$job\",mode='system'}) by (instance)",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "interval": "",
+              "legendFormat": "总核数",
+              "refId": "C"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P5DCFC7561CCDE821"
+              },
+              "editorMode": "code",
+              "expr": "node_load5{NHcenter=~\"$center\",job=~\"$job\"}",
+              "format": "table",
+              "instant": true,
+              "interval": "",
+              "legendFormat": "5分钟负载",
+              "refId": "L"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P5DCFC7561CCDE821"
+              },
+              "editorMode": "code",
+              "expr": "(1 - avg(rate(node_cpu_seconds_total{NHcenter=~\"$center\",job=~\"$job\",mode=\"idle\"}[$interval])) by (instance)) * 100",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "interval": "",
+              "legendFormat": "CPU使用率",
+              "refId": "F"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P5DCFC7561CCDE821"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "(node_memory_Buffers_bytes{NHcenter=~\"$center\",job=~\"$job\"}+\nnode_memory_Cached_bytes{NHcenter=~\"$center\",job=~\"$job\"}) / node_memory_MemTotal_bytes{NHcenter=~\"$center\",job=~\"$job\"} * 100",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "interval": "",
+              "legendFormat": "内存使用率",
+              "refId": "G"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P5DCFC7561CCDE821"
+              },
+              "editorMode": "code",
+              "expr": "max(rate(node_disk_read_bytes_total{NHcenter=~\"$center\",job=~\"$job\"}[$interval])) by (instance)",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "interval": "",
+              "legendFormat": "最大读取",
+              "refId": "H"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P5DCFC7561CCDE821"
+              },
+              "editorMode": "code",
+              "expr": "max(rate(node_disk_written_bytes_total{NHcenter=~\"$center\",job=~\"$job\"}[$interval])) by (instance)",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "interval": "",
+              "legendFormat": "最大写入",
+              "refId": "I"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P5DCFC7561CCDE821"
+              },
+              "editorMode": "code",
+              "expr": "node_netstat_Tcp_CurrEstab{NHcenter=~\"$center\",job=~\"$job\"} - 0",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "interval": "",
+              "legendFormat": "连接数",
+              "refId": "M"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P5DCFC7561CCDE821"
+              },
+              "expr": "node_sockstat_TCP_tw{origin_prometheus=~\"$origin_prometheus\",job=~\"$job\"} - 0",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "interval": "",
+              "legendFormat": "TIME_WAIT",
+              "refId": "N"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P5DCFC7561CCDE821"
+              },
+              "editorMode": "code",
+              "expr": "max(rate(node_network_receive_bytes_total{NHcenter=~\"$center\",job=~\"$job\"}[$interval])*8) by (instance)",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "interval": "",
+              "legendFormat": "下载带宽",
+              "refId": "J"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P5DCFC7561CCDE821"
+              },
+              "editorMode": "code",
+              "expr": "max(rate(node_network_transmit_bytes_total{NHcenter=~\"$center\",job=~\"$job\"}[$interval])*8) by (instance)",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "interval": "",
+              "legendFormat": "上传带宽",
+              "refId": "K"
+            }
+          ],
+          "title": "All Node Overview [Job: $job, Total: $total]",
+          "transform": "table",
+          "type": "table-old"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P5DCFC7561CCDE821"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "none",
+              "unitScale": true
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 6
+          },
+          "id": 191,
+          "options": {
+            "legend": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true,
+              "sortBy": "Name",
+              "sortDesc": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P5DCFC7561CCDE821"
+              },
+              "editorMode": "code",
+              "expr": "node_load1",
+              "instant": false,
+              "legendFormat": "{{instance}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Load Average 1m",
+          "transformations": [],
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P5DCFC7561CCDE821"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "percent",
+              "unitScale": true
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 6
+          },
+          "id": 188,
+          "options": {
+            "legend": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "displayMode": "table",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P5DCFC7561CCDE821"
+              },
+              "editorMode": "code",
+              "expr": "100 - (sum by (instance) (rate(node_cpu_seconds_total{job=\"node-exporter\", mode=\"idle\"}[5m])) / sum by (instance) (rate(node_cpu_seconds_total{job=\"node-exporter\"}[5m])) * 100)\r\n",
+              "instant": false,
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "CPU Usage",
+          "transformations": [],
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P5DCFC7561CCDE821"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "fieldMinMax": false,
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "binbps",
+              "unitScale": true
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 12,
+            "x": 0,
+            "y": 14
+          },
+          "id": 190,
+          "options": {
+            "legend": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true,
+              "sortBy": "Name",
+              "sortDesc": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "asc"
+            }
+          },
+          "pluginVersion": "10.3.3",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P5DCFC7561CCDE821"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "irate(node_network_receive_bytes_total{device!~\"cali.*\", device!~\"vxlan.*\", device!~\"lo.*\"}[5m])*8 or irate(node_network_receive_bytes{device!~\"cali.*\", device!~\"vxlan.*\", device!~\"lo.*\"}[5m])*8",
+              "format": "time_series",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "{{instance}}, {{device}}_in",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P5DCFC7561CCDE821"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "(irate(node_network_transmit_bytes_total{device!~\"cali.*\", device!~\"vxlan.*\", device!~\"lo.*\"}[5m])*8 or irate(node_network_transmit_bytes_total{device!~\"cali.*\", device!~\"vxlan.*\", device!~\"lo.*\"}[5m])*8 )* -1",
+              "format": "time_series",
+              "hide": false,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "{{instance}}, {{device}}_out",
+              "range": true,
+              "refId": "C"
+            }
+          ],
+          "title": "Network Traffic",
+          "transformations": [],
+          "transparent": true,
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P5DCFC7561CCDE821"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "percent",
+              "unitScale": true
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 14
+          },
+          "id": 189,
+          "options": {
+            "legend": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "displayMode": "table",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "P5DCFC7561CCDE821"
+              },
+              "editorMode": "code",
+              "expr": "avg by (instance) ((1 - (node_memory_MemAvailable_bytes{job=\"node-exporter\"} / node_memory_MemTotal_bytes{job=\"node-exporter\"})) * 100)\r\n",
+              "instant": false,
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Memory Usage",
+          "type": "timeseries"
+        }
+      ],
+      "refresh": "",
+      "schemaVersion": 39,
+      "tags": [],
+      "templating": {
+        "list": [
+          {
+            "current": {
+              "selected": false,
+              "text": "node-exporter",
+              "value": "node-exporter"
+            },
+            "datasource": {
+              "type": "prometheus",
+              "uid": "P5DCFC7561CCDE821"
+            },
+            "definition": "label_values(node_uname_info,job)",
+            "hide": 0,
+            "includeAll": false,
+            "label": "JOB",
+            "multi": false,
+            "name": "job",
+            "options": [],
+            "query": {
+              "qryType": 1,
+              "query": "label_values(node_uname_info,job)",
+              "refId": "PrometheusVariableQueryEditor-VariableQuery"
+            },
+            "refresh": 1,
+            "regex": "",
+            "skipUrlSync": false,
+            "sort": 5,
+            "tagValuesQuery": "",
+            "tagsQuery": "",
+            "type": "query",
+            "useTags": false
+          },
+          {
+            "auto": false,
+            "auto_count": 100,
+            "auto_min": "10s",
+            "current": {
+              "selected": false,
+              "text": "2m",
+              "value": "2m"
+            },
+            "hide": 0,
+            "label": "Interval",
+            "name": "interval",
+            "options": [
+              {
+                "selected": false,
+                "text": "30s",
+                "value": "30s"
+              },
+              {
+                "selected": false,
+                "text": "1m",
+                "value": "1m"
+              },
+              {
+                "selected": true,
+                "text": "2m",
+                "value": "2m"
+              },
+              {
+                "selected": false,
+                "text": "3m",
+                "value": "3m"
+              },
+              {
+                "selected": false,
+                "text": "5m",
+                "value": "5m"
+              },
+              {
+                "selected": false,
+                "text": "10m",
+                "value": "10m"
+              },
+              {
+                "selected": false,
+                "text": "30m",
+                "value": "30m"
+              }
+            ],
+            "query": "30s,1m,2m,3m,5m,10m,30m",
+            "queryValue": "",
+            "refresh": 2,
+            "skipUrlSync": false,
+            "type": "interval"
+          },
+          {
+            "current": {
+              "selected": false,
+              "text": "4",
+              "value": "4"
+            },
+            "datasource": {
+              "type": "prometheus",
+              "uid": "P5DCFC7561CCDE821"
+            },
+            "definition": "query_result(count(node_uname_info{job=~\"$job\"}))",
+            "hide": 2,
+            "includeAll": false,
+            "label": "total_servers",
+            "multi": false,
+            "name": "total",
+            "options": [],
+            "query": {
+              "qryType": 3,
+              "query": "query_result(count(node_uname_info{job=~\"$job\"}))",
+              "refId": "PrometheusVariableQueryEditor-VariableQuery"
+            },
+            "refresh": 1,
+            "regex": "/{} (.*) .*/",
+            "skipUrlSync": false,
+            "sort": 0,
+            "tagValuesQuery": "",
+            "tagsQuery": "",
+            "type": "query",
+            "useTags": false
+          },
+          {
+            "current": {
+              "selected": false,
+              "text": "centerA",
+              "value": "centerA"
+            },
+            "datasource": {
+              "type": "prometheus",
+              "uid": "P5DCFC7561CCDE821"
+            },
+            "definition": "label_values(NHcenter)",
+            "description": "Center Name",
+            "hide": 0,
+            "includeAll": false,
+            "label": "Center",
+            "multi": false,
+            "name": "center",
+            "options": [],
+            "query": {
+              "qryType": 1,
+              "query": "label_values(NHcenter)",
+              "refId": "PrometheusVariableQueryEditor-VariableQuery"
+            },
+            "refresh": 1,
+            "regex": "",
+            "skipUrlSync": false,
+            "sort": 0,
+            "type": "query"
+          }
+        ]
+      },
+      "time": {
+        "from": "now-3h",
+        "to": "now"
+      },
+      "timepicker": {
+        "hidden": false,
+        "now": true,
+        "refresh_intervals": [
+          "15s",
+          "30s",
+          "1m",
+          "5m",
+          "15m",
+          "30m"
+        ],
+        "time_options": [
+          "5m",
+          "15m",
+          "1h",
+          "6h",
+          "12h",
+          "24h",
+          "2d",
+          "7d",
+          "30d"
+        ]
+      },
+      "timezone": "browser",
+      "title": "Node Exporter All Nodes Overview",
+      "uid": "W5KDrdKnz111122",
+      "version": 4,
+      "weekStart": ""
+    }

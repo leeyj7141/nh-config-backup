@@ -2,5 +2,7 @@ namespace: cattle-monitoring-system
 
 resources:
  - grafana-dashboards-k8s-status.yaml
- - grafana-dashboards-node-exporter-full.yaml
+# - grafana-dashboards-node-exporter-full.yaml
+ - grafana-dashboards-node-exporter-full-2.yaml
  - grafana-dashboards-node-status.yaml
+ - grafana-dashboards-node-exporter-overview.yaml
