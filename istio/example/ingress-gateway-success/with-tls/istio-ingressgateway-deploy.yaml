@@ -3,8 +3,6 @@ kind: Deployment
 metadata:
   annotations:
     deployment.kubernetes.io/revision: "1"
-    field.cattle.io/publicEndpoints: '[{"addresses":["172.31.14.140"],"port":30939,"protocol":"TCP","serviceName":"istio-system:istio-ingressgateway","allNodes":true},{"addresses":["172.31.14.140"],"port":31380,"protocol":"TCP","serviceName":"istio-system:istio-ingressgateway","allNodes":true},{"addresses":["172.31.14.140"],"port":31390,"protocol":"TCP","serviceName":"istio-system:istio-ingressgateway","allNodes":true},{"addresses":["172.31.14.140"],"port":31400,"protocol":"TCP","serviceName":"istio-system:istio-ingressgateway","allNodes":true},{"addresses":["172.31.14.140"],"port":31981,"protocol":"TCP","serviceName":"istio-system:istio-ingressgateway","allNodes":true}]'
-  creationTimestamp: "2024-07-02T12:19:50Z"
   generation: 31
   labels:
     app: istio-ingressgateway
