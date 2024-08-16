@@ -1,0 +1,32 @@
+apiVersion: networking.istio.io/v1beta1
+#apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: httpbin
+spec:
+  hosts:
+  - "httpbin.example.com"
+  gateways:
+  - mygateway
+  http:
+  - match:
+    - uri:
+        prefix: /
+        #prefix: /status
+   # - uri:
+   #     prefix: /delay
+    route:
+    #- destination:
+    #    port:
+    #      number: 8000
+    #    host: productpage.istio-example.svc.cluster.local
+    #    #host: httpbin
+    - destination:
+        host: productpage.istio-example.svc.cluster.local
+        subset: v1
+      weight: 78
+    - destination:
+        host: productpage.istio-example.svc.cluster.local
+        subset: v2
+      weight: 22
+

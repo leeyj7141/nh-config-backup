@@ -1,0 +1,69 @@
+#apiVersion: networking.istio.io/v1beta1
+#kind: VirtualService
+#metadata:
+#  creationTimestamp: "2024-08-12T05:50:19Z"
+#  generation: 2
+#  labels:
+#    kiali_wizard: request_routing
+#  name: productpage
+#  namespace: istio-example
+#  resourceVersion: "15551671"
+#  uid: 0f71e9f0-1e04-44f8-9872-a1f6d2176240
+#spec:
+#  gateways:
+#  - istio-example/productpage-gateway
+#  hosts:
+#  - prod.test.dom
+#  http:
+#  - route:
+#    - destination:
+#        host: productpage.istio-example.svc.cluster.local
+#        subset: v1
+#      weight: 78
+#    - destination:
+#        host: productpage.istio-example.svc.cluster.local
+#        subset: v2
+#      weight: 22
+
+#---
+#apiVersion: networking.istio.io/v1beta1  
+#kind: VirtualService  
+#metadata:  
+#  name: productpage-tls
+#  namespace: istio-example  
+#spec:  
+#  gateways:  
+#    - istio-example/productpage-gateway-tls
+#  hosts:  
+#    - prod.test.dom  
+#  http:  
+#    - route:  
+#        - destination:  
+#            host: productpage.istio-example.svc.cluster.local  
+#            subset: v1  
+#          weight: 78  
+#        - destination:  
+#            host: productpage.istio-example.svc.cluster.local  
+#            subset: v2  
+#          weight: 22
+
+apiVersion: networking.istio.io/v1beta1  
+kind: VirtualService  
+metadata:  
+  name: productpage-tls
+  namespace: istio-example  
+spec:  
+  hosts:  
+  - prod.test.dom  
+  gateways:  
+  - productpage-gateway-tls
+  http:  
+  - route:  
+    - destination:  
+        host: productpage.istio-example.svc.cluster.local  
+        subset: v1  
+      weight: 78  
+    - destination:  
+        host: productpage.istio-example.svc.cluster.local  
+        subset: v2  
+      weight: 22
